@@ -34,5 +34,18 @@
 		<servlet-name>StockController</servlet-name>
 		<url-pattern>/stock.do</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>TradeController</servlet-name>
+		<servlet-class>com.semi.controller.TradeController</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>TradeController</servlet-name>
+		<url-pattern>/trade.do</url-pattern>
+	</servlet-mapping>
+	
+
   
 </web-app>

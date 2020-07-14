@@ -88,7 +88,7 @@
                   <a href="detail_trade.jsp" style="display: block;">거래 조회</a>
                 </li>
                 <li style="white-space: nowrap;">
-                  <a href="trading.jsp" style="display: block;">모의거래</a>
+                  <a href="trade.do?command=trading" style="display: block;">모의거래</a>
                 </li>
               </ul>
             </li>

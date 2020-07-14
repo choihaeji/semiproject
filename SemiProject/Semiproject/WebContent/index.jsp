@@ -23,7 +23,7 @@
           </h2>
           
           <a href="register.jsp" class="button">계좌개설</a>
-          <a href="trading.jsp" class="button">모의거래</a>
+          <a href="trade.do?command=trading" class="button">모의거래</a>
         </header>
       </section>
 <%@ include file="./form/footer.jsp" %>
