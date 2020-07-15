@@ -2,25 +2,45 @@ package com.semi.dto;
 
 public class TradeDto {
 
-//	--(거래ID,종목코드,구매주식수)
-//	    TRADEID    VARCHAR2(100)    NOT NULL, 
-//	    CODE       VARCHAR2(50)           NOT NULL, 
-//	    HOLDING    NUMBER           NOT NULL, 
-//	    CONSTRAINT TRADE_PK PRIMARY KEY (TRADEID, CODE)
+//	--(거래ID,계좌번호,이름,종목명,보유주식수,계좌평가금액,유가증권평가금액)
 	
 	private String tradeId;
-	private String code;
+	private int bankNo;
+	private String name;
+	private String ent;
 	private int holding;
-	
+	private int account;
+	private int stockAccount;
+		
 	public TradeDto() {
 		super();
 	}
 
-	public TradeDto(String tradeId, String code, int holding) {
+	public TradeDto(String tradeId, int bankNo, String name, String ent, int holding,int account,int stockAccount) {
 		super();
 		this.tradeId = tradeId;
-		this.code = code;
+		this.bankNo = bankNo;
+		this.name = name;
+		this.ent = ent;
 		this.holding = holding;
+		this.account = account;
+		this.stockAccount = stockAccount;
+	}
+
+	public int getAccount() {
+		return account;
+	}
+
+	public void setAccount(int account) {
+		this.account = account;
+	}
+
+	public int getStockAccount() {
+		return stockAccount;
+	}
+
+	public void setStockAccount(int stockAccount) {
+		this.stockAccount = stockAccount;
 	}
 
 	public String getTradeId() {
@@ -31,12 +51,28 @@ public class TradeDto {
 		this.tradeId = tradeId;
 	}
 
-	public String getCode() {
-		return code;
+	public int getBankNo() {
+		return bankNo;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setBankNo(int bankNo) {
+		this.bankNo = bankNo;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEnt() {
+		return ent;
+	}
+
+	public void setEnt(String ent) {
+		this.ent = ent;
 	}
 
 	public int getHolding() {
@@ -45,7 +81,7 @@ public class TradeDto {
 
 	public void setHolding(int holding) {
 		this.holding = holding;
-	}
+	}	
 
 	
 
