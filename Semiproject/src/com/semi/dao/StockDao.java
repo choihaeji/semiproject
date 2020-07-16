@@ -106,5 +106,17 @@ public class StockDao {
 		
 		return info;
 	}
-
+	
+	//현재 주가
+	public int getStockPrice(String str) {
+		GetDocument gdoc = new GetDocument();
+		Document doc = gdoc.getDoc(str);
+		int price = 0;
+		price = 
+		Integer.parseInt((doc.select("#chart_area > div.rate_info > div > p.no_today span.blind").get(0).text()).replace(",", ""));
+			
+		System.out.println(price);
+		
+		return price;
+	}
 }
