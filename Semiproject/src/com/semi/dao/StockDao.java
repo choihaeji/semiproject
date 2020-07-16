@@ -107,10 +107,10 @@ public class StockDao {
 		return info;
 	}
 	
-	//현재 주가
-	public int getStockPrice(String str) {
+	//현재 주가 
+	public int getStockPrice(String code) {
 		GetDocument gdoc = new GetDocument();
-		Document doc = gdoc.getDoc(str);
+		Document doc = gdoc.getDoc(code);
 		int price = 0;
 		price = 
 		Integer.parseInt((doc.select("#chart_area > div.rate_info > div > p.no_today span.blind").get(0).text()).replace(",", ""));
