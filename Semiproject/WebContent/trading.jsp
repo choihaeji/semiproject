@@ -3,6 +3,7 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +28,7 @@
 
 <body>
 <%@ include file="form/header.jsp" %>
-
-
-        
+  
         <!--================Home Banner Area =================-->
         <section class="banner_area">
             <div class="box_1620">
@@ -66,7 +65,7 @@
 						<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
 							<div class="section-top-border">
 							<table class="list">
-									<h3 class="mb-30 title_color"> 님의 주식주문</h3>
+									<h3 class="mb-30 title_color">님의 주식주문</h3>
 									<div class="progress-table-wrap">
 										<div class="progress-table">
 											<div class="table-head">
@@ -113,7 +112,7 @@
 												<div class="serial"></div>
 												<div class="country">매수 금액 : </div>
 												<div class="country"></div>	
-												<div class="country"><a href="#" class="genric-btn danger circle">매수하기</a></div>
+												<div class="country"><a href="#" class="genric-btn danger circle" onclick="location.href='trade.do?command=tradebuy'">모의 주식 주문</a></div>
 											</div>
 											</table>
 									</div>
@@ -174,7 +173,7 @@
 												<div class="serial"></div>
 												<div class="country">매매 금액 : </div>
 												<div class="country"></div>	
-												<div class="country"><a href="#" class="genric-btn danger circle">매도하기</a></div>
+												<div class="country"><a href="#" class="genric-btn danger circle" onclick="location.href='trade.do?command=tradesell'">매도하기</a></div>
 											</div>
 									<!--  -->
 									</table>

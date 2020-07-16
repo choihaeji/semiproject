@@ -27,12 +27,14 @@ public class TradeController extends HttpServlet {
 		
 		String command = request.getParameter("command");
 		
+		HttpSession session = request.getSession();
+		MemberDto login = (MemberDto)session.getAttribute("dto");
+		String loginid = login.getId();
+		
 		if(command.equals("index")) {
 			response.sendRedirect("index.jsp'");
 		}else if(command.equals("trading")) {
-			HttpSession session = request.getSession();
-			MemberDto login = (MemberDto)session.getAttribute("dto");
-			String loginid = login.getId();
+			
 			if(loginid == null) {
 				//로그인 폼으로 보내주기 (로그인폼 수정해야함)
 				jsResponse("로그인이 필요한 서비스 입니다.","member.do?command=loginform",response);
