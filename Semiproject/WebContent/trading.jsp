@@ -3,6 +3,7 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,21 +24,21 @@
         <!-- main css -->
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/responsive.css">
-    </head>
-    <body>
-        
-       <%@ include file="form/header.jsp" %>
-        
+</head>
+
+<body>
+<%@ include file="form/header.jsp" %>
+  
         <!--================Home Banner Area =================-->
         <section class="banner_area">
             <div class="box_1620">
 				<div class="banner_inner d-flex align-items-center">
 					<div class="container">
 						<div class="banner_content text-center">
-							<h2>Elements</h2>
+							<h2>모의거래</h2>
 							<div class="page_link">
-								<a href="index.html">Home</a>
-								<a href="elements.html">Elements</a>
+								<a href="trade.do?command=index">Home</a>
+								<a href="trade.do?commnad=trading">모의거래</a>
 							</div>
 						</div>
 					</div>
@@ -52,127 +53,142 @@
         		<div class="tabs_inner">
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item">
-							<a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">매수</a>
+							<a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">모의 주식주문</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">매도</a>
+							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">매도하기</a>
 						</li>
 					</ul>
 					
 					<!--================매수 =================-->
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="section-top-border">
 							<table class="list">
-								<div class="section-top-border">
-									<h3 class="mb-30 title_color">Table</h3>
+									<h3 class="mb-30 title_color">님의 주식주문</h3>
 									<div class="progress-table-wrap">
 										<div class="progress-table">
 											<div class="table-head">
-												<div class="serial">#</div>
-												<div class="country">Countries</div>
-												<div class="visit">Visits</div>
-												<div class="percentage">Percentages</div>
+												<div class="serial">계좌번호 : </div>
+												<div class="percentage"></div>
+												<div class="serial">이름 : </div>
+												<div class="serial"></div>
 											</div>
 											<div class="table-row">
-												<div class="serial">01</div>
-												<div class="country"> <img src="img/elements/f1.jpg" alt="flag">Canada</div>
-												<div class="visit">645032</div>
-												<div class="percentage">
-													<div class="progress">
-														<div class="progress-bar color-1" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
+												<div class="serial"></div>
+												<div class="country">계좌평가금액 : </div>
+												<div class="country">  </div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="country">유가증권평가금액: </div>
+												<div class="country"> </div>
+												<div class="serial"></div>
 											</div>
 											<div class="table-row">
-												<div class="serial">02</div>
-												<div class="country"> <img src="img/elements/f2.jpg" alt="flag">Canada</div>
-												<div class="visit">645032</div>
-												<div class="percentage">
-													<div class="progress">
-														<div class="progress-bar color-2" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
+												<div class="serial">
+													<input type="checkbox" id="default-checkbox">
+													<label for="default-checkbox"></label>
 												</div>
+												<div class="country">종목명</div>
+												<div class="country">현재가</div>
+												<div class="country">수량</div>
+																		
 											</div>
+											<div class="table-head">
+												<div class="serial">
+													<input type="checkbox" id="default-checkbox">
+													<label for="default-checkbox"></label>
+												</div>
+												<div class="country"></div>
+												<div class="serial"></div>														
+											</div>
+											<br>
 											<div class="table-row">
-												<div class="serial">03</div>
-												<div class="country"> <img src="img/elements/f3.jpg" alt="flag">Canada</div>
-												<div class="visit">645032</div>
-												<div class="percentage">
-													<div class="progress">
-														<div class="progress-bar color-3" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="country">매수 금액 : </div>
+												<div class="country"></div>	
+												<div class="country"><a href="#" class="genric-btn danger circle" onclick="location.href='trade.do?command=tradebuy'">모의 주식 주문</a></div>
 											</div>
-											<div class="table-row">
-												<div class="serial">04</div>
-												<div class="country"> <img src="img/elements/f4.jpg" alt="flag">Canada</div>
-												<div class="visit">645032</div>
-												<div class="percentage">
-													<div class="progress">
-														<div class="progress-bar color-4" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-											</div>
-											<div class="table-row">
-												<div class="serial">05</div>
-												<div class="country"> <img src="img/elements/f5.jpg" alt="flag">Canada</div>
-												<div class="visit">645032</div>
-												<div class="percentage">
-													<div class="progress">
-														<div class="progress-bar color-5" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-											</div>
-											<div class="table-row">
-												<div class="serial">06</div>
-												<div class="country"> <img src="img/elements/f6.jpg" alt="flag">Canada</div>
-												<div class="visit">645032</div>
-												<div class="percentage">
-													<div class="progress">
-														<div class="progress-bar color-6" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-											</div>
-											<div class="table-row">
-												<div class="serial">07</div>
-												<div class="country"> <img src="img/elements/f7.jpg" alt="flag">Canada</div>
-												<div class="visit">645032</div>
-												<div class="percentage">
-													<div class="progress">
-														<div class="progress-bar color-7" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-											</div>
-											<div class="table-row">
-												<div class="serial">08</div>
-												<div class="country"> <img src="img/elements/f8.jpg" alt="flag">Canada</div>
-												<div class="visit">645032</div>
-												<div class="percentage">
-													<div class="progress">
-														<div class="progress-bar color-8" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</div>
-											</div>
-										</div>
+											</table>
 									</div>
 								</div>
-								
-							</table>
-						</div>
 						
 						<!--================매도 =================-->
 						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-							<table>
-								<tr>매도</tr>
-							</table>
-						</div>
+							<div class="section-top-border">
+							<table class="list">
+									<h3 class="mb-30 title_color"> 님의 매도가능 정보</h3>
+									<div class="progress-table-wrap">
+									<!--  -->
+										<div class="progress-table">
+											<div class="table-head">
+												<div class="serial">계좌번호 : </div>
+												<div class="percentage"></div>
+												<div class="serial">이름 : </div>
+												<div class="serial"></div>
+											</div>
+									<!--  -->				
+											<div class="table-row">
+												<div class="serial"></div>
+												<div class="country">계좌평가금액 : </div>
+												<div class="country">  </div>
+												<div class="country">유가증권평가금액: </div>
+												<div class="country"> </div>
+												<div class="serial"></div>
+											</div>
+									<!--  -->
+											<div class="table-row">
+												<div class="serial">
+													<input type="checkbox" id="default-checkbox">
+													<label for="default-checkbox"></label>
+												</div>
+												<div class="country">종목명</div>
+												<div class="country">현재가</div>
+												<div class="country">보유 주가 수</div>
+												<div class="serial">수량</div>												
+																		
+											</div>
+									<!--  -->
+											<div class="table-head">
+												<div class="serial">
+													<input type="checkbox" id="default-checkbox">
+													<label for="default-checkbox"></label>
+												</div>
+												<div class="country"></div>
+												<div class="serial"></div>														
+											</div>
+									<!--  -->											
+											<br>
+											<div class="table-row">
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="serial"></div>
+												<div class="country">매매 금액 : </div>
+												<div class="country"></div>	
+												<div class="country"><a href="#" class="genric-btn danger circle" onclick="location.href='trade.do?command=tradesell'">매도하기</a></div>
+											</div>
+									<!--  -->
+									</table>
+									</div>
+								</div>
+					<!--================매도 끝=================-->
 					</div>
         		</div>
         	</div>
         </section>
         <!--================End My Tabs Area =================-->
-		
-		<%@ include file="form/footer.jsp" %>   
+
+<%@ include file="form/footer.jsp" %>
+
+   
 		     
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -192,5 +208,5 @@
         <script src="js/mail-script.js"></script>
         <script src="js/theme.js"></script>
     
-</body>
-</html>
+
+</body></html>
