@@ -23,7 +23,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#email_url").val("<%=dto.getEmailURL() %>").attr("selected","selected");
-		$("#bank_name").val("<%=dto.getBank_name() %>").attr("selected","selected");
+		$("#bank_name").val("<%=dto.getbankName() %>").attr("selected","selected");
 	});
 
 	function pwCheck(){
@@ -146,7 +146,7 @@
 						<option value="하나">하나</option>
 						<option value="카카오뱅크">카카오뱅크</option>
 					</select>
-					<input type="text" name="bank_no" required="required" placeholder=" ( - ) 포함하여 전체 입력 " value="<%=dto.getBank_no()%>">
+					<input type="text" name="bank_no" required="required" placeholder=" ( - ) 포함하여 전체 입력 " value="<%=dto.getbankNo()%>">
 				</td>
 			</tr>
 			<tr>
