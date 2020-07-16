@@ -30,8 +30,8 @@
 	<div>
 		<table border="1">
 			<tr>
-				<th><%=dto.getBank_name() %></th>
-				<td><%=dto.getBank_no() %></td>
+				<th><%=dto.getbankName() %></th>
+				<td><%=dto.getbankNo() %></td>
 				<td><%=dto.getAccount() %>원</td>
 				<td><input type="button" onclick="" value="충전"></td>
 			</tr>
