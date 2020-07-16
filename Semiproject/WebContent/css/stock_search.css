@@ -1,0 +1,81 @@
+@charset "UTF-8";
+#s_contents{
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+#s_contents input{
+	display: inline-block;
+}
+
+#stock_s{
+	margin-right: 30px;
+	width: 400px;
+	height: 35px;
+}
+
+#stock_b{
+	width: 100px;
+	height: 35px;
+}
+
+#search_list{
+	margin-top: 30px;
+	text-align: center;	
+}
+
+#stock_list_t{
+	margin: 0;
+	padding: 0;
+	width: 850px;
+	display: inline-block;
+}
+
+#stock_list_t th{
+	height: 20px;
+    border-top: 1px solid #cdced2;
+    border-right: 1px solid #ececec;
+    border-bottom: 1px solid #d4d5d8;
+    background: #fafafa
+}
+#stock_list_t th:last-child{
+	 border-right: 0;
+}
+
+#stock_list_t .stock_th1{
+	width: 200px;
+}
+#stock_list_t .stock_th2{
+	width: 130px;
+}
+#stock_list_t .stock_td1{
+	text-align: left;
+}
+#stock_list_t td{
+	border-right: 1px solid #ececec;
+    border-bottom: 1px solid #ededed;
+}
+#stock_list_t td:last-child{
+	border-right: 0;
+}
+#stock_list_t .td_up{
+	color: red;
+}
+#stock_list_t .td_down{
+	color: blue;
+}
+
+.a_info:hover {
+	cursor: pointer;
+	font-weight: bold;
+}
+.a_info:active{
+}
+
+#test1{
+	background-color: gray;
+}
+#test2{
+	background-color: yellow;
+}
