@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.semi.dao.MemberDao;
 import com.semi.dto.MemberDto;
 
-@WebServlet("/member.do")
+@WebServlet("/member")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
