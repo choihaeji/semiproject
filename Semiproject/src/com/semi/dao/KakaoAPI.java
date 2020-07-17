@@ -35,7 +35,7 @@ public class KakaoAPI {
 			
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=5d72007ee138ddab5fe6236180b87978");
-			sb.append("&redirect_uri=http://localhost:8787/Semiproject/registform.jsp");
+			sb.append("&redirect_uri=http://localhost:8787/Semiproject/kakaoLogin.jsp");
 			sb.append("&code=" + authorizeCode);
 			
 			bw.write(sb.toString());

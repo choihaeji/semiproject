@@ -100,14 +100,7 @@
 </script>
 
 </head>
-<%
-	KakaoAPI api = new KakaoAPI();
-	String code = request.getParameter("code");
-	String accessToken = api.getAccessToken(code);
-	
-	String email = api.getUserInfo(accessToken).getEmail();
-	int atIndex = email.indexOf("@");
-%>
+
 <body>
 	<h1>회원가입</h1>
 	<form action="member.do" method="post">
@@ -143,8 +136,7 @@
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="name" required="required" placeholder="한글 2글자 이상 입력"
-					value="<%=api.getUserInfo(accessToken).getName() %>"></td>
+				<td><input type="text" name="name" required="required" placeholder="한글 2글자 이상 입력"></td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
@@ -164,7 +156,7 @@
 			<tr>
 				<th>이메일</th>
 				<td>
-					<input type="text" name="email_id" required="required" value="<%=email.substring(0, atIndex) %>">&nbsp;&nbsp;@&nbsp;
+					<input type="text" name="email_id" required="required">&nbsp;&nbsp;@&nbsp;
 					<select name="email_url">
 						<option value="@naver.com">naver.com</option>
 						<option value="@hanmail.net">hanmail.net</option>
