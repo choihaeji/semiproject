@@ -1,0 +1,133 @@
+
+#m_contents{
+	width: 700px;
+	margin: 0px auto;
+	text-align: center;
+	
+}
+
+#s_contents{
+	margin-bottom: 30px;
+	margin-top: 10px;
+}
+
+#s_contents input{
+	display: inline-block;
+}
+
+#stock_s{
+	margin-left: 15px;
+	margin-right: 15px;
+	width: 400px;
+	height: 35px;
+}
+
+#stock_b{
+	width: 100px;
+	height: 35px;
+}
+
+#c_info1{
+}
+#c_info2 img{
+	width: 670px;
+	height: 280px;
+}
+
+#c_info1 .stock_p1{
+	font-weight: 550;
+	font-size: 40px;
+}
+#c_info1 .stock_p2{
+	font-size: 20px;
+}
+#c_info1 div{
+	margin-top: 20px;
+}
+
+#p_s_name{
+	color: black;
+	font-size: 35px;
+}
+#p_s_name span{
+	color: gray;
+	font-size: 15px;
+}
+
+#c_info1 .no{
+	color: gray;
+}
+
+#u_info .stock_p1{
+	color: red;
+}
+#u_info .stock_p2{
+	color: red;
+}
+#d_info .stock_p1{
+	color: blue;
+}
+#d_info .stock_p2{
+	color: blue;
+}
+#nud_info .stock_p1{
+	color: black;
+}
+#nud_info .stock_p2{
+	color: black
+}
+
+#chart_area .graph_nav{
+	margin-top: 30px;
+}
+
+#chart_area > div dd li{
+	display: inline-block;
+	margin-right: 10px;
+}
+#chart_area dl{
+	height: 30px;
+	background-color: #e4e4e4;
+	border: solid 1px #c0c0c0;
+	float: left;
+}
+#chart_area dt{
+	margin-left: 10px;
+	float: left;
+	display: inline-block;
+	font-weight: 600;
+}
+#chart_area dd{
+	float: right;
+	display: inline-block;
+	text-align: right;
+	font-weight: 600;
+}
+
+dl.line{
+	width: 440px;
+}
+dl.bar{
+	width: 260px;
+}
+
+#chart_area a{
+	color: #464646;
+}
+#chart_area a.day{
+	color: #00468c;
+}
+
+.line ul{
+	margin: 0;
+	padding: 0;
+	color: black;
+	list-style: none;
+}
+
+.bar ul{
+	margin: 0;
+	padding: 0;
+	color: black;
+	list-style: none;
+}

@@ -102,21 +102,21 @@ public class StockDao {
 		info.put("fluctuation_ud", doc.select("#chart_area > div.rate_info > div > p.no_exday > em:nth-child(4) > span:nth-child(1)").get(0).text());
 		info.put("volume", doc.select("#chart_area > div.rate_info > table > tbody > tr:nth-child(1) > td:nth-child(3) > em > span.blind").get(0).text());
 		info.put("trading_val", doc.select("#chart_area > div.rate_info > table > tbody > tr:nth-child(2) > td:nth-child(3) > em > span.blind").get(0).text());
-		info.put("d_graph", doc.select("#img_chart_area").toString());
 		
 		return info;
 	}
-	
-	//현재 주가 
-	public int getStockPrice(String code) {
+
+	//현재 주가
+	public int getStockPrice(String str) {
 		GetDocument gdoc = new GetDocument();
-		Document doc = gdoc.getDoc(code);
+		Document doc = gdoc.getDoc(str);
 		int price = 0;
 		price = 
 		Integer.parseInt((doc.select("#chart_area > div.rate_info > div > p.no_today span.blind").get(0).text()).replace(",", ""));
-			
+		
 		System.out.println(price);
 		
 		return price;
 	}
+	
 }
