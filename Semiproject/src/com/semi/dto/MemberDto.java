@@ -67,6 +67,8 @@ package com.semi.dto;
 			this.bankName = bankName;
 			this.bankNo = bankNo;
 		}
+		
+		
 
 		public int getStockAccount() {
 			return stockAccount;

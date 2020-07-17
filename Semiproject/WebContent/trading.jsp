@@ -3,6 +3,7 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -65,80 +66,49 @@
 						<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
 							<div class="section-top-border">
 							<table class="list">
-									<h3 class="mb-30 title_color">님의 주식주문</h3>
-									<div class="progress-table-wrap">
-										<div class="progress-table">
-											<div class="table-head">
-												<div class="serial">계좌번호 : </div>
-												<div class="percentage"></div>
-												<div class="serial">이름 : </div>
-												<div class="serial"></div>
-											</div>
-											<div class="table-row">
-												<div class="serial"></div>
-												<div class="country">계좌평가금액 : </div>
-												<div class="country">  </div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="country">유가증권평가금액: </div>
-												<div class="country"> </div>
-												<div class="serial"></div>
-											</div>
-											<div class="table-row">
-												<div class="serial">
-													<input type="checkbox" id="default-checkbox">
-													<label for="default-checkbox"></label>
-												</div>
-												<div class="country">종목명</div>
-												<div class="country">현재가</div>
-												<div class="country">수량</div>
-																		
-											</div>
-											<div class="table-head">
-												<div class="serial">
-													<input type="checkbox" id="default-checkbox">
-													<label for="default-checkbox"></label>
-												</div>
-												<div class="country"></div>
-												<div class="serial"></div>														
-											</div>
-											<br>
-											<div class="table-row">
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="country">매수 금액 : </div>
-												<div class="country"></div>	
-												<div class="country"><a href="#" class="genric-btn danger circle" onclick="location.href='trade.do?command=tradebuy'">모의 주식 주문</a></div>
-											</div>
-											</table>
-									</div>
-								</div>
+									<h3 class="mb-30 title_color">주식주문</h3>
+										
+									<div align="center">
+										<div class="col-lg-5 col-sm-6">
+						        			<aside class="f_widget news_widget">
+						        				<div id="mc_embed_signup">
+						                            <div class="input-group d-flex flex-row">
+						                                <input name="stockName" required="" type="text">
+						                                <button class="btn sub-btn" onclick="trade.do?command=tradebuyform"><span class="lnr lnr-arrow-right"></span></button>		
+						                            </div>				
+						                        	<div class="mt-10 info"></div>
+						               			</div>
+						 					</aside>
+        								</div>
+        							</div>	
+        								
+							</table>
+							</div>
+						</div>
 						
 						<!--================매도 =================-->
 						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 							<div class="section-top-border">
-							<table class="list">
-									<h3 class="mb-30 title_color"> 님의 매도가능 정보</h3>
+							<talbe class="list">
+							<form action="trade.do" method="post">
+							<input type="hidden" name="command" value="tradesell">
+									<h3 class="mb-30 title_color">매도가능 정보</h3>
 									<div class="progress-table-wrap">
 									<!--  -->
 										<div class="progress-table">
 											<div class="table-head">
-												<div class="serial">계좌번호 : </div>
-												<div class="percentage"></div>
 												<div class="serial">이름 : </div>
-												<div class="serial"></div>
+												<div class="serial">${member.getname }</div>
+												<div class="serial">계좌번호 : </div>
+												<div class="percentage">${member.getBankNo }</div>
 											</div>
 									<!--  -->				
 											<div class="table-row">
 												<div class="serial"></div>
-												<div class="country">계좌평가금액 : </div>
-												<div class="country">  </div>
+												<div class="country">계좌평가금액: </div>
+												<div class="country">${member.getAccount }  </div>
 												<div class="country">유가증권평가금액: </div>
-												<div class="country"> </div>
+												<div class="country">${member.gerStockAccount }</div>
 												<div class="serial"></div>
 											</div>
 									<!--  -->
@@ -148,33 +118,49 @@
 													<label for="default-checkbox"></label>
 												</div>
 												<div class="country">종목명</div>
-												<div class="country">현재가</div>
+												<div class="country">구매가</div>
 												<div class="country">보유 주가 수</div>
 												<div class="serial">수량</div>												
 																		
 											</div>
 									<!--  -->
-											<div class="table-head">
-												<div class="serial">
-													<input type="checkbox" id="default-checkbox">
-													<label for="default-checkbox"></label>
-												</div>
-												<div class="country"></div>
-												<div class="serial"></div>														
-											</div>
+										
+											<c:choose>
+												<c:when test="${empty trade }">
+													<div align="center">===============구매한 주가가 존재하지 않습니다.===============</div>
+												</c:when>
+												<%--<c:otherwise>
+													<c:forEach var="tradelist" items=${trade }>
+														<div class="table-head">
+															<div class="serial">
+																<input type="checkbox" id="default-checkbox">
+																<label for="default-checkbox"></label>
+															</div>
+															<div class="country"></div>
+															<div class="country" name="price"></div>
+															<div class="country">${tradelist.getHolding }</div>
+															<div class="serial"><input name="countsell" class="nice-select" type="number" min="0" max="${tradelist.getHolding }" step="1"></div>														
+														</div>
+													</c:forEach>
+												</c:otherwise>
+											--%>
+											</c:choose> 
+											
 									<!--  -->											
 											<br>
 											<div class="table-row">
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="country">매매 금액 : </div>
-												<div class="country"></div>	
-												<div class="country"><a href="#" class="genric-btn danger circle" onclick="location.href='trade.do?command=tradesell'">매도하기</a></div>
+													<div class="serial"></div>
+													<div class="serial"></div>
+													<div class="serial"></div>
+													<div class="serial"></div>
+													<div class="serial"></div>
+													<div class="serial"></div>
+													<div class="country">매매 금액 : </div>
+													<div class="country"></div>	
+													<div class="country"><input type="submit" value="매도하기" class="genric-btn danger circle" ></div>
+												
 											</div>
+										</form>	
 									<!--  -->
 									</table>
 									</div>
@@ -207,6 +193,12 @@
         <script src="vendors/counter-up/jquery.counterup.min.js"></script>
         <script src="js/mail-script.js"></script>
         <script src="js/theme.js"></script>
-    
+    	<script src="js/crwaling.js"></script>
+    	<script type="text/javascript">
+    		function getStockValues(){
+    			var stock = $("#stockName").val().replace(/ /g,"");
+    			return stock
+    		}
+    	</script>
 
 </body></html>
