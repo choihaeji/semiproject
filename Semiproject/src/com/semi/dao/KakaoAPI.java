@@ -106,11 +106,13 @@ public class KakaoAPI {
 			
 			String name = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakaoAccount.getAsJsonObject().get("email").getAsString();
+			Long id = properties.getAsJsonObject().get("id").getAsLong();
 			
-			dto.setbankName(name);
+			dto.setName(name);
 			dto.setEmail(email);
-			
+
 			System.out.println("name : " + name);
+			System.out.println("kakao id : " + id);
 			System.out.println("email : " + email);
 			
 		} catch (MalformedURLException e) {

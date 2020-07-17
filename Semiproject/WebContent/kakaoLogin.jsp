@@ -35,7 +35,8 @@
 			</tr>
 			<tr>
 				<th rowspan="2">비밀번호</th>
-				<td><input type="password" onclick="idChkConfirm();" name="pw" required="required" onchange="pwCheck();"></td>
+				<td><input type="password" onclick="idChkConfirm();" name="pw" required="required" onchange="pwCheck();" >
+				</td>
 			</tr>
 			<tr>
 				<td style="color:blue">
@@ -45,7 +46,7 @@
 			<tr>
 				<th>비밀번호 확인</th>
 				<td>
-					<input type="password" name="pwcheck" required="required" onchange="pwCheck();">
+					<input type="password" name="pwcheck" required="required" onchange="pwCheck();" >
 					&nbsp;<span id="check"></span>
 				</td>
 			</tr>
@@ -77,6 +78,7 @@
 					<input type="text" name="email_id" required="required"
 						value="<%=email.substring(0, atIndex) %>">&nbsp;&nbsp;@&nbsp;
 					<select name="email_url">
+						<option value="@kakao.com">kakao.com</option>
 						<option value="@naver.com">naver.com</option>
 						<option value="@hanmail.net">hanmail.net</option>
 						<option value="@gmail.com">gmail.com</option>
