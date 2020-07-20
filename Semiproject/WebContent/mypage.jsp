@@ -30,15 +30,26 @@
 	<div>
 		<table border="1">
 			<tr>
-				<th><%=dto.getbankName() %></th>
+				<th><%=dto.getbankName() %> 은행</th>
 				<td><%=dto.getbankNo() %></td>
 				<td><%=dto.getAccount() %>원</td>
-				<td><input type="button" onclick="" value="충전"></td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input type="button" onclick="" value="충전">
+				</td>
 			</tr>
 		</table>
 		
 		<h3>거래 내역</h3>
 		<table border="1">
+			<tr>
+				<th></th>
+				<th>거래 ID</th>
+				<th>종목 코드</th>
+				<th>보유 수량</th>
+			</tr>
+			
 		</table>
 	</div>
 </body>
