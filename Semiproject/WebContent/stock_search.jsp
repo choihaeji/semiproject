@@ -28,9 +28,6 @@
 	
 </head>
 <body>
-	<!-- <div class="wrap-loading display-none">
-		<div><img src="img/stock_search/ico_up" /></div>
-	</div> -->
 	<!--================Header Menu Area =================-->
 	<header class="header_area">
 			<div class="main_menu">
@@ -76,6 +73,11 @@
 	<section class="home_banner_area">
 		<div class="container box_1620">
 			<div id="m_contents">
+				<!-- 로딩 -->
+				<div class="wrap-loading display-none">
+					<div><img src="img/stock_search/loadding.gif" /></div>
+				</div>
+				<!-- 검색 -->
 				<div id=s_contents>
 					<input id="stock_s" type="text" onkeypress="if( event.keyCode==13 ){search();}">
 					<input id="stock_b" type="button" value="검색" onclick="search();">
