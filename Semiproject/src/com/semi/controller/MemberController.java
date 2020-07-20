@@ -134,6 +134,20 @@ public class MemberController extends HttpServlet {
 				jsResponse("회원정보 수정 실패","updateform.jsp",response);
 			}
 		}
+		else if (command.equals("mypage")) {
+			String id = request.getParameter("id");
+			
+			if (id != null) {
+				String str = "<script type='text/javascript'>" +
+							"location.href='mypage.jsp';" +
+							"</script>";
+				PrintWriter out = response.getWriter();
+				out.print(str);
+			}
+			else {
+				jsResponse("로그인이 필요합니다", "login.jsp", response);
+			}
+		}
 			
 	}
 
