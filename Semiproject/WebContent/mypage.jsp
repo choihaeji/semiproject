@@ -54,6 +54,10 @@
 				<th>성별</th>
 				<td><%=dto.getGender() %></td>
 			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><%=dto.getEmail() %></td>
+			</tr>
 			
 		</table>
 	</div>
