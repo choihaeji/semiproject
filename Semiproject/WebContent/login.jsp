@@ -29,6 +29,9 @@
 					<input type="submit" value="login" >
 					<input type="button" value="regist"
 								onclick="location.href='member.do?command=registform'" >
+					<a href="https://kauth.kakao.com/oauth/authorize?client_id=5d72007ee138ddab5fe6236180b87978&redirect_uri=http://localhost:8787/Semiproject/kakaoLogin.jsp&response_type=code">
+						<img src="./img/kakao_login_small.png">
+					</a>
 				</td>
 			</tr>
 		</table>

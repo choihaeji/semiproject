@@ -8,10 +8,13 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre8">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/haechan/Documents/카카오톡 받은 파일/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/haechan/Documents/카카오톡 받은 파일/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/haechan/Documents/카카오톡 받은 파일/jsoup-1.13.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

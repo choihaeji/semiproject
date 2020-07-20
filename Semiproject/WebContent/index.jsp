@@ -1,3 +1,4 @@
+<%@page import="com.semi.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -25,7 +26,9 @@
 	<link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-	
+	<%
+		MemberDto dto = new MemberDto();
+	%>
 	<!--================Header Menu Area =================-->
 	<header class="header_area">
 			<div class="main_menu">
@@ -55,10 +58,10 @@
 						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">마이페이지</a>
 						<ul class="dropdown-menu">
 							<li class="nav-item"><a class="nav-link" href="blog.html">거래내역 조회</a></li>
-							<li class="nav-item"><a class="nav-link" href="single-blog.html">회원정보 수정</a></li>
+							<li class="nav-item"><a class="nav-link" href="member.do?command=updata&mno=<%=dto.getMno() %>">회원정보 수정</a></li>
 						</ul>
 					</li> 
-					<li class="nav-item"><a class="nav-link" href="contact.html">Login/Register</a></li>
+					<li class="nav-item"><a class="nav-link" href="login.jsp">Login/Register</a></li>
 				</ul>
 			</div> 
 		</div>

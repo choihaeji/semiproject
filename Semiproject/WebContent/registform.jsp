@@ -3,7 +3,7 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
-
+<%@ page import = "com.semi.dao.KakaoAPI" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,6 +100,7 @@
 </script>
 
 </head>
+
 <body>
 	<h1>회원가입</h1>
 	<form action="member.do" method="post">
