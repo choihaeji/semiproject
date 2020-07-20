@@ -66,14 +66,6 @@ public class TradeDto {
 		this.holding = holding;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public int getPrice() {
 		return price;
 	}
@@ -82,4 +74,11 @@ public class TradeDto {
 		this.price = price;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }
