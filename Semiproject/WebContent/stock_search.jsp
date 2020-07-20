@@ -141,9 +141,6 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 	
 	
 	
-	
-	
-	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="js/jquery-3.3.1.min.js"></script>

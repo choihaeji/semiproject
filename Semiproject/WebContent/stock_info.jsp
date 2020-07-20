@@ -265,6 +265,7 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 		}
 	}
 	
+	
 	//선택한 주식 정보가져오기
 	function selOne(code){
 		$.ajax({
