@@ -113,7 +113,6 @@ public class StockDao {
 		//상장주식수
 		info.put("listed_stocks", doc.select("#tab_con1 > div.first > table > tbody > tr:nth-child(3) > td > em").get(0).text());
 		
-		
 		return info;
 	}
 

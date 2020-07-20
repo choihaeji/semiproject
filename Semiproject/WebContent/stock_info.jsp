@@ -26,7 +26,6 @@
 	
 	<link rel="stylesheet" href="css/stock_info.css" />
 	
-	
 </head>
 <body>
 	
