@@ -1,67 +1,100 @@
+SELECT * FROM MEMBER;
+SELECT * FROM TRADE_BOARD;
+SELECT * FROM BOARD_COMMENT;
+SELECT * FROM STOCKBOARD;
+SELECT * FROM BOARD;
+
+DROP TABLE MEMBER CASCADE CONSTRAINT;
+DROP TABLE BOARD CASCADE CONSTRAINT;
+
+SELECT * FROM ALL_CONSTRAINT WHERE TABLE_NAME = 'MEMBER';
+SELECT * FROM ALL_CONSTRAINT WHERE TABLE_NAME = 'TRADE_BOARD';
+SELECT * FROM ALL_CONSTRAINT WHERE TABLE_NAME = 'BOARD_COMMENT';
+SELECT * FROM ALL_CONSTRAINT WHERE TABLE_NAME = 'STOCKBOARD';
+SELECT * FROM ALL_CONSTRAINT WHERE TABLE_NAME = 'BOARD';
+
+
+--회원
+INSERT INTO MEMBER VALUES(MEMBERNOSQ.NEXTVAL,'유저1','USER1','유저','1992-05-28','F','SAYT3013','국민',12312423,1000000,1000000);
+--거래
+INSERT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,'유저1',1,3,600,'매도');
+
+SELECT * FROM MEMBER;
+
+SELECT * FROM TRADE_BOARD;
+
 ----------------------------------------------------------------------------------------------
 ---------------------------------------거래 talbe-----------------------------------------------
 ----------------------------------------------------------------------------------------------
-DROP TABLE TARDE;
+DROP TABLE TRADE_BOARD;
+DROP SEQUENCE TRADENOSQ;
 
+CREATE SEQUENCE TRADENOSQ;
+SELECT * FROM TRADE_BOARD;
 --(거래ID,종목코드,구매주식수)
-CREATE TABLE TRADE
+CREATE TABLE TRADE_BOARD
 (
-    ID    VARCHAR2(100)    NOT NULL, 
-    CODE       VARCHAR2(50)           NOT NULL, 
+	TRADENO NUMBER,
+    ID    VARCHAR2(100),   
+    STOCKNAME    VARCHAR2(1000),        
     HOLDING    NUMBER           NOT NULL, 
     PRICE 	   NUMBER			NOT NULL,
-    STATUS CHAR(6) CHECK( STATUS IN ('매도','매수')),
-    CONSTRAINT TRADE_PK PRIMARY KEY (ID, CODE)
+    STATUS VARCHAR2(6) CHECK( STATUS IN ('매도','매수')),
+    CONSTRAINT TRADEPK PRIMARY KEY (TRADENO)
 );
 
-COMMENT ON COLUMN TRADE.TRADEID IS '구매자';
+COMMENT ON COLUMN TRADE_BOARD.TRADEID IS '구매자';
 
-COMMENT ON COLUMN TRADE.CODE IS '종목코드';
+COMMENT ON COLUMN TRADE_BOARD.CODE IS '종목코드';
 
-COMMENT ON COLUMN TRADE.HOLDING IS '보유주식수';
+COMMENT ON COLUMN TRADE_BOARD.HOLDING IS '보유주식수';
 
 -- 참조
-ALTER TABLE TRADE
-    ADD CONSTRAINT FK_TRADE_CODE_STOCK_CODE FOREIGN KEY (STOCKCODE)
-        REFERENCES STOCKBOARD (STOCKCODE);
+ALTER TABLE TRADE_BOARD
+    ADD CONSTRAINT FK_TRADE_NO_STOCK_NO FOREIGN KEY (STOCKNAME)
+        REFERENCES STOCKBOARD;
 
-ALTER TABLE TRADE
+ALTER TABLE TRADE_BOARD
     ADD CONSTRAINT FK_TRADE_TRADEID_MEMBER_ID FOREIGN KEY (ID)
         REFERENCES MEMBER (ID);
         
--- TRIGGER
+-- TRIGGER1(매도,매수시 계좌,유가증권 평가금액 변동)
 CREATE OR REPLACE TRIGGER TRADETRG
-AFTER INSERT ON TRADE
+AFTER INSERT ON TRADE_BOARD
 FOR EACH ROW 
 BEGIN 
 	IF :NEW.STATUS = '매도'
 	THEN 
 		UPDATE MEMBER
-		SET ACCOUNT = ACCOUNT + (:NEW.PRICE*HOLDING)
-			AND STOCK_ACCOUNT = STOCKA_CCOUNT - (:NEW.PRICE*HOLDING)
+		SET ACCOUNT = ACCOUNT + (:NEW.PRICE*:NEW.HOLDING)
+			,STOCKACCOUNT = STOCKACCOUNT - (:NEW.PRICE*:NEW.HOLDING)
 		WHERE ID = :NEW.ID;
+		UPDATE TRADE_BOARD
+		SET HOLDING = HOLDING - :NEW.HOLDING
+		WHERE ID = :NEW.ID AND STATUS = '매수' AND STOCKNAME = :NEW.STOCKNAME;
 	END IF;
 	IF :NEW.STATUS = '매수'
 	THEN 
 		UPDATE MEMBER
-		SET ACCOUNT = ACCOUNT - (:NEW.PRICE*HOLDING)
-			AND STOCK_ACCOUNT = STOCK_ACOOUNT + (:NEW.PRICE*HOLDING)
+		SET ACCOUNT = ACCOUNT - (:NEW.PRICE*:NEW.HOLDING)
+			,STOCKACCOUNT = STOCKACCOUNT + (:NEW.PRICE*:NEW.HOLDING)
 		WHERE ID = :NEW.ID;
 	END IF;
 END;
+
 ----------------------------------------------------------------------------------------------
 ---------------------------------------회원 talbe-----------------------------------------------
 ----------------------------------------------------------------------------------------------
-DROP TABLE MEMBER;
+DROP TABLE MEMBER CASCADE CONSTRAINTS;
 --회원번호 시퀀스
 DROP SEQUENCE MEMBERNOSQ;
 
-CREATE SEQUNECE MEMBERNOSQ NOCHAHE;
---(회원번호,아이디,비밀번호,이름,생일,성별,이메일,은행명,계좌번호,잔액정보)
+CREATE SEQUENCE MEMBERNOSQ;
+--(회원번호,아이디,비밀번호,이름,생일,성별,이메일,은행명,계좌번호,잔액정보,유가증권잔액)
 CREATE TABLE MEMBER
 (
     MEMBERNO    NUMBER           NOT NULL, 
-    ID          VARCHAR2(100)    NOT NULL, 
+    ID          VARCHAR2(100)    UNIQUE NOT NULL, 
     PW          VARCHAR2(100)    NOT NULL, 
     NAME        VARCHAR2(20)     NOT NULL, 
     BIRTH       DATE             NOT NULL, 
@@ -97,7 +130,7 @@ COMMENT ON COLUMN MEMBER.ACCOUNT IS '잔액정보';
 ----------------------------------------------------------------------------------------------
 ------------------------------------------게시판 table-------------------------------------------
 ----------------------------------------------------------------------------------------------
-DROP TABLE BOARD;
+DROP TABLE BOARD CASCADE CONSTRAINT;
 DROP SEQUENCE BOARDNOSQ;
 
 -- 게시글번호  SEQUENCE
@@ -129,7 +162,7 @@ COMMENT ON COLUMN BOARD.CHECKNO IS '조회수';
 ----------------------------------------------------------------------------------------------
 ------------------------------------------댓글 table--------------------------------------------
 ----------------------------------------------------------------------------------------------
-DROP TABLE COMMENT;
+DROP TABLE  BOARD_COMMENT;
 DROP SEQUENCE COMMENTSQ;
 
 -- 댓글번호 SEQUENCE
@@ -138,7 +171,7 @@ CREATE SEQUENCE COMMENTSQ NOCHACHE;
 -- (글번호,댓글번호,댓글내용,댓글작성자,작성일,부모댓글)
 CREATE TABLE BOARD_COMMENT(
     BOARDNO            NUMBER            NOT NULL, 
-    COMMENT_NO         NUMBER            NOT NULL, 
+    COMMENT_NO         NUMBER, 
     COMMENT_CONTENT    VARCHAR2(1000)    NOT NULL, 
     COMMENT_ID         VARCHAR2(100)     NOT NULL, 
     REGDATE            DATE              NOT NULL, 
@@ -172,7 +205,7 @@ DROP TABLE STOCKBOARD;
 -- (종목코드,종목명,현시세(STRING),전일비,현시세(NUMBER))
 CREATE TABLE STOCKBOARD(
 	STOCKNO NUMBER PRIMARY KEY,
-	STOCKNAME VARCHAR2(1000) NOT NULL,
+	STOCKNAME VARCHAR2(1000) NOT NULL UNIQUE,
 	STOCKCODE VARCHAR2(1000) NOT NULL
 );
 

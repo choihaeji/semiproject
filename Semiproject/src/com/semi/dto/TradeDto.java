@@ -2,78 +2,60 @@ package com.semi.dto;
 
 public class TradeDto {
 
-//	--(거래ID,계좌번호,이름,종목명,보유주식수,계좌평가금액,유가증권평가금액)
+//	--(거래번호,거래ID,종목명,구매주식수,구매가or판매가)
 	
-	private String tradeId;
-	private int bankNo;
-	private String name;
-	private String ent;
+	private int tradeNo;
+	private String id;
+	private String stockName;
 	private int holding;
-	private int account;
-	private int stockAccount;
+	private int price;
 	private String status;
-		
+
 	public TradeDto() {
 		super();
 	}
 
-	public TradeDto(String tradeId, int bankNo, String name, String ent, int holding,int account,int stockAccount) {
+	public TradeDto(int tradeNo, String id, String stockName, int holding, int price,String status) {
 		super();
-		this.tradeId = tradeId;
-		this.bankNo = bankNo;
-		this.name = name;
-		this.ent = ent;
+		this.tradeNo = tradeNo;
+		this.id = id;
+		this.stockName = stockName;
 		this.holding = holding;
-		this.account = account;
-		this.stockAccount = stockAccount;
+		this.price = price;
+		this.status = status;
+	}
+	
+
+	public TradeDto(String id, String stockName, int holding, int price) {
+		super();
+		this.id = id;
+		this.stockName = stockName;
+		this.holding = holding;
+		this.price = price;
 	}
 
-	public int getAccount() {
-		return account;
+	public int getTradeNo() {
+		return tradeNo;
 	}
 
-	public void setAccount(int account) {
-		this.account = account;
+	public void setTradeNo(int tradeNo) {
+		this.tradeNo = tradeNo;
 	}
 
-	public int getStockAccount() {
-		return stockAccount;
+	public String getId() {
+		return id;
 	}
 
-	public void setStockAccount(int stockAccount) {
-		this.stockAccount = stockAccount;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getTradeId() {
-		return tradeId;
+	public String getstockName() {
+		return stockName;
 	}
 
-	public void setTradeId(String tradeId) {
-		this.tradeId = tradeId;
-	}
-
-	public int getBankNo() {
-		return bankNo;
-	}
-
-	public void setBankNo(int bankNo) {
-		this.bankNo = bankNo;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEnt() {
-		return ent;
-	}
-
-	public void setEnt(String ent) {
-		this.ent = ent;
+	public void setstockName(String stockName) {
+		this.stockName = stockName;
 	}
 
 	public int getHolding() {
@@ -82,7 +64,7 @@ public class TradeDto {
 
 	public void setHolding(int holding) {
 		this.holding = holding;
-	}	
+	}
 
 	public String getStatus() {
 		return status;
@@ -90,6 +72,14 @@ public class TradeDto {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 }
