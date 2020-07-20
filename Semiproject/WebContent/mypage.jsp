@@ -89,7 +89,7 @@
 				for (int i = 0; i < count; i++) {
 			%>
 				<tr>
-					<td><%=dtos.getEnt() %></td>
+					<td><%=dtos.getstockName() %></td>
 					<td><%=dtos.getHolding() %></td>
 					<td><%=dtos.getStatus() %></td>
 				</tr>
