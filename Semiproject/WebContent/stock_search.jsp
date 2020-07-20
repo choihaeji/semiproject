@@ -28,7 +28,6 @@
 	
 </head>
 <body>
-	
 	<!--================Header Menu Area =================-->
 	<header class="header_area">
 			<div class="main_menu">
@@ -74,6 +73,11 @@
 	<section class="home_banner_area">
 		<div class="container box_1620">
 			<div id="m_contents">
+				<!-- 로딩 -->
+				<div class="wrap-loading display-none">
+					<div><img src="img/stock_search/loadding.gif" /></div>
+				</div>
+				<!-- 검색 -->
 				<div id=s_contents>
 					<input id="stock_s" type="text" onkeypress="if( event.keyCode==13 ){search();}">
 					<input id="stock_b" type="button" value="검색" onclick="search();">
@@ -159,38 +163,39 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 	<script src="js/theme.js"></script>
 	<script type="text/javascript">
 	var g_val = "";
+	
 	//검색한 주식명
 	function getStockValues(){
 		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
 		var stock = $("#stock_s").val().replace(/ /g,"").replace(regExp,"");
-
+		
 		return stock;
 	}
 		
 	//주식검색
 	function search(){
-		if(getStockValues() == ""){
+		var stock = getStockValues();
+		
+		if(stock == ""){
 			alert('종목명을 입력하세요.');
-		}else if(getStockValues().length < 2){
+		}else if(stock.length < 2){
 			alert('두글자 이상 입력하세요.');
 		}else{
-			stock_search("");
+			stock_search(stock);
 		}
 	}
 	
-	function stock_search(chk){
-		var s_val = "";
-		if(chk == ""){
-			g_val = getStockValues();
-			s_val = g_val;
-		}else {
-			s_val = g_val;
-		}
+	function stock_search(stock){
+		var s_val = stock;
 		
 		$.ajax({
 			url:"ServletController?command=stock_search_list&stock="+s_val,
-			dataType:"json",
-			success:function(data){
+			dataType:"json"
+			,beforeSend:function(){
+		    	$('.wrap-loading').removeClass('display-none');
+		    }
+			,success:function(data){
+				$('.wrap-loading').addClass('display-none');
 				if(data[0].chk == 0){
 					$("#search_list").html("'"+s_val+"'에 대한 검색결과가 없습니다.");
 				}else{
@@ -238,6 +243,7 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 					}
 					
 					$("#stock_list_t")[0].innerHTML = html.join('');
+					$("#stock_s").val("");
 				}
 			},
 			error:function(){
@@ -252,6 +258,5 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 		}
 	});
 	</script>
-
 </body>
 </html>

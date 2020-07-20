@@ -26,7 +26,6 @@
 	
 	<link rel="stylesheet" href="css/stock_info.css" />
 	
-	
 </head>
 <body>
 	
@@ -208,7 +207,7 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 	//자동 갱신 함수
 	function setInter(code){
 		selOne(code);
-		setI = setInterval(function(){selOne(code);}, 5000);
+		setI = setInterval(function(){selOne(code);}, 5000000);
 	}
 	
 	//보여줄 그래프선택
@@ -278,33 +277,41 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 				var j=0;
 				
 				html1[i++] = '<div id="c_info1">';
-				html1[i++] = '<p id="p_s_name">' + data.stock_name + '<span>&nbsp&nbsp&nbsp' +data.stock_code + '</span>' + '</p>';
+				
 				if(data.dod_ud == "상승"){
 					html1[i++] = '<div id="u_info">';
+					html1[i++] = '<p id="p_s_name">' + data.stock_name + '<span>&nbsp&nbsp&nbsp' +data.stock_code + '</span>' + '</p>';
 					html1[i++] = '<p class="stock_p1">' + data.price + '</p>';
 					html1[i++] = '<p class="stock_p2"><img src="img/stock_search/ico_up.gif" width="11" height="9" alt="상승">' 
 					+ data.dod + '<span class="no"> | </span>' + data.fluctuation_ud + data.fluctuation + '%' + '</p>';
 					html1[i++] = '</div>';
 				}else if(data.dod_ud == "하락"){
 					html1[i++] = '<div id="d_info">';
+					html1[i++] = '<p id="p_s_name">' + data.stock_name + '<span>&nbsp&nbsp&nbsp' +data.stock_code + '</span>' + '</p>';
 					html1[i++] = '<p class="stock_p1">' + data.price + '</p>';
 					html1[i++] = '<p class="stock_p2"><img src="img/stock_search/ico_down.gif" width="11" height="9" alt="하락">' 
 					+ data.dod + '<span class="no"> | </span>' + data.fluctuation_ud + data.fluctuation + '%' + '</p>';
 					html1[i++] = '</div>';
 				}else{
 					html1[i++] = '<div id="nud_info">';
+					html1[i++] = '<p id="p_s_name">' + data.stock_name + '<span>&nbsp&nbsp&nbsp' +data.stock_code + '</span>' + '</p>';
 					html1[i++] = '<p class="stock_p1">' + data.price + '</p>';
 					html1[i++] = '<p class="stock_p2"><img src="img/stock_search/ico_same.gif" width="11" height="9" alt="보합">' 
 					+ data.dod + '<span class="no"> | </span>' + data.fluctuation_ud + data.fluctuation + '%' + '</p>';
 					html1[i++] = '</div>';
 				}
 				
+				html1[i++] = '<table id="t_info">';
+				html1[i++] = '<tr><th>시가총액</th><td>' + data.price_sum + '억원</td></tr>';
+				html1[i++] = '<tr><th>시가총액순위</th><td>' + data.rank + '위</td></tr>';
+				html1[i++] = '<tr><th>상장주식수</th><td>' + data.listed_stocks + '</td></tr>';
+				html1[i++] = '<tr><th>거래량</th><td>' + data.volume + '</td></tr>';
+				html1[i++] = '<tr><th>거래대금</th><td>' + data.trading_val + '</td></tr>';
+				html1[i++] = '</table>';
+				
 				html1[i++] = '</div>';
 				
-				
-				
 				html2[j++] = '<div id="c_info2"><img id="img_chart_area" src="" alt="이미지 차트"></div>';
-				
 				
 				$("#stock_info")[0].innerHTML = html1.join('');
 				$("#graph_area")[0].innerHTML = html2.join('');
