@@ -117,9 +117,11 @@ dl.bar{
 #c_info1 > div{
 	display: inline-block;
 	height: 140px;
-	margin-right: 50px;
+	padding-right: 25px;
+	margin-right: 25px;
 	line-height: 40px;
 	vertical-align: top;
+	border-right: solid gray 1px;
 }
 #c_info1 > div p{
 	margin-bottom: 8px;
@@ -148,3 +150,4 @@ dl.bar{
 	color: black;
 	list-style: none;
 }
+

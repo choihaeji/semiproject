@@ -35,7 +35,7 @@
 				<nav class="navbar navbar-expand-lg navbar-light">
 		<div class="container box_1620">
 			<!-- Brand and toggle get grouped for better mobile display -->
-			<a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+			<a class="navbar-brand logo_h" href="index.jsp"><img src="img/logo.png" alt=""></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -44,7 +44,7 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 				<ul class="nav navbar-nav menu_nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> 
+					<li class="nav-item active"><a class="nav-link" href="index.jsp">Home</a></li> 
 					<li class="nav-item submenu dropdown">
 						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">시장정보</a>
 						<ul class="dropdown-menu">
@@ -207,7 +207,7 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 	//자동 갱신 함수
 	function setInter(code){
 		selOne(code);
-		setI = setInterval(function(){selOne(code);}, 5000000);
+		setI = setInterval(function(){selOne(code);}, 60000); //1분마다 갱신
 	}
 	
 	//보여줄 그래프선택
@@ -264,6 +264,7 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 			$("a.month_b").css('color','#00468c');
 		}
 	}
+	
 	
 	//선택한 주식 정보가져오기
 	function selOne(code){

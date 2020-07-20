@@ -11,6 +11,7 @@ public class TradeDto {
 	private int holding;
 	private int account;
 	private int stockAccount;
+	private String status;
 		
 	public TradeDto() {
 		super();
@@ -83,6 +84,12 @@ public class TradeDto {
 		this.holding = holding;
 	}	
 
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }
