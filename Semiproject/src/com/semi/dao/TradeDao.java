@@ -13,20 +13,15 @@ import com.semi.dto.TradeDto;
 
 public class TradeDao {
 
-	
-	//매도시 trade table에 insert
-	String sellSql = " INSERT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,?,?,?,?,'매도') ";
-	//매수시 trade table에 insert
-	String buySql = " INESRT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,?,?,?,?,'매수') ";
-	//보유주식 리스트 
-	String selectAllSql = " SELECT * FROM TRADE_BOARD WHERE ID=? AND STATUS='매수' ";
-
 	Connection con = getConnection();
 	PreparedStatement pstm = null;
 	
 	//매도시
 	public int sell(TradeDto membertd) {		
 		int res = 0;
+		//매도시 trade table에 insert
+		String sellSql = " INSERT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,?,?,?,?,'매도') ";
+		
 		try {
 			pstm = con.prepareStatement(sellSql);
 			pstm.setString(1, membertd.getId());
@@ -36,7 +31,9 @@ public class TradeDao {
 			System.out.println("03. 쿼리 준비: "+sellSql);
 			
 			res = pstm.executeUpdate();
-		
+			
+			int updateres = updateBuy(membertd);
+			
 			if(res>0) {
 				commit(con);
 			}
@@ -52,9 +49,25 @@ public class TradeDao {
 		return res;
 	}
 	
+	//매도시 매수 보유량 update
+	public int updateBuy(TradeDto membertd) {
+		int update = 0;
+		
+		
+		
+		
+	
+		
+		
+		return 0;
+	}
+	
+	
 	//매수시
 	public int buy(TradeDto membertd) {
 		int res =0;
+		//매수시 trade table에 insert
+		String buySql = " INESRT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,?,?,?,?,'매수') ";
 		
 		try {
 			pstm = con.prepareStatement(buySql);
@@ -86,6 +99,8 @@ public class TradeDao {
 		
 		ResultSet rs = null;
 		List<TradeDto> res = new ArrayList<>();
+		//보유주식 리스트 
+		String selectAllSql = " SELECT * FROM TRADE_BOARD WHERE ID=? AND STATUS='매수' ";
 		
 		try {
 			pstm = con.prepareStatement(selectAllSql);
@@ -117,6 +132,37 @@ public class TradeDao {
 		
 		
 		return res;
+	}
+	
+	//주식명 코드로 변환
+	public String transCode(String stockName) {
+		String code = null;
+		ResultSet rs = null;
+		//주식이름 코드로 변환
+		String selectCode = " SELECT STOCKCODE FROM STOCKBOARD WHERE STOCKNAME = ? ";
+		
+		try {
+			pstm = con.prepareStatement(selectCode);
+			pstm.setString(1, stockName);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {				
+				code = rs.getString(1);
+			}
+			System.out.println("stockName :"+stockName+", code: "+code);
+			
+		} catch (SQLException e) {
+			System.out.println("3/4단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+			System.out.println("05.db 종료");
+		}
+		
+		return code;
 	}
 	
 	

@@ -1,7 +1,10 @@
 package com.semi.controller;
 
+import java.awt.Desktop;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,12 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.semi.dao.MemberDao;
 import com.semi.dao.StockDao;
 import com.semi.dao.TradeDao;
 import com.semi.dto.MemberDto;
-import com.semi.dto.StockDto;
 import com.semi.dto.TradeDto;
 
 @WebServlet("/TradeController")
@@ -38,62 +41,100 @@ public class TradeController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
+		MemberDto login = (MemberDto)session.getAttribute("dto");
+		System.out.println("login: "+login);
+		
 		MemberDao memberDao = new MemberDao();
 		TradeDao tradeDao = new TradeDao();
 		StockDao stockDao = new StockDao();
 		
-		MemberDto login = (MemberDto)session.getAttribute("dto");
-		System.out.println("login: "+login);
+		JSONArray stockinfo = null;
 		
+		MemberDto member = null;
+		
+		String stockName = null;
+		String loginid = null;
+		String loginpw = null;
+		String code = null;
+		int price = 0;
 		
 		if(command.equals("trading")) {
 			//모의거래폼
 			if(login != null) {				
-				String loginid = login.getId();
-				String loginpw = login.getPw();
+				loginid = login.getId();
+				loginpw = login.getPw();
 
-				MemberDto member = memberDao.login(loginid,loginpw);
-				List<TradeDto> trade = tradeDao.holdingStock(loginid);			
+				member = memberDao.login(loginid,loginpw);
+				List<TradeDto> trade = tradeDao.holdingStock(loginid);	
+				
+				//현재가 받아오기
+				List<Integer> nowPrice = null;
+				
+				for(int i=0; i<trade.size();i++) {
+					code = tradeDao.transCode(trade.get(i).getstockName());
+					price = stockDao.getStockPrice(code);
+					nowPrice.add(price);
+				}
 				
 				request.setAttribute("member", member);
 				request.setAttribute("trade", trade);
-				dispatch("trading.jsp",request,response);	
+				request.setAttribute("nowPrice", nowPrice);
+				dispatch("trading.jsp",request,response);
+				
 			}else {
 				//로그인 폼으로 보내주기 (command값 수정해야됨)
-				jsResponse("로그인이 필요한 서비스 입니다.","index.jsp",response);
+				//jsResponse("로그인이 필요한 서비스 입니다.","index.jsp",response);
+				dispatch("trading.jsp",request,response);
 			}
 			
-			dispatch("trading.jsp",request,response);
 			
 		}else if(command.equals("tradesell")) {
 			//매도버튼 클릭시(아이디,종목명,현재가,수량)
-			String stockName = request.getParameter("stockName");
-			int price = Integer.parseInt(request.getParameter("price"));
+			stockName = request.getParameter("stockName");
+			price = Integer.parseInt(request.getParameter("price"));
 			int countsell = Integer.parseInt(request.getParameter("countsell"));
-			String loginid = login.getId();
+			loginid = login.getId();
+			
 			TradeDto membertd = new TradeDto(loginid,stockName,countsell,price);
 			
 			int res = tradeDao.sell(membertd);
+			//int update = tradeDao.updateBuy(membertd);
 			
-			if(res>0) {
-				jsResponse("매도에 성공하셨습니다.","trading.jsp",response);
+			if(res>0 /*&& update>0*/) {
+				jsResponse("매도에 성공하셨습니다.","trade.do?command=trading",response);
 			}else {
-				
+				jsResponse("매도에 실패하셨습니다.","trade.do?command=trading",response);
 			}
 			
 		}else if(command.equals("tradebuyform")) {
-			//기업검색 후 기업검색 뿌려주기
-			String stockName = request.getParameter("stockName");
+			//매수폼
+			//기업검색 후 기업검색 뿌려주기(매수페이지)
 			
-		
+			member = memberDao.login(loginid,loginpw);
+			System.out.println(member.getName());
+			stockName = request.getParameter("stockName");
+			System.out.println(stockName);
+			code = tradeDao.transCode(stockName);
+			
+			if(code!=null||stockName!="") {
+				price = stockDao.getStockPrice(code);
+				System.out.println("code: "+code+", price:"+price);
+				
+				request.setAttribute("member", member);
+				request.setAttribute("price", price);
+				request.setAttribute("stockName", stockName);
+				dispatch("tradebuying.jsp",request,response);
+			}else {
+				jsResponse("기업명을 입력해 주세요.","trade.do?command=trading",response);
+			}
 			
 		}else if(command.equals("tradebuy")) {
 			//매수버튼 클릭시(아이디,종목명,현재가,수량)
 
-			String stockName = request.getParameter("stockName");
-			int price = Integer.parseInt(request.getParameter("price"));
+			stockName = request.getParameter("stockName");
+			price = Integer.parseInt(request.getParameter("price"));
 			int countbuy = Integer.parseInt(request.getParameter("countbuy"));
-			String loginid = login.getId();
+			loginid = login.getId();
 			
 			TradeDto membertd = new TradeDto(loginid,stockName,countbuy,price);
 			
@@ -110,6 +151,20 @@ public class TradeController extends HttpServlet {
 				}
 			}
 				
+		}else if(command.equals("ajax")) {
+			int count = Integer.parseInt(request.getParameter("count"));
+			price = Integer.parseInt(request.getParameter("price"));
+			
+			System.out.println("개수: "+count+"가격:"+price);
+			int allPrice = count*price;
+			
+			JSONObject obj = new JSONObject();
+			obj.put("allPrice", allPrice);
+			System.out.println(obj);
+			
+			PrintWriter out = response.getWriter();
+			out.print(obj.toJSONString());
+			System.out.println("총 가격: "+obj.toJSONString());
 		}
 	
 	}

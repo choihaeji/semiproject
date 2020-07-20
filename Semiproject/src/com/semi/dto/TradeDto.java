@@ -9,20 +9,23 @@ public class TradeDto {
 	private String stockName;
 	private int holding;
 	private int price;
+	private String status;
 
 	public TradeDto() {
 		super();
 	}
 
-	public TradeDto(int tradeNo, String id, String stockName, int holding, int price) {
+	public TradeDto(int tradeNo, String id, String stockName, int holding, int price,String status) {
 		super();
 		this.tradeNo = tradeNo;
 		this.id = id;
 		this.stockName = stockName;
 		this.holding = holding;
 		this.price = price;
+		this.status = status;
 	}
 	
+
 	public TradeDto(String id, String stockName, int holding, int price) {
 		super();
 		this.id = id;
@@ -70,11 +73,12 @@ public class TradeDto {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
-	
-	
-		
-	
-	
 
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

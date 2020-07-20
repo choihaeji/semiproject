@@ -69,6 +69,9 @@ BEGIN
 		SET ACCOUNT = ACCOUNT + (:NEW.PRICE*:NEW.HOLDING)
 			,STOCKACCOUNT = STOCKACCOUNT - (:NEW.PRICE*:NEW.HOLDING)
 		WHERE ID = :NEW.ID;
+		UPDATE TRADE_BOARD
+		SET HOLDING = HOLDING - :NEW.HOLDING
+		WHERE ID = :NEW.ID AND STATUS = '매수' AND STOCKNAME = :NEW.STOCKNAME;
 	END IF;
 	IF :NEW.STATUS = '매수'
 	THEN 
@@ -78,8 +81,6 @@ BEGIN
 		WHERE ID = :NEW.ID;
 	END IF;
 END;
-
-
 
 ----------------------------------------------------------------------------------------------
 ---------------------------------------회원 talbe-----------------------------------------------
