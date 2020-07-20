@@ -114,14 +114,14 @@ dl.bar{
 	color: #00468c;
 }
 
-#d_info{
+#c_info1 > div{
 	display: inline-block;
 	height: 140px;
 	margin-right: 50px;
 	line-height: 40px;
 	vertical-align: top;
 }
-#d_info p{
+#c_info1 > div p{
 	margin-bottom: 8px;
 }
 #t_info{
