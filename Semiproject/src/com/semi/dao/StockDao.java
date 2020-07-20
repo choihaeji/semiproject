@@ -94,14 +94,25 @@ public class StockDao {
 		info.put("stock_name", doc.select("#middle > div.h_company > div.wrap_company > h2 > a").get(0).text());
 		info.put("stock_code", code);
 		info.put("price", doc.select("#chart_area > div.rate_info > div > p.no_today span.blind").get(0).text());
+		//전일대비
 		info.put("dod", doc.select("#chart_area > div.rate_info > div > p.no_exday > em:nth-child(2) > span.blind").get(0).text());
 		//상승, 보합, 하락
 		info.put("dod_ud", doc.select("#chart_area > div.rate_info > div > p.no_exday > em:nth-child(2) > span.ico").get(0).text());
+		//등락율
 		info.put("fluctuation", doc.select("#chart_area > div.rate_info > div > p.no_exday > em:nth-child(4) > span.blind").get(0).text());
 		//+, -
 		info.put("fluctuation_ud", doc.select("#chart_area > div.rate_info > div > p.no_exday > em:nth-child(4) > span:nth-child(1)").get(0).text());
+		//거래량
 		info.put("volume", doc.select("#chart_area > div.rate_info > table > tbody > tr:nth-child(1) > td:nth-child(3) > em > span.blind").get(0).text());
+		//거래대금
 		info.put("trading_val", doc.select("#chart_area > div.rate_info > table > tbody > tr:nth-child(2) > td:nth-child(3) > em > span.blind").get(0).text());
+		//시가총액
+		info.put("price_sum", doc.select("#_market_sum").get(0).text());
+		//시가총액순위
+		info.put("rank", doc.select("#tab_con1 > div.first > table > tbody > tr:nth-child(2) > td > em").get(0).text());
+		//상장주식수
+		info.put("listed_stocks", doc.select("#tab_con1 > div.first > table > tbody > tr:nth-child(3) > td > em").get(0).text());
+		
 		
 		return info;
 	}

@@ -1,9 +1,7 @@
-
 #m_contents{
 	width: 700px;
 	margin: 0px auto;
 	text-align: center;
-	
 }
 
 #s_contents{
@@ -27,22 +25,20 @@
 	height: 35px;
 }
 
-#c_info1{
-}
 #c_info2 img{
 	width: 670px;
 	height: 280px;
 }
 
+#c_info1{
+	height: 140px;	
+}
 #c_info1 .stock_p1{
 	font-weight: 550;
 	font-size: 40px;
 }
 #c_info1 .stock_p2{
 	font-size: 20px;
-}
-#c_info1 div{
-	margin-top: 20px;
 }
 
 #p_s_name{
@@ -118,6 +114,27 @@ dl.bar{
 	color: #00468c;
 }
 
+#d_info{
+	display: inline-block;
+	height: 140px;
+	margin-right: 50px;
+	line-height: 40px;
+	vertical-align: top;
+}
+#d_info p{
+	margin-bottom: 8px;
+}
+#t_info{
+	display: inline-block;
+	font-size: 12px;
+}
+#t_info th{
+	text-align: left;
+}
+#t_info td{
+	text-align: right;
+}
+
 .line ul{
 	margin: 0;
 	padding: 0;
@@ -131,3 +148,4 @@ dl.bar{
 	color: black;
 	list-style: none;
 }
+
