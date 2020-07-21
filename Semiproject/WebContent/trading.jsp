@@ -26,7 +26,7 @@
 <!-- main css -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 function getStockName(){
 	var stockName = $("#stockName").val();
@@ -35,6 +35,34 @@ function getStockName(){
 
 function search(){
 	window.open("trade.do?command=tradebuyform&stockName="+getStockName(), "_blank", "width=full,height=full");
+}
+
+function getParameter(){
+	
+	var count = "count="+$("#count").val();
+	var price = "price="+$("#price").val();
+	
+	return "&"+count+"&"+price;
+}
+
+$(function(){
+	$("#process").click(function(){
+		$.ajax({
+			url:"trade.do?command=ajax"+getParameter(),	
+			dataType: "json",						
+			success:function(msg){
+				$("#result").html(msg.allPrice+" 원")
+			},
+			error:function(){
+				alert("실패");
+			}
+		});
+	});
+	
+});
+
+function sell(){
+	window.open("trade.do?command=tradesellform&stockName="+,"_blank","width=full,height=full");
 }
 
 </script>
@@ -136,7 +164,6 @@ function search(){
 											<div class="country">구매가(/주당)</div>
 											<div class="country">현재가(/주당)</div>
 											<div class="country">보유량</div>
-											<div class="country">수량</div>
 											<div class="country"></div>
 
 										</div>
@@ -152,21 +179,19 @@ function search(){
 													<c:forEach var="trade" items="${trade }" varStatus="status">
 
 														<div class="serial">
-															<input type="checkbox" id="default-checkbox"> <label
-																for="default-checkbox"></label>
+															<input type="radio" id="default-radio">
+															<label for="default-radio"></label>
 														</div>
-														<div class="country">${trade.stockName }</div>
+														<div class="country">
+															<input type="text" name="stock" value="${trade.stockName }" readonly="readonly" style="border:0px; outline:none;">
+														</div>
 														<div class="country">${trade.price }</div>
-														<div class="country" id="price">${nowPrice[status.index].value}</div>
+														<div class="country">
+															<input type="text" id="price" name="priceNow" value="${nowPrice[status.index].value}"
+																readonly="readonly" style="border:0px; outline:none;">
+														</div>
 														<div class="country">${trade.holding }주</div>
-														<div class="country">
-															<input id="count" name="count" class="nice-select"
-																type="number" min="0" max="${trade.holding }" step="1">
-														</div>
-														<div class="country">
-															<input type="button" class="genric-btn disable circle"
-																onclick="checkPrice();" value="가격확인">
-														</div>
+														<input type="button" class="btn sub-btn" onclick="sell();" name="sell" value="매도하기">
 
 													</c:forEach>
 												</c:otherwise>

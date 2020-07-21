@@ -85,8 +85,8 @@ public class MemberController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("dto", dto);
 				session.setMaxInactiveInterval(60*60);
-				
-				jsResponse("로그인 성공","mypage.jsp",response);
+				//마이페이지로 수정해줘야함
+				jsResponse("로그인 성공","index.jsp",response);
 			}
 			else {
 				System.out.println("로그인 실패");

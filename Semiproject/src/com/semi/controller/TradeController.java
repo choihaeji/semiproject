@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -36,10 +37,7 @@ public class TradeController extends HttpServlet {
 		String command = request.getParameter("command");
 		System.out.println("command: "+command);
 		
-		HttpSession session = request.getSession();
-		
-		MemberDto login = (MemberDto)session.getAttribute("dto");
-		System.out.println("login: "+login);
+		HttpSession session = request.getSession(true);
 		
 		MemberDao memberDao = new MemberDao();
 		TradeDao tradeDao = new TradeDao();
@@ -47,7 +45,8 @@ public class TradeController extends HttpServlet {
 		
 		JSONArray stockinfo = null;
 		
-		MemberDto member = null;
+		MemberDto member = new MemberDto();
+		MemberDto login = new MemberDto();
 		
 		String stockName = null;
 		String loginid = null;
@@ -56,6 +55,9 @@ public class TradeController extends HttpServlet {
 		int price = 0;
 		
 		if(command.equals("trading")) {
+			login = (MemberDto)session.getAttribute("dto");
+			System.out.println("login: "+login.getId());
+			
 			//모의거래폼
 			if(login != null) {				
 				loginid = login.getId();
@@ -85,7 +87,11 @@ public class TradeController extends HttpServlet {
 			}
 			
 			
+		}else if(command.equals("tradesellform")) {
+			
 		}else if(command.equals("tradesell")) {
+			login = (MemberDto)session.getAttribute("dto");
+			System.out.println("login: "+login);
 			//매도버튼 클릭시(아이디,종목명,현재가,수량)
 			stockName = request.getParameter("stockName");
 			price = Integer.parseInt(request.getParameter("price"));
@@ -95,15 +101,16 @@ public class TradeController extends HttpServlet {
 			TradeDto membertd = new TradeDto(loginid,stockName,countsell,price);
 			
 			int res = tradeDao.sell(membertd);
-			//int update = tradeDao.updateBuy(membertd);
 			
-			if(res>0 /*&& update>0*/) {
+			if(res>0 ) {
 				jsResponse("매도에 성공하셨습니다.","trade.do?command=trading",response);
 			}else {
 				jsResponse("매도에 실패하셨습니다.","trade.do?command=trading",response);
 			}
 			
 		}else if(command.equals("tradebuyform")) {
+			login = (MemberDto)session.getAttribute("dto");
+			System.out.println("login: "+login);
 			//매수폼
 			//기업검색 후 기업검색 뿌려주기(매수페이지)
 			
@@ -126,25 +133,41 @@ public class TradeController extends HttpServlet {
 			}
 			
 		}else if(command.equals("tradebuy")) {
+			login = (MemberDto)session.getAttribute("dto");
+			System.out.println("login: "+login);
 			//매수버튼 클릭시(아이디,종목명,현재가,수량)
 
-			stockName = request.getParameter("stockName");
-			price = Integer.parseInt(request.getParameter("price"));
+			String stock = request.getParameter("stock");
+			int priceNow = Integer.parseInt(request.getParameter("priceNow"));
 			int countbuy = Integer.parseInt(request.getParameter("countbuy"));
+			System.out.println("stockName:"+stock+"price:"+priceNow);
 			loginid = login.getId();
 			
-			TradeDto membertd = new TradeDto(loginid,stockName,countbuy,price);
+			TradeDto membertd = new TradeDto(loginid,stock,countbuy,priceNow);
 			
-			if(price*countbuy>login.getAccount()) {
+			if(priceNow*countbuy>login.getAccount()) {
+				
 				//충전가능한 페이지로 보내줌(수정해야함)
 				jsResponse("잔액이 부족합니다.","trade.do?command=trading",response);
 			}else {
 				int res = tradeDao.buy(membertd);
 				
 				if(res>0) {
-					jsResponse("매수에 성공하셨습니다.","trade.do?command=tradebuyform",response);
+					String s = "<script type='text/javascript'>"
+							+ "alert('매수에 성공하셨습니다.');"
+							+ "self.close();"
+							+ "</script>";
+					
+					PrintWriter out = response.getWriter();
+					out.print(s);
 				}else {
-					jsResponse("매수에 실패하셨습니다.","trade.do?command=tradebuyform",response);
+					String s = "<script type='text/javascript'>"
+							+ "alert('매수에 실패하셨습니다.');"
+							+"self.close();"
+							+ "</script>";
+					
+					PrintWriter out = response.getWriter();
+					out.print(s);
 				}
 			}
 				
@@ -161,7 +184,6 @@ public class TradeController extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.print(obj.toJSONString());
-			System.out.println("총 가격: "+obj.toJSONString());
 		}
 	
 	}

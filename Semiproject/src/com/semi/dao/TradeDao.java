@@ -32,7 +32,10 @@ public class TradeDao {
 			
 			res = pstm.executeUpdate();
 			
-			int updateres = updateBuy(membertd);
+			List<TradeDto> comfirm = comfirm(membertd);
+			if(comfirm!=null) {
+				updateBuy(membertd);
+			}
 			
 			if(res>0) {
 				commit(con);
@@ -49,19 +52,71 @@ public class TradeDao {
 		return res;
 	}
 	
-	//매도시 매수 보유량 update
-	public int updateBuy(TradeDto membertd) {
-		int update = 0;
+	//매도시 테이블에 같은이름을 가진 주식을 가지고 있는지 
+	public List<TradeDto> comfirm(TradeDto membertd){
+		List<TradeDto> res = new ArrayList<>();
+		ResultSet rs = null;
 		
+		String select = " SELECT * FROM TRADE_BOARD WHERE ID=? AND STATUS='매수' AND STOCKNAME=? ";
 		
+		try {
+			pstm = con.prepareStatement(select);
+			pstm.setString(1, membertd.getId());
+			pstm.setString(2, membertd.getstockName());
+			System.out.println("03. 쿼리준비: "+select);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				TradeDto tmp = new TradeDto();
+				tmp.setTradeNo(rs.getInt(1));
+				tmp.setId(rs.getString(2));
+				tmp.setstockName(rs.getString(3));
+				tmp.setHolding(rs.getInt(4));
+				tmp.setPrice(rs.getInt(5));
+				
+				res.add(tmp);
+			}
 		
+		} catch (SQLException e) {
+			System.out.println("3/4단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+			System.out.println("05. db종료");
+		}
 		
-	
-		
-		
-		return 0;
+		return res;
 	}
 	
+	//매도시 매수 보유량 update
+	public void updateBuy(TradeDto membertd) {
+		int update = 0;
+		String updateBoardSql = " UPDATE TRADE_BOARD SET HOLDING = HOLIDNG-? WHERE ID=? AND STOCKNAME=? AND STATUS='매수'";
+		
+		try {
+			pstm = con.prepareStatement(updateBoardSql);
+			pstm.setInt(1, membertd.getHolding());
+			pstm.setString(2, membertd.getId());
+			pstm.setString(3, membertd.getstockName());
+			System.out.println("03.쿼리준비: "+updateBoardSql);
+			
+			update = pstm.executeUpdate();
+			
+			if(update>0) {
+				commit(con);
+			}
+		} catch (SQLException e) {
+			System.out.println("3/4단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+			System.out.println("05. db종료");
+		}
+	}
 	
 	//매수시
 	public int buy(TradeDto membertd) {

@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; charset=UTF-8"); %>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -25,31 +29,31 @@
 <!-- main css -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-function getParameter(){
-	
-	var count = "count="+$("#count").val();
-	var price = "price="+$("#price").val();
-	
-	return "&"+count+"&"+price;
-}
+	function getParameter() {
 
-$(function(){
-	$("#process").click(function(){
-		$.ajax({
-			url:"trade.do?command=ajax"+getParameter(),	
-			dataType: "json",						
-			success:function(msg){
-				$("#result").html(msg.allPrice+" 원")
-			},
-			error:function(){
-				alert("실패");
-			}
+		var count = "count=" + $("#count").val();
+		var price = "price=" + $("#price").val();
+
+		return "&" + count + "&" + price;
+	}
+
+	$(function() {
+		$("#process").click(function() {
+			$.ajax({
+				url : "trade.do?command=ajax" + getParameter(),
+				dataType : "json",
+				success : function(msg) {
+					$("#result").html(msg.allPrice + " 원")
+				},
+				error : function() {
+					alert("실패");
+				}
+			});
 		});
 	});
-});
-
 </script>
 
 </head>
@@ -67,7 +71,7 @@ $(function(){
 							<table class="list">
 								<form action="trade.do" method="post">
 									<input type="hidden" name="command" value="tradebuy">
-									<h3 class="mb-30 title_color">주식매도</h3>
+									<h3 class="mb-30 title_color">주식주문</h3>
 									<div class="progress-table-wrap">
 										<div class="progress-table">
 											<div class="table-head">
@@ -88,28 +92,31 @@ $(function(){
 												<div class="serial"></div>
 											</div>
 											<div class="table-row">
-												<div class="serial"></div>
 												<div class="country">종목명</div>
-												<div class="country">현재가</div>
-												<div class="country">수량</div>
+												<div class="country">구매가(/주당)</div>
+												<div class="country">현재가(/주당)</div>
+												<div class="country">보유량</div>
 												<div class="country"></div>
+
 											</div>
 											<div class="table-head">
-												<div class="serial"></div>
-												<div class="country">
-													<input type="text" name="stock" value="${stockName }" readonly="readonly" style="border:0px; outline:none;">
+												<div class="serial">
+													<input type="radio" id="default-radio"> <label
+														for="default-radio"></label>
 												</div>
 												<div class="country">
-													<input type="text" id="price" name="priceNow" value="${price }" readonly="readonly" style="border:0px; outline:none;">
+													<input type="text" name="stock" value="${trade.stockName }"
+														readonly="readonly" style="border: 0px; outline: none;">
 												</div>
+												<div class="country">${trade.price }</div>
 												<div class="country">
-													<input name="countbuy" id="count" type="number" min="0"
-														max="15" step="1">
+													<input type="text" id="price" name="priceNow"
+														value="${nowPrice[status.index].value}"
+														readonly="readonly" style="border: 0px; outline: none;">
 												</div>
-												<div class="country">
-													<input type="button" class="btn sub-btn circle"
-														 value="가격확인" id="process">
-												</div>
+												<div class="country">${trade.holding }주</div>
+												<input type="button" class="btn sub-btn" onclick="sell();"
+													name="sell" value="매도하기">
 											</div>
 											<br>
 											<div class="table-row">
