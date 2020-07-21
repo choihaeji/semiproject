@@ -24,8 +24,20 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/responsive.css">
 	
-	<link rel="stylesheet" href="css/stock_search.css" />
+	<link rel="stylesheet" href="css/stock_rank.css" />
+	<script type="text/javascript">
+		function mouseOver(obj){
+			obj.style.backgroundColor="#f6f4e5";
+		}
+		function mouseOut(obj){
+  			obj.style.backgroundColor="#ffffff";
+		}
+	</script>
 	
+	<% 
+		int pageNum = Integer.parseInt(request.getParameter("page")); 
+		String kos = (String)request.getParameter("kos");
+	%>
 </head>
 <body>
 	<!--================Header Menu Area =================-->
@@ -73,17 +85,17 @@
 	<section class="home_banner_area">
 		<div class="container box_1620">
 			<div id="m_contents">
-				<!-- 로딩 -->
-				<div class="wrap-loading display-none">
-					<div><img src="img/stock_search/loadding.gif" /></div>
+				<div class="selR">
+					<a href="StockController?command=stock_rank&kos=p&page=1">코스피</a>
+					<a href="StockController?command=stock_rank&kos=d&page=1">코스닥</a>
 				</div>
-				<!-- 검색 -->
-				<div id=s_contents>
-					<input id="stock_s" type="text" onkeypress="if( event.keyCode==13 ){search();}">
-					<input id="stock_b" type="button" value="검색" onclick="search();">
-				</div>
-				<div id="search_list">
-	
+				<div id="rank_list">
+					<div>
+						${rank.rank_list }
+					</div>
+					<div id="page">
+						
+					</div>
 				</div>
 			</div>
 		</div>
@@ -159,100 +171,51 @@ Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All r
 	<script src="js/mail-script.js"></script>
 	<script src="js/theme.js"></script>
 	<script type="text/javascript">
-	var g_val = "";
-	
-	//검색한 주식명
-	function getStockValues(){
-		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
-		var stock = $("#stock_s").val().replace(/ /g,"").replace(regExp,"");
-		
-		return stock;
-	}
-		
-	//주식검색
-	function search(){
-		var stock = getStockValues();
-		
-		if(stock == ""){
-			alert('종목명을 입력하세요.');
-		}else if(stock.length < 2){
-			alert('두글자 이상 입력하세요.');
-		}else{
-			stock_search(stock);
-		}
-	}
-	
-	function stock_search(stock){
-		var s_val = stock;
-		
-		$.ajax({
-			url:"StockController?command=stock_search_list&stock="+s_val,
-			dataType:"json"
-			,beforeSend:function(){
-		    	$('.wrap-loading').removeClass('display-none');
-		    }
-			,success:function(data){
-				$('.wrap-loading').addClass('display-none');
-				if(data[0].chk == 0){
-					$("#search_list").html("'"+s_val+"'에 대한 검색결과가 없습니다.");
-				}else{
-					var html = [];
-					var j=0;
-					$("#search_list").html('<table id="stock_list_t"></table>');
-					html[j++] = '<th class="stock_th1">종목명</th><th class="stock_th2">현재가</th><th class="stock_th2">전일대비</th><th class="stock_th2">등락율</th><th class="stock_th2">거래량</th><th class="stock_th2">거래대금(백만)</th>';
-					
-					for(var i=1; i<Object.keys(data).length; i++){
-						html[j++] = '<tr><td class="stock_td1">';
-						html[j++] = '<a class="a_info" href="stock_info.jsp?code=' + data[i].stock_code + '");">' + data[i].stock_name + '</a>';
-						html[j++] = '</td><td>';
-						html[j++] = data[i].price;
-						html[j++] = '</td>';
-						
-						if(data[i].dod_ud == "상승"){
-							html[j++] =	'<td class="td_up">' + '<img src="img/stock_search/ico_up.gif" width="7" height="6" alt="상승">';
-							html[j++] = data[i].dod;
-						}else if(data[i].dod_ud == "하락"){
-							html[j++] = '<td class="td_down">' + '<img src="img/stock_search/ico_down.gif" width="7" height="6" alt="하락">';
-							html[j++] = data[i].dod;
-						}else{
-							html[j++] = '<td>' + '<img src="img/stock_search/ico_same.gif" width="7" height="6" alt="보합">';
-							html[j++] = data[i].dod;
-						}
-						
-						html[j++] = '</td>';
-						
-						if(data[i].fluctuation_ud == "+"){
-							html[j++] =	'<td class="td_up">';
-							html[j++] = data[i].fluctuation_ud + data[i].fluctuation + '%';
-						}else if(data[i].fluctuation_ud == "-"){
-							html[j++] = '<td class="td_down">';
-							html[j++] = data[i].fluctuation_ud + data[i].fluctuation + '%';
-						}else{
-							html[j++] = '<td>';
-							html[j++] = data[i].fluctuation_ud + data[i].fluctuation + '%';
-						}
-						
-						html[j++] = '</td><td>';
-						html[j++] = data[i].volume;
-						html[j++] = '</td><td>';
-						html[j++] = data[i].trading_val;
-						html[j++] = '</td></tr>';
-					}
-					
-					$("#stock_list_t")[0].innerHTML = html.join('');
-					$("#stock_s").val("");
-				}
-			},
-			error:function(){
-				alert("fail");
-			}
-		});
-	}
+	var pageN = 1;
+	var kospd = "p";
 	$(function(){
-		g_val = '${param.s_name }';
-		if(g_val != ""){
-			stock_search(g_val);
+		pageN = parseInt((<%=pageNum%>-1)/10)*10;
+		kospd = '<%=kos%>';
+		
+		if(kospd == 'p'){
+			$("#m_contents > div.selR > a:nth-child(1)").addClass("sel_a");
+		}else{
+			$("#m_contents > div.selR > a:nth-child(2)").addClass("sel_a");
 		}
+		
+		var html = [];
+		var j = 0;
+		
+		html[j++] = '<table id="pageNum"><tr>';
+		for(var i = pageN+1; i <= pageN+10; i++){
+			if((pageN != 0)&&((i%10) == 1)){
+				var x = i-1;
+				html[j++] = '<td style="border-right: 1px solid gray; width: auto; padding-right: 5px;"><a href="StockController?command=stock_rank&kos=' + kospd + '&page=' + x + '">이전</a></td>';
+			}
+			if(i == <%=pageNum%>){
+				html[j++] = '<td><a style="color: black; font-weight: bold;" href="StockController?command=stock_rank&kos=' + kospd + '&page=' + i + '">' + i + '</a></td>';
+			}else{
+				html[j++] = '<td><a href="StockController?command=stock_rank&kos=' + kospd + '&page=' + i + '">' + i + '</a></td>';
+			}
+			
+			if((i%10) == 0){
+				var x = i+1;
+				html[j++] = '<td style="border-left: 1px solid gray; width: auto; padding-left: 5px;"><a href="StockController?command=stock_rank&kos=' + kospd + '&page=' + x + '">다음</a></td>';
+			}
+			
+			if(kospd == 'p'){
+				if(i == 32){
+					break;
+				}
+			}else{
+				if(i == 29){
+					break;
+				}
+			}
+		}
+		html[j++] = '</tr></table>';
+		
+		$("#page")[0].innerHTML = html.join('');
 	});
 	</script>
 </body>

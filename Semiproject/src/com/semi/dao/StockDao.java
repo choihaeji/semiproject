@@ -26,7 +26,7 @@ public class StockDao {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		List<StockDto> res = new ArrayList<StockDto>();
-		JSONArray info = new JSONArray();;
+		JSONArray info = new JSONArray();
 		String sql = " SELECT * FROM STOCKBOARD WHERE STOCKNAME LIKE '%" + str + "%' ";
 		try {
 			pstm = con.prepareStatement(sql);
@@ -116,6 +116,22 @@ public class StockDao {
 		return info;
 	}
 
+	public JSONObject getStockRank(String page,String kos) {
+		JSONObject rank = new JSONObject();;
+		GetDocument gdoc = new GetDocument();
+		Document doc = gdoc.getRankDoc(page, kos);
+		
+		doc.select("#contentarea > div.box_type_l > table.type_2 > caption").empty();
+		doc.select("#contentarea > div.box_type_l > table.type_2 > colgroup").remove();
+		doc.select("#contentarea > div.box_type_l > table.type_2 > thead > tr > th:nth-child(13)").remove();
+		doc.select("#contentarea > div.box_type_l > table.type_2 > tbody > tr > td.center").remove();
+		doc.select("#contentarea > div.box_type_l > table.type_2 > tbody > tr > td > a").removeAttr("href");
+		
+		rank.put("rank_list", doc.select("#contentarea > div.box_type_l > table.type_2").toString());
+		
+		return rank;
+	}
+	
 	//현재 주가
 	public int getStockPrice(String str) {
 		GetDocument gdoc = new GetDocument();

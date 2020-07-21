@@ -49,7 +49,7 @@
 						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">시장정보</a>
 						<ul class="dropdown-menu">
 							<li class="nav-item"><a class="nav-link" href="stock_search.jsp">기업별 조회</a></li>
-							<li class="nav-item"><a class="nav-link" href="elements.html">전종목 시세</a></li>
+							<li class="nav-item"><a class="nav-link" href="StockController?command=stock_rank">전종목 시세</a></li>
 						</ul>
 					</li> 
 					<li class="nav-item"><a class="nav-link" href="about-us.html">커뮤니티</a></li> 
