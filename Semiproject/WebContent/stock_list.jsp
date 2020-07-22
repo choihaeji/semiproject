@@ -84,7 +84,11 @@
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
 		<div class="container box_1620">
-			<div id="m_contents">
+			
+		</div>
+	</section>
+	<section>
+		<div id="m_contents">
 				<div class="selR">
 					<a href="StockController?command=stock_rank&kos=p&page=1">코스피</a>
 					<a href="StockController?command=stock_rank&kos=d&page=1">코스닥</a>
@@ -98,7 +102,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
 	<!--================Footer Area =================-->
 	<footer class="footer_area p_120">

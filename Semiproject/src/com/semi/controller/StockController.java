@@ -70,6 +70,17 @@ public class StockController extends HttpServlet {
 			request.setAttribute("rank", rank);
 			RequestDispatcher dispatch = request.getRequestDispatcher("stock_list.jsp?kos="+ kos +"&page="+page);
 			dispatch.forward(request, response);
+		}else if(command.equals("link_selOne")) {
+			String stock = request.getParameter("stock_name");
+			String code = sd.getStockCode(stock);
+			
+			System.out.println(code);
+			
+			if(code.isEmpty()) {
+				response.sendRedirect("StockController?command=stock_rank");
+			}else {
+				response.sendRedirect("stock_info.jsp?code="+code);
+			}
 		}
 		
 	}
