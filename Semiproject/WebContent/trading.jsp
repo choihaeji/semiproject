@@ -181,7 +181,7 @@ $(function(){
 																<input type="text" value="${trade.holding }" readonly="readonly" style="border:0px; outline:none;">주	
 															</div>
 															<div class="serial">
-																<input type="text" id="price" value="${nowPrice[status.index].value}"
+																<input type="text" id="price" value="${nowPrice[status.index]}"
 																	readonly="readonly" style="border:0px; outline:none;">
 															</div>
 															<div class="serial">
@@ -189,7 +189,7 @@ $(function(){
 																	max="${trade.holding }" step="1">
 															</div>
 															<div class="serial">
-																<input type="button" class="btn sub-btn circle" value="가격확인" onclick="process(${nowPrice[status.index].value})">
+																<input type="button" class="btn sub-btn circle" value="가격확인" onclick="process(${nowPrice[status.index]});">
 															</div>
 															</div>
 															<div class="serial">

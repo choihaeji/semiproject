@@ -2,6 +2,7 @@ package com.semi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -58,19 +59,28 @@ public class TradeController extends HttpServlet {
 			if (login != null) {
 				loginid = login.getId();
 				loginpw = login.getPw();
-
+				
+				List<TradeDto> trade = new ArrayList<>();
+				
+				
+				
 				member = memberDao.login(loginid, loginpw);
-				List<TradeDto> trade = tradeDao.holdingStock(loginid);
+				if(member !=null) {
+					trade = tradeDao.holdingStock(loginid);
+				}
+				
 
 				// 현재가 받아오기
-				List<Integer> nowPrice = null;
+				List<Integer> nowPrice = new ArrayList<>();
 
 				for (int i = 0; i < trade.size(); i++) {
 					code = tradeDao.transCode(trade.get(i).getstockName());
 					price = stockDao.getStockPrice(code);
 					nowPrice.add(price);
 				}
-
+				
+				System.out.println("nowPrice: " + nowPrice.get(0));
+				
 				request.setAttribute("member", member);
 				request.setAttribute("trade", trade);
 				request.setAttribute("nowPrice", nowPrice);
@@ -158,7 +168,7 @@ public class TradeController extends HttpServlet {
 
 				if (res > 0) {
 					String s = "<script type='text/javascript'>" + "alert('매수에 성공하셨습니다.');" + "self.close();"
-							+ "opener.location.reload();" + "</script>";
+							 + "</script>";
 
 					PrintWriter out = response.getWriter();
 					out.print(s);

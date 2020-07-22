@@ -25,7 +25,7 @@
 <!-- main css -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
-
+ 
 <style type="text/css">
 .col-lg-8 col-md-8 {
 	margin-top: 100px;
@@ -81,7 +81,28 @@
 	</form>
 	
 	----------------------------------------------------------------------------------------------- -->
-
+	<!--================Header Menu Area =================-->
+	<%@ include file="form/header.jsp"%>
+	<!--================Header Menu Area =================-->
+	<!--================Home Banner Area =================-->
+	<section class="banner_area">
+		<div class="box_1620">
+			<div class="banner_inner d-flex align-items-center">
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>로그인</h2>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================Home Banner Area =================-->
+	
+	<section class="contact_area p_120">
+ 
+ 
+    <!-- ==================로그인 부분======================= -->       
 	<div class="col-lg-8 col-md-8" id="d1">
 		<h3 class="mb-30 title_color">로그인</h3>
 		<form action="member.do" method="post">
@@ -101,6 +122,7 @@
 					onblur="this.placeholder = 'Password'" required=""
 					class="single-input">
 			</div>
+			<div>
 			<input type="submit" class="genric-btn success circle" value="Login">
 			<input type="button" value="Regist" class="genric-btn success circle"
 				onclick="location.href='member.do?command=registform'"> <input
@@ -108,8 +130,16 @@
 				class="genric-btn success circle"> <input type="button"
 				onclick="location.href='searchpw1.jsp'" value="pw 찾기"
 				class="genric-btn success circle">
+			</div>
 		</form>
 	</div>
-
+    <!-- ==================로그인 부분======================= -->       
+        </section>
+	
+	
+	
+	
+	
+	<%@ include file="form/footer.jsp"%>
 </body>
 </html>
