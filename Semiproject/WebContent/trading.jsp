@@ -31,11 +31,11 @@
 function getStockName(){
 	var stockName = $("#stockName").val();
 	return stockName;
-};
+}; 
 
 function search(){
 	window.open("trade.do?command=tradebuyform&stockName="+getStockName(), "_blank", "width=full,height=full");
-}
+};
 
 function getParameter(){
 	
@@ -44,7 +44,7 @@ function getParameter(){
 	
 	return "&"+count+"&"+price;
 }
-
+//ajax
 $(function(){
 	$("#process").click(function(){
 		$.ajax({
@@ -58,12 +58,7 @@ $(function(){
 			}
 		});
 	});
-	
 });
-
-function sell(){
-	window.open("trade.do?command=tradesellform&stockName="+,"_blank","width=full,height=full");
-}
 
 </script>
 </head>
@@ -133,22 +128,20 @@ function sell(){
 						aria-labelledby="profile-tab">
 						<div class="section-top-border">
 							<talbe class="list">
-							<form action="trade.do" method="post">
-								<input type="hidden" name="command" value="tradesell">
 								<h3 class="mb-30 title_color">매도가능 정보</h3>
 								<div class="progress-table-wrap">
 									<div class="progress-table">
 										<!--  -->
 										<div class="table-head">
 											<div class="serial">이름 :</div>
-											<div class="serial">${member.name }</div>
-											<div class="serial">계좌번호 :</div>
+											<div class="country">${member.name }</div>
+											<div class="country">계좌번호 :</div>
 											<div class="percentage">${member.bankNo }</div>
+											<div class="percentage"></div>
 										</div>
 										<!--  -->
 										<div class="table-row">
-											<div class="serial"></div>
-											<div class="country">계좌평가금액:</div>
+											<div class="serial">계좌잔액:</div>
 											<div class="country">${member.account }</div>
 											<div class="country">유가증권평가금액:</div>
 											<div class="country">${member.stockAccount }</div>
@@ -156,16 +149,14 @@ function sell(){
 										</div>
 										<!--  -->
 										<div class="table-row">
-											<div class="serial">
-												<input type="checkbox" id="default-checkbox"> <label
-													for="default-checkbox"></label>
-											</div>
-											<div class="country">종목명</div>
-											<div class="country">구매가(/주당)</div>
-											<div class="country">현재가(/주당)</div>
-											<div class="country">보유량</div>
-											<div class="country"></div>
-
+											<div class="serial">종목명</div>
+											<div class="serial">구매가(/주당)</div>
+											<div class="serial">보유량</div>
+											<div class="serial">현재가(/주당)</div>
+											<div class="serial">판매량</div>
+											<div class="seiral"></div>
+											<div class="seiral">예상매도가</div>
+											<div class="serial"></div>
 										</div>
 										<!--  -->
 										<div class="talbe-row">
@@ -173,54 +164,50 @@ function sell(){
 												<c:when test="${empty trade }">
 													<div align="center">===============구매한 주가가 존재하지
 														않습니다.===============</div>
+													
 												</c:when>
 
 												<c:otherwise>
 													<c:forEach var="trade" items="${trade }" varStatus="status">
-
-														<div class="serial">
-															<input type="radio" id="default-radio">
-															<label for="default-radio"></label>
-														</div>
-														<div class="country">
-															<input type="text" name="stock" value="${trade.stockName }" readonly="readonly" style="border:0px; outline:none;">
-														</div>
-														<div class="country">${trade.price }</div>
-														<div class="country">
-															<input type="text" id="price" name="priceNow" value="${nowPrice[status.index].value}"
-																readonly="readonly" style="border:0px; outline:none;">
-														</div>
-														<div class="country">${trade.holding }주</div>
-														<input type="button" class="btn sub-btn" onclick="sell();" name="sell" value="매도하기">
-
+														<form action="trade.do" method="post">
+															<input type="hidden" name="command" value="tradesell">
+															<div class="serial">
+																<input type="text" name="stockName" value="${trade.stockName }" readonly="readonly" style="border:0px; outline:none;">
+															</div>
+															<div class="serial" >
+																<input type="text" value="${trade.price }" readonly="readonly" style="border:0px; outline:none;">
+															</div>
+															<div class="serial">
+																<input type="text" value="${trade.holding }" readonly="readonly" style="border:0px; outline:none;">주	
+															</div>
+															<div class="serial">
+																<input type="text" id="price" value="${nowPrice[status.index].value}"
+																	readonly="readonly" style="border:0px; outline:none;">
+															</div>
+															<div class="serial">
+																<input id="count" type="number" min="0"
+																	max="${trade.holding }" step="1">
+															</div>
+															<div class="serial">
+																<input type="button" class="btn sub-btn circle" value="가격확인" onclick="process(${nowPrice[status.index].value})">
+															</div>
+															</div>
+															<div class="serial">
+																<input type="text" name="result" readonly="readonly" style="border:0px; outline:none;">
+															</div>
+															<div class="serial">
+																<input type="submit" class="genric-btn danger circle" value="매도하기">
+															</div>
+														</form>
 													</c:forEach>
 												</c:otherwise>
-
 											</c:choose>
 										</div>
 										<!--  -->
-										<br>
-										<div class="table-row">
-											<div class="serial"></div>
-											<div class="serial"></div>
-											<div class="serial"></div>
-											<div class="serial"></div>
-											<div class="serial"></div>
-											<div class="serial"></div>
-											<div class="country">매매 금액 :</div>
-											<div class="country" id="result"></div>
-											<div class="country">
-												<input type="submit" value="매도하기"
-													class="genric-btn danger circle">
-											</div>
-
-										</div>
-
+										
 									</div>
 								</div>
-							</form>
-							<!--  -->
-							</table>
+							</table> 
 						</div>
 					</div>
 					<!--================매도 끝=================-->

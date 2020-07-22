@@ -27,15 +27,23 @@
 <link rel="stylesheet" href="css/responsive.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-function getParameter(){
+//ajax
+function process(price){
 	
-	var count = "count="+$("#count").val();
-	var price = "price="+$("#price").val();
-	
-	return "&"+count+"&"+price;
+	var count = $("#count").val();
+		$.ajax({
+			url:"trade.do?command=ajax&count="+count+"&price="+price,	
+			dataType: "json",						
+			success:function(msg){
+				$("#result").html(msg.allPrice+" 원")
+			},
+			error:function(){
+				alert("실패");
+			}
+		});
 }
 
-$(function(){
+/* $(function(){
 	$("#process").click(function(){
 		$.ajax({
 			url:"trade.do?command=ajax"+getParameter(),	
@@ -48,7 +56,7 @@ $(function(){
 			}
 		});
 	});
-});
+}); */
 
 </script>
 
@@ -65,8 +73,8 @@ $(function(){
 						aria-labelledby="home-tab">
 						<div class="section-top-border">
 							<table class="list">
-								<form action="trade.do" method="post">
-									<input type="hidden" name="command" value="tradebuy">
+								 <form action="trade.do" method="post">
+									<input type="hidden" name="command" value="tradebuy"> 
 									<h3 class="mb-30 title_color">주식매도</h3>
 									<div class="progress-table-wrap">
 										<div class="progress-table">
@@ -108,7 +116,7 @@ $(function(){
 												</div>
 												<div class="country">
 													<input type="button" class="btn sub-btn circle"
-														 value="가격확인" id="process">
+														 value="가격확인" onclick="process(${price})">
 												</div>
 											</div>
 											<br>
@@ -119,17 +127,17 @@ $(function(){
 												<div class="serial"></div>
 												<div class="serial"></div>
 												<div class="serial"></div>
-												<div class="country">매매 금액 :</div>
+												<div class="country">매수 금액 :</div>
 												<div class="percentage" id="result"></div>
 												<div class="country">
 													<input type="submit" value="주식주문"
-														class="genric-btn danger circle">
+														class="genric-btn danger circle" >
 												</div>
 											</div>
 										</div>
 									</div>
-								</form>
-							</table>
+								 </form>
+							</table> 
 						</div>
 					</div>
 				</div>
