@@ -168,7 +168,7 @@ public class MemberController extends HttpServlet {
 				System.out.println("모두 일치!");
 				HttpSession session = request.getSession();
 				session.setAttribute("dto", dto);
-				session.setMaxInactiveInterval(60 * 60);
+				session.setMaxInactiveInterval(60* 60);
 
 				jsResponse("성공", "searchpw2.jsp", response);
 

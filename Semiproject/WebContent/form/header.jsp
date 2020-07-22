@@ -61,6 +61,8 @@
 								class="nav-link dropdown-toggle" data-toggle="dropdown"
 								role="button" aria-haspopup="true" aria-expanded="false">마이페이지</a>
 								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="mypage.jsp">마이페이지
+										</a></li>
 									<li class="nav-item"><a class="nav-link" href="blog.html">거래내역
 											조회</a></li>
 									<li class="nav-item"><a class="nav-link"
@@ -79,6 +81,19 @@
 								}
 							%>
 						</ul>
+					</li> 
+					<li class="nav-item"><a class="nav-link" href="about-us.html">커뮤니티</a></li> 
+					<li class="nav-item"><a class="nav-link" href="trade.do?command=trading">모의거래</a></li> 
+					<li class="nav-item submenu dropdown">
+						<a href="mypage.jsp" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">마이페이지</a>
+						<ul class="dropdown-menu">
+							<li class="nav-item"><a class="nav-link" href="blog.html">거래내역 조회</a></li>
+							<li class="nav-item"><a class="nav-link" href="single-blog.html">회원정보 수정</a></li>
+						</ul>
+					</li> 
+					<li class="nav-item"><a class="nav-link" href="login.jsp">Login/Register</a></li>
+							</ul>
+						</div> 
 					</div>
 				</div>
 			</nav>
