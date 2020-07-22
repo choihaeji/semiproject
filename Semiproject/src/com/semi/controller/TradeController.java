@@ -59,16 +59,13 @@ public class TradeController extends HttpServlet {
 			if (login != null) {
 				loginid = login.getId();
 				loginpw = login.getPw();
-				
+
 				List<TradeDto> trade = new ArrayList<>();
-				
-				
-				
+
 				member = memberDao.login(loginid, loginpw);
-				if(member !=null) {
+				if (member != null) {
 					trade = tradeDao.holdingStock(loginid);
 				}
-				
 
 				// 현재가 받아오기
 				List<Integer> nowPrice = new ArrayList<>();
@@ -78,9 +75,9 @@ public class TradeController extends HttpServlet {
 					price = stockDao.getStockPrice(code);
 					nowPrice.add(price);
 				}
-				
+
 				System.out.println("nowPrice: " + nowPrice.get(0));
-				
+
 				request.setAttribute("member", member);
 				request.setAttribute("trade", trade);
 				request.setAttribute("nowPrice", nowPrice);
@@ -95,12 +92,16 @@ public class TradeController extends HttpServlet {
 		} else if (command.equals("tradesell")) {
 			MemberDto login = new MemberDto();
 			login = (MemberDto) session.getAttribute("dto");
-			//System.out.println("login: " + login.getId());
+			System.out.println("login: " + login.getId());
 			// 매도버튼 클릭시(아이디,종목명,현재가,수량)
 			stockName = request.getParameter("stockName");
+			System.out.println("sotckName: "+stockName );
 			price = Integer.parseInt(request.getParameter("price"));
+			System.out.println("price: "+price);
 			int count = Integer.parseInt(request.getParameter("count"));
+			System.out.println("count:"+count);
 			loginid = login.getId();
+			
 
 			TradeDto membertd = new TradeDto(loginid, stockName, count, price);
 
@@ -115,7 +116,7 @@ public class TradeController extends HttpServlet {
 		} else if (command.equals("tradebuyform")) {
 			MemberDto login = new MemberDto();
 			login = (MemberDto) session.getAttribute("dto");
-			//System.out.println("login: " + login.getId());
+			System.out.println("login: " + login.getId());
 			// 매수폼
 			// 기업검색 후 기업검색 뿌려주기(매수페이지)
 			loginid = login.getId();
@@ -147,7 +148,7 @@ public class TradeController extends HttpServlet {
 			String stock = request.getParameter("stock");
 			int priceNow = Integer.parseInt(request.getParameter("priceNow"));
 			int countbuy = Integer.parseInt(request.getParameter("countbuy"));
-			System.out.println("countbuy:" +countbuy);
+			System.out.println("countbuy:" + countbuy);
 			System.out.println("stockName:" + stock + "price:" + priceNow);
 
 			loginid = login.getId();
@@ -168,7 +169,7 @@ public class TradeController extends HttpServlet {
 
 				if (res > 0) {
 					String s = "<script type='text/javascript'>" + "alert('매수에 성공하셨습니다.');" + "self.close();"
-							 + "</script>";
+							+ "</script>";
 
 					PrintWriter out = response.getWriter();
 					out.print(s);
