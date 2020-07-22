@@ -264,4 +264,34 @@ public class MemberDao extends JDBCTemplate {
 		return result;
 	}
 
+	public MemberDto selectMember(String id) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		MemberDto dto = new MemberDto();
+		String sql = " SELECT ID, PW, NAME, BIRTH, GENDER, EMAIL FROM MEMBER WHERE ID=? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, id);
+			
+			rs = pstm.executeQuery();
+			while(rs.next()) {
+				dto.setId(rs.getString(1));
+				dto.setPw(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setBday(rs.getString(4));
+				dto.setGender(rs.getString(5));
+				dto.setEmail(rs.getString(6));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
+		return dto;
+	}
 }

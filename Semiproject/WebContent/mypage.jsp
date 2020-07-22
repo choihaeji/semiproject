@@ -18,13 +18,13 @@
 </head>
 <%
 	MemberDto dto = (MemberDto)session.getAttribute("dto");
-	TradeDto dtos = (TradeDto) session.getAttribute("dtos");
+	TradeDto dtos = new TradeDto();
 	TradeDao dao = new TradeDao();
 	String id = request.getParameter(dto.getId());
-	int count = dao.countTrade(id);
+
 %>
 <body>
-	<h1>My Page</h1>
+	<h1><a href="index.jsp">My Page</a></h1>
 	<div>
 		<span><%=dto.getName() %> 님 환영합니다.</span>
 		<input type="button" onclick="location.href='member.do?command=logout'" value="로그아웃">
@@ -86,7 +86,7 @@
 				<th>매수 / 매도</th>
 			</tr>
 			<%
-				for (int i = 0; i < count; i++) {
+				for (int i = 0; i < 30; i++) {
 			%>
 				<tr>
 					<td><%=dtos.getstockName() %></td>
