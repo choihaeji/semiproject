@@ -13,11 +13,12 @@ import com.semi.dto.TradeDto;
 
 public class TradeDao {
 
-	Connection con = getConnection();
+	//Connection con = getConnection();
 	PreparedStatement pstm = null;
 	
 	//매도시
 	public int sell(TradeDto membertd) {		
+		Connection con = getConnection();
 		int res = 0;
 		//매도시 trade table에 insert
 		String sellSql = " INSERT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,?,?,?,?,'매도') ";
@@ -54,6 +55,7 @@ public class TradeDao {
 	
 	//매도시 테이블에 같은이름을 가진 주식을 가지고 있는지 
 	public List<TradeDto> comfirm(TradeDto membertd){
+		Connection con = getConnection();
 		List<TradeDto> res = new ArrayList<>();
 		ResultSet rs = null;
 		
@@ -93,6 +95,7 @@ public class TradeDao {
 	
 	//매도시 매수 보유량 update
 	public void updateBuy(TradeDto membertd) {
+		Connection con = getConnection();
 		int update = 0;
 		String updateBoardSql = " UPDATE TRADE_BOARD SET HOLDING = HOLIDNG-? WHERE ID=? AND STOCKNAME=? AND STATUS='매수'";
 		
@@ -120,9 +123,10 @@ public class TradeDao {
 	
 	//매수시
 	public int buy(TradeDto membertd) {
+		Connection con = getConnection();
 		int res =0;
 		//매수시 trade table에 insert
-		String buySql = " INESRT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,?,?,?,?,'매수') ";
+		String buySql = " INSERT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,?,?,?,?,'매수') ";
 		
 		try {
 			pstm = con.prepareStatement(buySql);
@@ -151,12 +155,11 @@ public class TradeDao {
 	
 	//보유 주식 리스트
 	public List<TradeDto> holdingStock(String id){
-		
+		Connection con = getConnection();
 		ResultSet rs = null;
 		List<TradeDto> res = new ArrayList<>();
 		//보유주식 리스트 
 		String selectAllSql = " SELECT * FROM TRADE_BOARD WHERE ID=? AND STATUS='매수' ";
-		
 		try {
 			pstm = con.prepareStatement(selectAllSql);
 			pstm.setString(1, id);
@@ -191,6 +194,7 @@ public class TradeDao {
 	
 	//주식명 코드로 변환
 	public String transCode(String stockName) {
+		Connection con = getConnection();
 		String code = null;
 		ResultSet rs = null;
 		//주식이름 코드로 변환

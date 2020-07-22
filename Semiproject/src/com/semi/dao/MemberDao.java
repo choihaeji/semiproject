@@ -89,7 +89,7 @@ public class MemberDao extends JDBCTemplate {
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, id);
 			pstm.setString(2, pw);
-			System.out.println("03. query 준비: " + sql);
+			System.out.println("03. query 준비(MemberDao.login): " + sql);
 
 			rs = pstm.executeQuery();
 			System.out.println("04. query 실행 및 리턴");

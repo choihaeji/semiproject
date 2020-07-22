@@ -1,14 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; charset=UTF-8"); %>
-
-<%@ page import = "com.semi.dto.MemberDto" %>
-<%@ page import = "com.semi.dao.TradeDao" %>
-<%@ page import = "com.semi.dto.TradeDto"%>
-<%@ page import = "java.util.ArrayList"%>
-<%@ page import = "java.util.List" %>
+pageEncoding="UTF-8"%> <% request.setCharacterEncoding("UTF-8"); %> <%
+response.setContentType("text/html; charset=UTF-8"); %> <%@ page import =
+"com.semi.dto.MemberDto" %> <%@ page import = "com.semi.dao.TradeDao" %> <%@
+page import = "com.semi.dto.TradeDto"%> <%@ page import =
+"java.util.ArrayList"%> <%@ page import = "java.util.List" %>
 
 <!DOCTYPE html>
 <html>
