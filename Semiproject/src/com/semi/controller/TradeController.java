@@ -37,7 +37,6 @@ public class TradeController extends HttpServlet {
 		System.out.println("command: " + command);
 
 		HttpSession session = request.getSession(true);
-		System.out.println(session);
 
 		MemberDao memberDao = new MemberDao();
 		TradeDao tradeDao = new TradeDao();

@@ -220,6 +220,7 @@ public class TradeDao {
 		return code;
 	}
 	
+	//보유 주식 개수
 	public int countTrade(String id) {
 		Connection con = getConnection();
 		PreparedStatement pstm = null;
