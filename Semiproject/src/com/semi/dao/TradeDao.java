@@ -220,5 +220,28 @@ public class TradeDao {
 		return code;
 	}
 	
-	
+	public int countTrade(String id) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		int count = 0;
+		String sql = " SELECT COUNT(*) FROM TRADE_BOARD WHERE=? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, id);
+			
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		return count;
+	}
 }
