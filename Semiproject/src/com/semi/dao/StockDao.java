@@ -13,14 +13,48 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.semi.dto.StockDto;
 
 import common.GetDocument;
 
 public class StockDao {
-	
 	//
+	public String getStockCode(String str) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = " SELECT * FROM STOCKBOARD WHERE STOCKNAME LIKE '" + str + "' ";
+		String code = "";
+		try {
+			pstm = con.prepareStatement(sql);
+			System.out.println("03. query 준비: " + sql);
+			
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+			
+			
+			while(rs.next()) {
+				code = rs.getString("STOCKCODE");
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		
+		return code;
+	}
+	
+	//검색한 리스트
 	public JSONArray getStockList(String str) {
 		Connection con = getConnection();
 		PreparedStatement pstm = null;
@@ -125,7 +159,12 @@ public class StockDao {
 		doc.select("#contentarea > div.box_type_l > table.type_2 > colgroup").remove();
 		doc.select("#contentarea > div.box_type_l > table.type_2 > thead > tr > th:nth-child(13)").remove();
 		doc.select("#contentarea > div.box_type_l > table.type_2 > tbody > tr > td.center").remove();
-		doc.select("#contentarea > div.box_type_l > table.type_2 > tbody > tr > td > a").removeAttr("href");
+		
+		Elements els = doc.select("#contentarea > div.box_type_l > table.type_2 > tbody > tr > td > a.tltle");
+		for(Element el : els) {
+			String str = el.text().replace(" ", "");
+			el.attr("href", "StockController?command=link_selOne&stock_name="+str);
+		}
 		
 		rank.put("rank_list", doc.select("#contentarea > div.box_type_l > table.type_2").toString());
 		
