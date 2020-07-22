@@ -1,0 +1,103 @@
+#m_contents{
+	text-align: center;
+}
+
+div.selR{
+	margin-bottom: 20px;
+}
+div.selR a{
+	font-size: 30px;
+	color: gray;
+	padding-right:10px;
+	padding-left:10px;
+	font-weight: 1000;
+}
+
+div.selR a.sel_a{
+	color: black;
+}
+
+#rank_list{
+	text-align: center;
+	clear: both;
+}
+#rank_list a{
+	color: gray;
+}
+#rank_list > div > table.type_2{
+	width: 929px;
+	display: inline-block;
+	font-size: 14px;
+	border-bottom: solid 1px gray; 
+	border-top: solid 1px gray;
+	line-height: 26px;
+}
+#rank_list > div > table.type_2 caption{
+	padding: 0px;
+}
+#rank_list > div > table.type_2 > thead{
+	border-bottom: solid 1px gray;
+}
+#rank_list > div > table.type_2 > thead > tr > th.tr{
+	padding-right: 0;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(1){
+	width: 34px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(2){
+	width: 140px;
+}
+#rank_list > div > table.type_2 > tbody > tr > td:nth-child(2){
+	padding-right: 5px;
+	padding-left: 5px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(3){
+	width: 80px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(4){
+	width: 70px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(5){
+	width: 70px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(6){
+	width: 60px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(7){
+	width: 95px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(8){
+	width: 88px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(9){
+	width: 77px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(10){
+	width: 80px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(11){
+	width: 75px;
+}
+#rank_list > div > table.type_2 > thead > tr > th:nth-child(12){
+	width: 60px;
+}
+#pageNum{
+	width: 380px;
+	display: inline-block;
+}
+#pageNum tr td{
+	padding: 0px;
+	width: 30px;
+	height: 22px;
+}
+
+#pageNum a:hover{
+	text-decoration: underline;
+}
+
+.red01, .red02{
+	color: red;
+}
+.nv01{
+	color: blue;
+}

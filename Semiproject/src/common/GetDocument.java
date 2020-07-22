@@ -23,6 +23,29 @@ public class GetDocument {
 			e.printStackTrace();
 		}
 		
+		return doc;
+	}
+	
+	public Document getRankDoc(String page, String kos) {
+		Document doc = null;
+		Connection conn = null;
+		
+		try {
+			// URL 선언
+			String connUrl = "";
+			if(kos.equals("p")) {
+				connUrl = "https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&page="+page;
+			}else {
+				connUrl = "https://finance.naver.com/sise/sise_market_sum.nhn?sosok=1&page="+page;
+			}
+			
+			// HTML 가져오기
+			conn = Jsoup.connect(connUrl);
+			doc = conn.get();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return doc;
 	}

@@ -26,7 +26,7 @@
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav ml-auto">
-								<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> 
+								<li class="nav-item active"><a class="nav-link" href="index.jsp">Home</a></li> 
 					<li class="nav-item submenu dropdown">
 						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">시장정보</a>
 						<ul class="dropdown-menu">
@@ -35,7 +35,7 @@
 						</ul>
 					</li> 
 					<li class="nav-item"><a class="nav-link" href="about-us.html">커뮤니티</a></li> 
-					<li class="nav-item"><a class="nav-link" href="trading.jsp">모의거래</a></li> 
+					<li class="nav-item"><a class="nav-link" href="trade.do?command=trading">모의거래</a></li> 
 					<li class="nav-item submenu dropdown">
 						<a href="member.do?command=mypage&id=<%=dto.getId() %>" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">마이페이지</a>
 						<ul class="dropdown-menu">
@@ -43,7 +43,7 @@
 							<li class="nav-item"><a class="nav-link" href="single-blog.html">회원정보 수정</a></li>
 						</ul>
 					</li> 
-					<li class="nav-item"><a class="nav-link" href="contact.html">Login/Register</a></li>
+					<li class="nav-item"><a class="nav-link" href="login.jsp">Login/Register</a></li>
 							</ul>
 						</div> 
 					</div>
