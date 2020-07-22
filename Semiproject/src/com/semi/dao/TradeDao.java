@@ -245,4 +245,32 @@ public class TradeDao {
 		}
 		return count;
 	}
+	
+	public List<TradeDto> viewTrade(String id) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		TradeDto dto = new TradeDto();
+		List<TradeDto> list = new ArrayList<TradeDto>();
+		String sql = " SELECT TRADENO, STOCKNAME, HOLDING, STATUS FROM TRADE_BOARD WHERE ID=? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, id);
+			
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				dto.setTradeNo(rs.getInt(1));
+				dto.setstockName(rs.getString(2));
+				dto.setHolding(rs.getInt(3));
+				dto.setStatus(rs.getString(4));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

@@ -18,8 +18,8 @@
 </head>
 <%
 	MemberDto dto = (MemberDto)session.getAttribute("dto");
-	TradeDto dtos = new TradeDto();
 	TradeDao dao = new TradeDao();
+	List<TradeDto> list = dao.holdingStock(dto.getId());
 	String id = request.getParameter(dto.getId());
 
 %>
@@ -86,12 +86,13 @@
 				<th>매수 / 매도</th>
 			</tr>
 			<%
-				for (int i = 0; i < 30; i++) {
+				for (int i = 0; i < list.size(); i++) {
 			%>
 				<tr>
-					<td><%=dtos.getstockName() %></td>
-					<td><%=dtos.getHolding() %></td>
-					<td><%=dtos.getStatus() %></td>
+					<td><%=list.get(i).getTradeNo() %></td>
+					<td><%=list.get(i).getstockName() %></td>
+					<td><%=list.get(i).getHolding() %></td>
+					<td><%=list.get(i).getStatus() %></td>
 				</tr>
 			<%
 				}
