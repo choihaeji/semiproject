@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
+
 	<%
 		MemberDto dto = new MemberDto();
 	%>

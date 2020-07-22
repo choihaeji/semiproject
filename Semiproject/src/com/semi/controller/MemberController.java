@@ -91,7 +91,7 @@ public class MemberController extends HttpServlet {
 				String url = before.split("/")[4];
 				System.out.println(url);
 
-				jsResponse("로그인 성공", "index.jsp", response);
+				jsResponse("로그인 성공", url, response);
 			} else {
 				System.out.println("로그인 실패");
 				jsResponse("로그인 실패", "login.jsp", response);
