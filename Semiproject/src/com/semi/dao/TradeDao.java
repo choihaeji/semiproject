@@ -256,7 +256,7 @@ public class TradeDao {
 		ResultSet rs = null;
 		TradeDto dto = new TradeDto();
 		List<TradeDto> list = new ArrayList<TradeDto>();
-		String sql = " SELECT TRADENO, STOCKNAME, HOLDING, STATUS FROM TRADE_BOARD WHERE ID=? ";
+		String sql = " SELECT LOGSQ, STOCKNAME, PRICE, HOLDING, STATUS FROM TRADE_LOG WHERE ID=? ";
 		
 		try {
 			pstm = con.prepareStatement(sql);
@@ -266,8 +266,9 @@ public class TradeDao {
 			while (rs.next()) {
 				dto.setTradeNo(rs.getInt(1));
 				dto.setstockName(rs.getString(2));
-				dto.setHolding(rs.getInt(3));
-				dto.setStatus(rs.getString(4));
+				dto.setPrice(rs.getInt(3));
+				dto.setHolding(rs.getInt(4));
+				dto.setStatus(rs.getString(5));
 				
 				list.add(dto);
 			}
@@ -276,5 +277,40 @@ public class TradeDao {
 		}
 		
 		return list;
+	}
+	
+	public void tradeLog(String command) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		String sql = "";
+		TradeDto dto = new TradeDto();
+		int res = 0;
+		
+		if (command.equals("tradebuy")) {
+			sql = " INSERT INTO TRADE_LOG VALUES (LOGSQ.NEXTVAL, ?, ?, ?, ?, '매수', SYSDATE) ";
+		}
+		else if (command.equals("tradesell")) {
+			sql = " INSERT INTO TRADE_LOG VALUES (LOGSQ.NEXTVAL, ?, ?, ?, ?, '매도', SYSDATE) ";
+		}
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, dto.getId());
+			pstm.setString(2, dto.getstockName());
+			pstm.setInt(3, dto.getPrice());
+			pstm.setInt(4, dto.getHolding());
+			
+			res = pstm.executeUpdate();
+			
+			if (res > 0) {
+				commit(con);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			close(con);
+		}
+
 	}
 }

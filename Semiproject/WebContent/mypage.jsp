@@ -17,6 +17,7 @@ page import = "com.semi.dto.TradeDto"%> <%@ page import =
 	List<TradeDto> list = dao.holdingStock(dto.getId());
 	String id = request.getParameter(dto.getId());
 
+	System.out.println(dto.getName() + " | " + dto.getAccount());
 %>
 <body>
 	<h1><a href="index.jsp">My Page</a></h1>

@@ -105,6 +105,7 @@ public class TradeController extends HttpServlet {
 			TradeDto membertd = new TradeDto(loginid, stockName, count, price);
 
 			int res = tradeDao.sell(membertd);
+			tradeDao.tradeLog(command);
 
 			if (res > 0) {
 				jsResponse("매도에 성공하셨습니다.", "trade.do?command=trading", response);
@@ -165,6 +166,7 @@ public class TradeController extends HttpServlet {
 
 			} else {
 				int res = tradeDao.buy(membertd);
+				tradeDao.tradeLog(command);
 
 				if (res > 0) {
 					String s = "<script type='text/javascript'>" + "alert('매수에 성공하셨습니다.');" + "self.close();"
