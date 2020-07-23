@@ -104,11 +104,7 @@ public class TradeController extends HttpServlet {
 			tradeDao.tradeLog(command);
 
 			if (res > 0) {
-				String s = "<script type='text/javascript'>" + "alert('매도성공')"+"location.href='trade.do?command=trading';"
-						+"</script>";
-
-					PrintWriter out = response.getWriter();
-					out.print(s);
+				jsResponse("매도 성공", "trade.do?command=trading", response);
 			}else {
 				jsResponse("매도에 실패하셨습니다.", "trade.do?command=trading", response);
 			}
@@ -162,8 +158,7 @@ public class TradeController extends HttpServlet {
 			if (priceNow * countbuy > login.getAccount()) {
 
 				String s = "<script type='text/javascript'>" + "alert('잔액이부족합니다.');" + "self.close();"
-				// 수정: 충전가능한 페이지로 보내줌(수정해야함)
-						+ "opener.location.href='index.jsp'" + "</script>";
+						+ "opener.location.href='mypage.jsp'" + "</script>";
 
 				PrintWriter out = response.getWriter();
 				out.print(s);
