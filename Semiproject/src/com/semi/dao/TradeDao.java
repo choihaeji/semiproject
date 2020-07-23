@@ -13,7 +13,7 @@ import com.semi.dto.TradeDto;
 
 public class TradeDao {
 
-	//Connection con = getConnection();
+	
 	PreparedStatement pstm = null;
 	
 	//매도시
@@ -31,15 +31,18 @@ public class TradeDao {
 			pstm.setInt(4, membertd.getPrice());
 			System.out.println("03. 쿼리 준비: "+sellSql);
 			
-			res = pstm.executeUpdate();
+			res = pstm.executeUpdate();			
 			
-			List<TradeDto> comfirm = comfirm(membertd);
-			if(comfirm!=null) {
-				updateBuy(membertd);
-			}
-			
+			List<TradeDto> confirm1 = new ArrayList<>();
 			if(res>0) {
-				commit(con);
+				confirm1 = confirm(membertd,con);
+				if(confirm1 != null) {
+					updateBuy(membertd,con);
+					commit(con);
+					
+				}else {
+					commit(con);
+				}
 			}
 		} catch (SQLException e) {
 			System.out.println("3/4단계 오류");
@@ -54,8 +57,8 @@ public class TradeDao {
 	}
 	
 	//매도시 테이블에 같은이름을 가진 주식을 가지고 있는지 
-	public List<TradeDto> comfirm(TradeDto membertd){
-		Connection con = getConnection();
+	public List<TradeDto> confirm(TradeDto membertd,Connection con){
+		
 		List<TradeDto> res = new ArrayList<>();
 		ResultSet rs = null;
 		
@@ -86,7 +89,6 @@ public class TradeDao {
 		}finally {
 			close(rs);
 			close(pstm);
-			close(con);
 			System.out.println("05. db종료");
 		}
 		
@@ -94,10 +96,9 @@ public class TradeDao {
 	}
 	
 	//매도시 매수 보유량 update
-	public void updateBuy(TradeDto membertd) {
-		Connection con = getConnection();
+	public int updateBuy(TradeDto membertd,Connection con) {
 		int update = 0;
-		String updateBoardSql = " UPDATE TRADE_BOARD SET HOLDING = HOLIDNG-? WHERE ID=? AND STOCKNAME=? AND STATUS='매수'";
+		String updateBoardSql = " UPDATE TRADE_BOARD SET HOLDING = HOLDING-? WHERE ID=? AND STOCKNAME=? AND STATUS='매수'";
 		
 		try {
 			pstm = con.prepareStatement(updateBoardSql);
@@ -116,9 +117,10 @@ public class TradeDao {
 			e.printStackTrace();
 		}finally {
 			close(pstm);
-			close(con);
 			System.out.println("05. db종료");
 		}
+		
+		return update;
 	}
 	
 	//매수시
@@ -159,7 +161,7 @@ public class TradeDao {
 		ResultSet rs = null;
 		List<TradeDto> res = new ArrayList<>();
 		//보유주식 리스트 
-		String selectAllSql = " SELECT * FROM TRADE_BOARD WHERE ID=? AND STATUS='매수' ";
+		String selectAllSql = " SELECT * FROM TRADE_BOARD WHERE ID=? AND STATUS='매수' AND HOLDING NOT IN(0) ";
 		try {
 			pstm = con.prepareStatement(selectAllSql);
 			pstm.setString(1, id);

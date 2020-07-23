@@ -62,14 +62,11 @@ public class TradeController extends HttpServlet {
 				
 				List<TradeDto> trade = new ArrayList<>();
 				
-				
-				
 				member = memberDao.login(loginid, loginpw);
 				if(member !=null) {
 					trade = tradeDao.holdingStock(loginid);
 				}
 				
-
 				// 현재가 받아오기
 				List<Integer> nowPrice = new ArrayList<>();
 
@@ -77,9 +74,8 @@ public class TradeController extends HttpServlet {
 					code = tradeDao.transCode(trade.get(i).getstockName());
 					price = stockDao.getStockPrice(code);
 					nowPrice.add(price);
+					System.out.println("nowPrice["+i+"]:"+nowPrice.get(i));
 				}
-				
-				System.out.println("nowPrice: " + nowPrice.get(0));
 				
 				request.setAttribute("member", member);
 				request.setAttribute("trade", trade);
@@ -95,11 +91,14 @@ public class TradeController extends HttpServlet {
 		} else if (command.equals("tradesell")) {
 			MemberDto login = new MemberDto();
 			login = (MemberDto) session.getAttribute("dto");
-			//System.out.println("login: " + login.getId());
+			System.out.println("login: " + login.getId());
 			// 매도버튼 클릭시(아이디,종목명,현재가,수량)
 			stockName = request.getParameter("stockName");
+			System.out.println(stockName);
 			price = Integer.parseInt(request.getParameter("price"));
+			System.out.println(price);
 			int count = Integer.parseInt(request.getParameter("count"));
+			System.out.println(count);
 			loginid = login.getId();
 
 			TradeDto membertd = new TradeDto(loginid, stockName, count, price);
@@ -109,10 +108,10 @@ public class TradeController extends HttpServlet {
 
 			if (res > 0) {
 				jsResponse("매도에 성공하셨습니다.", "trade.do?command=trading", response);
-			} else {
+			}else {
 				jsResponse("매도에 실패하셨습니다.", "trade.do?command=trading", response);
 			}
-
+						
 		} else if (command.equals("tradebuyform")) {
 			MemberDto login = new MemberDto();
 			login = (MemberDto) session.getAttribute("dto");
@@ -185,9 +184,10 @@ public class TradeController extends HttpServlet {
 
 		} else if (command.equals("ajax")) {
 			int count = Integer.parseInt(request.getParameter("count"));
+			System.out.println("개수: " + count);
 			price = Integer.parseInt(request.getParameter("price"));
 
-			System.out.println("개수: " + count + "가격:" + price);
+			System.out.println( "가격:" + price);
 			int allPrice = count * price;
 
 			JSONObject obj = new JSONObject();

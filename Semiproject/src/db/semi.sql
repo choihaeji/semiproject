@@ -31,9 +31,80 @@ INSERT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,'유저1','신도기연',3,500,
 INSERT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,'유저1','카카오',3,700,'매수');
 INSERT INTO TRADE_BOARD VALUES(TRADENOSQ.NEXTVAL,'유저1','카카오',2,700,'매도');
 
-SELECT * FROM MEMBER;
+----------------------------------------------------------------------------------------------
+---------------------------------------회원 talbe-----------------------------------------------
+----------------------------------------------------------------------------------------------
+DROP TABLE MEMBER CASCADE CONSTRAINTS;
+--회원번호 시퀀스
+DROP SEQUENCE MEMBERNOSQ;
 
-SELECT * FROM TRADE_BOARD;
+CREATE SEQUENCE MEMBERNOSQ;
+--(회원번호,아이디,비밀번호,이름,생일,성별,이메일,은행명,계좌번호,잔액정보,유가증권잔액)
+CREATE TABLE MEMBER
+(
+    MEMBERNO    NUMBER           NOT NULL, 
+    ID          VARCHAR2(100)    UNIQUE NOT NULL, 
+    PW          VARCHAR2(100)    NOT NULL, 
+    NAME        VARCHAR2(20)     NOT NULL, 
+    BIRTH       DATE             NOT NULL, 
+    GENDER      VARCHAR2(6)          NOT NULL, 
+    EAMIL       VARCHAR2(100)    NOT NULL, 
+    BANK        VARCHAR2(50)     NOT NULL, 
+    BANKNO      VARCHAR2(100)          NOT NULL, 
+    ACCOUNT     NUMBER           DEFAULT 0	NOT NULL, 
+    STOCKACCOUNT NUMBER 		 DEFAULT 0 	NOT NULL,
+    CONSTRAINT MEMBER_PK PRIMARY KEY (MEMBERNO)
+);
+
+COMMENT ON COLUMN MEMBER.MEMBERNO IS '회원번호';
+
+COMMENT ON COLUMN MEMBER.ID IS '아이디';
+
+COMMENT ON COLUMN MEMBER.PW IS '비밀번호';
+
+COMMENT ON COLUMN MEMBER.NAME IS '이름';
+
+COMMENT ON COLUMN MEMBER.BIRTH IS '생일';
+
+COMMENT ON COLUMN MEMBER.GENDER IS '성별';
+
+COMMENT ON COLUMN MEMBER.EAMIL IS '이메일';
+
+COMMENT ON COLUMN MEMBER.BANK IS '은행명';
+
+COMMENT ON COLUMN MEMBER.BANKNO IS '계좌번호';
+
+COMMENT ON COLUMN MEMBER.ACCOUNT IS '잔액정보';
+
+----------------------------------------------------------------------------------------------
+---------------------------------------주가 talbe-----------------------------------------------
+----------------------------------------------------------------------------------------------
+  
+DROP TABLE STOCKBOARD;
+
+SELECT * FROM STOCKBOARD;
+
+-- (종목코드,종목명,현시세(STRING),전일비,현시세(NUMBER))
+CREATE TABLE STOCKBOARD(
+	STOCKNO NUMBER PRIMARY KEY,
+	STOCKNAME VARCHAR2(1000) NOT NULL UNIQUE,
+	STOCKCODE VARCHAR2(1000) NOT NULL
+);
+
+
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'MEMBER';
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'TRADE_BOARD';
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'BOARD_COMMENT';
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'STOCKBOARD';
+SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'BOARD';
+
+
+
+COMMENT ON COLUMN STOCK.STOCKNO IS '번호';
+
+COMMENT ON COLUMN STOCK.STOCKNAME IS '종목명';
+
+COMMENT ON COLUMN STOCK.STOCKCODE IS '종목코드';
 
 ----------------------------------------------------------------------------------------------
 ---------------------------------------거래 talbe-----------------------------------------------
@@ -84,74 +155,17 @@ BEGIN
 	THEN 
 		UPDATE MEMBER
 		SET ACCOUNT = ACCOUNT + (:NEW.PRICE*:NEW.HOLDING)
-			,STOCKACCOUNT = STOCKACCOUNT - (:NEW.PRICE*:NEW.HOLDING)
 		WHERE ID = :NEW.ID;
 	END IF;
 	IF :NEW.STATUS = '매수'
 	THEN 
 		UPDATE MEMBER
 		SET ACCOUNT = ACCOUNT - (:NEW.PRICE*:NEW.HOLDING)
-			,STOCKACCOUNT = STOCKACCOUNT + (:NEW.PRICE*:NEW.HOLDING)
 		WHERE ID = :NEW.ID;
 	END IF;
 END;
 
-CREATE OR REPLACE TRIGGER TRADEDELE
-AFTER UPDATE ON TRADE_BOARD
-FOR EACH ROW 
-BEGIN 
-	IF :NEW.HOLDING = 0
-	THEN 
-		DELETE FROM TRADE_BOARD 
-		WHERE :NEW.HOLDING = 0 AND STATUS = '매수';
-	END IF;
-END;
 
-
-----------------------------------------------------------------------------------------------
----------------------------------------회원 talbe-----------------------------------------------
-----------------------------------------------------------------------------------------------
-DROP TABLE MEMBER CASCADE CONSTRAINTS;
---회원번호 시퀀스
-DROP SEQUENCE MEMBERNOSQ;
-
-CREATE SEQUENCE MEMBERNOSQ;
---(회원번호,아이디,비밀번호,이름,생일,성별,이메일,은행명,계좌번호,잔액정보,유가증권잔액)
-CREATE TABLE MEMBER
-(
-    MEMBERNO    NUMBER           NOT NULL, 
-    ID          VARCHAR2(100)    UNIQUE NOT NULL, 
-    PW          VARCHAR2(100)    NOT NULL, 
-    NAME        VARCHAR2(20)     NOT NULL, 
-    BIRTH       DATE             NOT NULL, 
-    GENDER      VARCHAR2(6)          NOT NULL, 
-    EAMIL       VARCHAR2(100)    NOT NULL, 
-    BANK        VARCHAR2(50)     NOT NULL, 
-    BANKNO      VARCHAR2(100)          NOT NULL, 
-    ACCOUNT     NUMBER           DEFAULT 0	NOT NULL, 
-    STOCKACCOUNT NUMBER 		 DEFAULT 0 	NOT NULL,
-    CONSTRAINT MEMBER_PK PRIMARY KEY (MEMBERNO)
-);
-
-COMMENT ON COLUMN MEMBER.MEMBERNO IS '회원번호';
-
-COMMENT ON COLUMN MEMBER.ID IS '아이디';
-
-COMMENT ON COLUMN MEMBER.PW IS '비밀번호';
-
-COMMENT ON COLUMN MEMBER.NAME IS '이름';
-
-COMMENT ON COLUMN MEMBER.BIRTH IS '생일';
-
-COMMENT ON COLUMN MEMBER.GENDER IS '성별';
-
-COMMENT ON COLUMN MEMBER.EAMIL IS '이메일';
-
-COMMENT ON COLUMN MEMBER.BANK IS '은행명';
-
-COMMENT ON COLUMN MEMBER.BANKNO IS '계좌번호';
-
-COMMENT ON COLUMN MEMBER.ACCOUNT IS '잔액정보';
 
 ----------------------------------------------------------------------------------------------
 ------------------------------------------게시판 table-------------------------------------------
@@ -222,36 +236,8 @@ COMMENT ON COLUMN BOARD_COMMENT.COMMENT_PARENT IS '부모댓글';
 
 
 
-----------------------------------------------------------------------------------------------
----------------------------------------주가 talbe-----------------------------------------------
-----------------------------------------------------------------------------------------------
-  
-DROP TABLE STOCKBOARD;
-
-SELECT * FROM STOCKBOARD;
-
--- (종목코드,종목명,현시세(STRING),전일비,현시세(NUMBER))
-CREATE TABLE STOCKBOARD(
-	STOCKNO NUMBER PRIMARY KEY,
-	STOCKNAME VARCHAR2(1000) NOT NULL UNIQUE,
-	STOCKCODE VARCHAR2(1000) NOT NULL
-);
-
-
-SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'MEMBER';
-SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'TRADE_BOARD';
-SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'BOARD_COMMENT';
-SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'STOCKBOARD';
-SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'BOARD';
-
-
-
-COMMENT ON COLUMN STOCK.STOCKNO IS '번호';
-
-COMMENT ON COLUMN STOCK.STOCKNAME IS '종목명';
-
-COMMENT ON COLUMN STOCK.STOCKCODE IS '종목코드';
-
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 INSERT INTO STOCKBOARD VALUES (
 '1','신도기연','290520');
 INSERT INTO STOCKBOARD VALUES (
