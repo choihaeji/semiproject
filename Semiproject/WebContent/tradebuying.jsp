@@ -80,20 +80,12 @@ function process(price){
 										<div class="progress-table">
 											<div class="table-head">
 												<div class="serial">이름 :</div>
-												<div class="serial">${member.name }</div>
-												<div class="serial">계좌번호 :</div>
-												<div class="percentage">${member.bankNo }</div>
-											</div>
-											<div class="table-row">
-												<div class=""></div>
-												<div class="serial"></div>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<div class="country">${member.name }</div>
+												<div class="country">계좌번호 :</div>
+												<div class="country">${member.bankNo }</div>
 												<div class="country">계좌평가금액 :</div>
 												<div class="country">${member.account }원</div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="country">유가증권평가금액:</div>
-												<div class="country">${member.stockAccount }원</div>
-												<div class="serial"></div>
 											</div>
 											<div class="table-row">
 												<div class="serial"></div>
@@ -102,7 +94,7 @@ function process(price){
 												<div class="country">수량</div>
 												<div class="country"></div>
 											</div>
-											<div class="table-head">
+											<div class="table-row">
 												<div class="serial"></div>
 												<div class="country">
 													<input type="text" name="stock" value="${stockName }" readonly="readonly" style="border:0px; outline:none;">
