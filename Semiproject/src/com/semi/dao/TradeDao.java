@@ -280,10 +280,10 @@ public class TradeDao {
 		return list;
 	}
 	
-	public void tradeLog(String command) {
+	public void tradeLog(String command,TradeDto membertd) {
 		Connection con = getConnection();
 		String sql = "";
-		TradeDto dto = new TradeDto();
+//		TradeDto dto = new TradeDto();
 		int res = 0;
 		
 		if (command.equals("tradebuy")) {
@@ -295,10 +295,10 @@ public class TradeDao {
 		
 		try {
 			pstm = con.prepareStatement(sql);
-			pstm.setString(1, dto.getId());
-			pstm.setString(2, dto.getstockName());
-			pstm.setInt(3, dto.getPrice());
-			pstm.setInt(4, dto.getHolding());
+			pstm.setString(1, membertd.getId());
+			pstm.setString(2, membertd.getstockName());
+			pstm.setInt(3, membertd.getPrice());
+			pstm.setInt(4, membertd.getHolding());
 			
 			res = pstm.executeUpdate();
 			

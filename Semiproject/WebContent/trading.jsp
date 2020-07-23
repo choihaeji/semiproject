@@ -30,6 +30,7 @@
 <!-- main css -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
+
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -93,6 +94,7 @@ function process(index){
 
 	<!--================매도 매수 =================-->
 	<section class="mytabs_area p_120">
+
 		<div class="container">
 			<div class="tabs_inner">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -218,11 +220,179 @@ function process(index){
 							</div>
 						</div>
 						</table>
-				</div>
+					</div>
 					<!--================매도 끝=================-->
+				</div>
 			</div>
-		</div>
 	</section>
+
+	<!--================new매도 =================-->
+	<section class="blog_area single-post-area p_120">
+
+		<div class="tab-pane fade" id="profile" role="tabpanel"
+			aria-labelledby="profile-tab">
+			<div class="section-top-border">
+				<talbe class="list">
+				<h3 class="mb-30 title_color">매도가능 정보</h3>
+				<div class="progress-table-wrap">
+					<div class="progress-table">
+						<!--  -->
+						<div class="table-head">
+							<div class="serial">이름 :</div>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="country">${member.name }</div>
+							<div class="country">계좌번호 :</div>
+							<div class="country">${member.bankNo }</div>
+							<div class="country">계좌잔액:</div>
+							<div class="country">${member.account }</div>
+						</div>
+						<!--  -->
+						<div class="table-row">
+							<div class="serial">종목명</div>
+							<div class="serial">구매가(/주당)</div>
+							<div class="serial">보유량</div>
+							<div class="serial">현재가(/주당)</div>
+							<div class="serial">판매량</div>
+							<div class="seiral"></div>
+							<div class="seiral">예상매도가</div>
+							<div class="serial"></div>
+						</div>
+						<!--  -->
+
+						<c:choose>
+							<c:when test="${empty trade }">
+								<div align="center">===============구매한 주가가 존재하지
+									않습니다.===============</div>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="trade" items="${trade }" varStatus="status">
+									<div class="table-row">
+										<form action="trade.do" method="post">
+											<input type="hidden" name="command" value="tradesell">
+											<div class="serial">
+												<input type="text" name="stockName"
+													value="${trade.stockName }" readonly="readonly"
+													style="border: 0px; outline: none;">
+											</div>
+											<div class="serial">
+												<input type="text" value="${trade.price }"
+													readonly="readonly" style="border: 0px; outline: none;">
+											</div>
+											<div class="serial">
+												<input type="text" value="${trade.holding }"
+													readonly="readonly" style="border: 0px; outline: none;">
+											</div>
+											<div class="serial">
+												<input type="text" name="price"
+													value="${nowPrice[status.index]}" readonly="readonly"
+													style="border: 0px; outline: none;">
+											</div>
+											<div class="serial">
+												<input name="count" type="number" min="0"
+													max="${trade.holding }" step="1">
+											</div>
+											<div class="serial">
+												<input type="button" class="btn sub-btn circle" value="가격확인"
+													onclick="process(${status.index});">
+											</div>
+
+											<div class="serial">
+												<input type="text" name="result" readonly="readonly"
+													style="border: 0px; outline: none;">
+											</div>
+											<div class="serial">
+												<input type="submit" class="genric-btn danger circle"
+													value="매도하기">
+											</div>
+										</form>
+									</div>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</div>
+	</section>
+
+
+
+<!-- 	<table> -->
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				< class="serial">이름 :</div> -->
+				
+<%-- 				< class="country">${member.name }</div> --%>
+<!-- 				<div class="country">계좌번호 :</div> -->
+<%-- 				<div class="country">${member.bankNo }</div> --%>
+<!-- 				<div class="country">계좌잔액:</div> -->
+<%-- 				<div class="country">${member.account }</div> --%>
+<!-- 			</tr> -->
+<!-- 			<!--  --> -->
+<!-- 			<div class="table-row"> -->
+<!-- 				<div class="serial">종목명</div> -->
+<!-- 				<div class="serial">구매가(/주당)</div> -->
+<!-- 				<div class="serial">보유량</div> -->
+<!-- 				<div class="serial">현재가(/주당)</div> -->
+<!-- 				<div class="serial">판매량</div> -->
+<!-- 				<div class="seiral"></div> -->
+<!-- 				<div class="seiral">예상매도가</div> -->
+<!-- 				<div class="serial"></div> -->
+<!-- 			</div> -->
+<!-- 			<!--  --> -->
+
+<%-- 			<c:choose> --%>
+<%-- 				<c:when test="${empty trade }"> --%>
+<!-- 					<div align="center">===============구매한 주가가 존재하지 -->
+<!-- 						않습니다.===============</div> -->
+<%-- 				</c:when> --%>
+<%-- 				<c:otherwise> --%>
+<%-- 					<c:forEach var="trade" items="${trade }" varStatus="status"> --%>
+<!-- 						<div class="table-row"> -->
+<!-- 							<form action="trade.do" method="post"> -->
+<!-- 								<input type="hidden" name="command" value="tradesell"> -->
+<!-- 								<div class="serial"> -->
+<%-- 									<input type="text" name="stockName" value="${trade.stockName }" --%>
+<!-- 										readonly="readonly" style="border: 0px; outline: none;"> -->
+<!-- 								</div> -->
+<!-- 								<div class="serial"> -->
+<%-- 									<input type="text" value="${trade.price }" readonly="readonly" --%>
+<!-- 										style="border: 0px; outline: none;"> -->
+<!-- 								</div> -->
+<!-- 								<div class="serial"> -->
+<%-- 									<input type="text" value="${trade.holding }" --%>
+<!-- 										readonly="readonly" style="border: 0px; outline: none;"> -->
+<!-- 								</div> -->
+<!-- 								<div class="serial"> -->
+<!-- 									<input type="text" name="price" -->
+<%-- 										value="${nowPrice[status.index]}" readonly="readonly" --%>
+<!-- 										style="border: 0px; outline: none;"> -->
+<!-- 								</div> -->
+<!-- 								<div class="serial"> -->
+<!-- 									<input name="count" type="number" min="0" -->
+<%-- 										max="${trade.holding }" step="1"> --%>
+<!-- 								</div> -->
+<!-- 								<div class="serial"> -->
+<!-- 									<input type="button" class="btn sub-btn circle" value="가격확인" -->
+<%-- 										onclick="process(${status.index});"> --%>
+<!-- 								</div> -->
+
+<!-- 								<div class="serial"> -->
+<!-- 									<input type="text" name="result" readonly="readonly" -->
+<!-- 										style="border: 0px; outline: none;"> -->
+<!-- 								</div> -->
+<!-- 								<div class="serial"> -->
+<!-- 									<input type="submit" class="genric-btn danger circle" -->
+<!-- 										value="매도하기"> -->
+<!-- 								</div> -->
+<!-- 							</form> -->
+<!-- 						</div> -->
+<%-- 					</c:forEach> --%>
+<%-- 				</c:otherwise> --%>
+<%-- 			</c:choose> --%>
+<!-- 		</thead> -->
+<!-- 		<tbody> -->
+
+<!-- 		</tbody> -->
+
+<!-- 	</table> -->
 	<!--================End My Tabs Area =================-->
 	<%@ include file="form/footer.jsp"%>
 
