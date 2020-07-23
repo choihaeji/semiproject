@@ -65,21 +65,17 @@ public class StockController extends HttpServlet {
 			System.out.println(kos);
 			
 			JSONObject rank = sd.getStockRank(page ,kos);
-			System.out.println(rank.toString());
 			
 			request.setAttribute("rank", rank);
 			RequestDispatcher dispatch = request.getRequestDispatcher("stock_list.jsp?kos="+ kos +"&page="+page);
 			dispatch.forward(request, response);
 		}else if(command.equals("link_selOne")) {
-			String stock = request.getParameter("stock_name");
-			String code = sd.getStockCode(stock);
+			String stock = request.getParameter("stock_code");
 			
-			System.out.println(code);
-			
-			if(code.isEmpty()) {
+			if(stock.isEmpty()) {
 				response.sendRedirect("StockController?command=stock_rank");
 			}else {
-				response.sendRedirect("stock_info.jsp?code="+code);
+				response.sendRedirect("stock_info.jsp?code="+stock);
 			}
 		}
 		
