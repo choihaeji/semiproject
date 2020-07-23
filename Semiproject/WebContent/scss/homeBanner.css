@@ -1,0 +1,23 @@
+.contents{
+	width: 100%;
+	text-align: center;
+}
+.m_contents{
+	display: inline-block;
+	width: 500px;
+}
+#kosp, #kosd{
+	display: inline-block;
+	margin-top: 50px;
+	margin-bottom: 80px;
+}
+#quotient{
+	font-size: 24px;
+}
+
+.up{
+	color: red;
+}
+.dn{
+	color: blue;
+}
