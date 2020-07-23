@@ -83,15 +83,12 @@ public class TradeController extends HttpServlet {
 				dispatch("trading.jsp", request, response);
 
 			} else {
-				// 수정: 로그인 폼으로 보내주기 (command값 수정해야됨)
-				jsResponse("로그인이 필요한 서비스 입니다.", "index.jsp", response);
-				// dispatch("trading.jsp",request,response);
+				jsResponse("로그인이 필요한 서비스 입니다.", "login.jsp", response);
 			}
 
 		} else if (command.equals("tradesell")) {
 			MemberDto login = new MemberDto();
 			login = (MemberDto) session.getAttribute("dto");
-			System.out.println("login: " + login.getId());
 			// 매도버튼 클릭시(아이디,종목명,현재가,수량)
 			stockName = request.getParameter("stockName");
 			System.out.println(stockName);
@@ -107,7 +104,11 @@ public class TradeController extends HttpServlet {
 			tradeDao.tradeLog(command);
 
 			if (res > 0) {
-				jsResponse("매도에 성공하셨습니다.", "trade.do?command=trading", response);
+				String s = "<script type='text/javascript'>" + "alert('매도성공')"+"location.href='trade.do?command=trading';"
+						+"</script>";
+
+					PrintWriter out = response.getWriter();
+					out.print(s);
 			}else {
 				jsResponse("매도에 실패하셨습니다.", "trade.do?command=trading", response);
 			}
@@ -127,7 +128,7 @@ public class TradeController extends HttpServlet {
 			System.out.println(stockName);
 			code = tradeDao.transCode(stockName);
 
-			if (code != null || stockName != "") {
+			if (code != null && stockName != "") {
 				price = stockDao.getStockPrice(code);
 				System.out.println("code: " + code + ", price:" + price);
 
@@ -136,7 +137,11 @@ public class TradeController extends HttpServlet {
 				request.setAttribute("stockName", stockName);
 				dispatch("tradebuying.jsp", request, response);
 			} else {
-				jsResponse("기업명을 입력해 주세요.", "trade.do?command=trading", response);
+				String s = "<script type='text/javascript'>" + "alert('종목명을 정확히 입력해 주세요');" + "self.close();"
+							+ "</script>";
+
+						PrintWriter out = response.getWriter();
+						out.print(s);
 			}
 
 		} else if (command.equals("tradebuy")) {
@@ -169,7 +174,8 @@ public class TradeController extends HttpServlet {
 
 				if (res > 0) {
 					String s = "<script type='text/javascript'>" + "alert('매수에 성공하셨습니다.');" + "self.close();"
-							 + "</script>";
+							 +"opener.location.reload();"
+							 +"</script>";
 
 					PrintWriter out = response.getWriter();
 					out.print(s);
