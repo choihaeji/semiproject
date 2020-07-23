@@ -14,7 +14,7 @@ page import = "com.semi.dto.TradeDto"%> <%@ page import =
 <%
 	MemberDto dto = (MemberDto)session.getAttribute("dto");
 	TradeDao dao = new TradeDao();
-	List<TradeDto> list = dao.holdingStock(dto.getId());
+	List<TradeDto> list = dao.viewTrade(dto.getId());
 	String id = request.getParameter(dto.getId());
 
 	System.out.println(dto.getName() + " | " + dto.getAccount());
