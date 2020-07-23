@@ -14,8 +14,10 @@
 </head>
 <body>
 	<%
-		String kospi = Jsoup.connect("https://finance.naver.com/sise/sise_index.nhn?code=KOSPI").get().select("#quotient").toString().replace("\n", "<br>");
-		String kosdaq = Jsoup.connect("https://finance.naver.com/sise/sise_index.nhn?code=KOSDAQ").get().select("#quotient").toString().replace("\n", "<br>");
+		String kospi = Jsoup.connect("https://finance.naver.com/sise/sise_index.nhn?code=KOSPI").get().select("#quotient").toString().replace("\n", "");
+		String kospi_info = Jsoup.connect("https://finance.naver.com/sise/sise_index.nhn?code=KOSPI").get().select("#contentarea_left > div.box_top_sub > div > dl").toString().replace("\n", "");
+		String kosdaq = Jsoup.connect("https://finance.naver.com/sise/sise_index.nhn?code=KOSDAQ").get().select("#quotient").toString().replace("\n", "");
+		String kosdaq_info = Jsoup.connect("https://finance.naver.com/sise/sise_index.nhn?code=KOSDAQ").get().select("#contentarea_left > div.box_top_sub > div > dl").toString().replace("\n", "");
 	%>
 	<section class="home_banner_area">
 		<div class="container box_1620">
@@ -47,13 +49,15 @@
 		var i = 0;
 		var j = 0;
 		
-		htmlp[i++] = '<h1>KOSPI</h1>';
+		htmlp[i++] = '<h2>KOSPI</h2>';
 		htmlp[i++] = '<%=kospi%>';
-		htmlp[i++] = '<img src="https://ssl.pstatic.net/imgfinance/chart/main/KOSPI.png?t=' + new Date().getTime() + '" width="480" height="180" alt="지수">';
+		htmlp[i++] = '<img src="https://ssl.pstatic.net/imgfinance/chart/main/KOSPI.png?t=' + new Date().getTime() + '" width="301" height="127" alt="지수">';
+		htmlp[i++] = '<%=kospi_info%>';
 		
-		htmld[j++] = '<h1>KOSDAQ</h1>';
+		htmld[j++] = '<h2>KOSDAQ</h2>';
 		htmld[j++] = '<%=kosdaq%>';
-		htmld[j++] = '<img src="https://ssl.pstatic.net/imgfinance/chart/main/KOSDAQ.png?t=' + new Date().getTime() + '" width="480" height="180" alt="지수">';
+		htmld[j++] = '<img src="https://ssl.pstatic.net/imgfinance/chart/main/KOSDAQ.png?t=' + new Date().getTime() + '" width="301" height="127" alt="지수">';
+		htmld[j++] = '<%=kosdaq_info%>';
 		
 		$("#kosp")[0].innerHTML = htmlp.join('');
 		$("#kosd")[0].innerHTML = htmld.join('');
