@@ -161,7 +161,7 @@ public class TradeDao {
 		ResultSet rs = null;
 		List<TradeDto> res = new ArrayList<>();
 		//보유주식 리스트 
-		String selectAllSql = " SELECT * FROM TRADE_BOARD WHERE ID=? AND STATUS='매수' AND HOLDING NOT IN(0) ";
+		String selectAllSql = " SELECT * FROM TRADE_BOARD WHERE ID=? AND STATUS='매수' AND HOLDING >0 ";
 		try {
 			pstm = con.prepareStatement(selectAllSql);
 			pstm.setString(1, id);
