@@ -1,0 +1,62 @@
+.contents{
+	width: 100%;
+	text-align: center;
+}
+.m_contents{
+	display: inline-block;
+	width: 500px;
+}
+.blind{
+	display: none;
+}
+#kosp, #kosd{
+	display: inline-block;
+	margin-bottom: 50px;
+}
+#quotient{
+	font-size: 20px;
+}
+#quotient em{
+	padding-right: 20px;
+	border-right: solid 1px #c8c8c8;
+}
+#quotient span{
+	margin-left: 10px;
+	margin-right: 5px;
+}
+
+.up{
+	color: red;
+}
+.dn span.fluc {
+    background: url(https://ssl.pstatic.net/static/nfinance/ico_down.gif) 0px 10px no-repeat;
+}
+.dn{
+	color: blue;
+}
+.up span.fluc {
+    background: url(https://ssl.pstatic.net/static/nfinance/ico_up.gif) 0px 10px no-repeat;
+}
+
+.lst_kos_info {
+    overflow: hidden;
+    width: 540px;
+    height: 56px;
+    margin-top: 23px;
+    text-align: center;
+    border: solid 1px #c8c8c8;
+}
+#kosp dl .blind, #kosd dl .blind{
+	display: block;
+}
+.lst_kos_info dt{
+	width: 59px;
+	float: left;
+}
+.lst_kos_info dt.last{
+	width: 63px;
+}
+.lst_kos_info dd{
+	width: 69px;
+	float: left;
+}

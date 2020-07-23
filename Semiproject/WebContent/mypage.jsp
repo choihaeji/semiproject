@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% request.setCharacterEncoding("UTF-8"); %> <%
-response.setContentType("text/html; charset=UTF-8"); %> <%@ page import =
-"com.semi.dto.MemberDto" %> <%@ page import = "com.semi.dao.TradeDao" %> <%@
-page import = "com.semi.dto.TradeDto"%> <%@ page import =
-"java.util.ArrayList"%> <%@ page import = "java.util.List" %>
+pageEncoding="UTF-8"%> 
+<% request.setCharacterEncoding("UTF-8"); %> 
+<% response.setContentType("text/html; charset=UTF-8"); %> 
+<%@ page import = "com.semi.dto.MemberDto" %> 
+<%@ page import = "com.semi.dao.TradeDao" %> 
+<%@ page import = "com.semi.dto.TradeDto"%> 
+<%@ page import = "java.util.ArrayList"%> 
+<%@ page import = "java.util.List" %>
 
 <!DOCTYPE html>
 <html>
@@ -15,9 +18,8 @@ page import = "com.semi.dto.TradeDto"%> <%@ page import =
 	MemberDto dto = (MemberDto)session.getAttribute("dto");
 	TradeDao dao = new TradeDao();
 	List<TradeDto> list = dao.viewTrade(dto.getId());
-	String id = request.getParameter(dto.getId());
 
-	System.out.println(dto.getName() + " | " + dto.getAccount());
+	System.out.println(dto.getName() + ", " + dto.getAccount());
 %>
 <body>
 	<h1><a href="index.jsp">My Page</a></h1>

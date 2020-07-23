@@ -254,7 +254,6 @@ public class TradeDao {
 	
 	public List<TradeDto> viewTrade(String id) {
 		Connection con = getConnection();
-		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		TradeDto dto = new TradeDto();
 		List<TradeDto> list = new ArrayList<TradeDto>();
@@ -283,7 +282,6 @@ public class TradeDao {
 	
 	public void tradeLog(String command) {
 		Connection con = getConnection();
-		PreparedStatement pstm = null;
 		String sql = "";
 		TradeDto dto = new TradeDto();
 		int res = 0;
