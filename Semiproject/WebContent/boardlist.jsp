@@ -142,6 +142,8 @@
 				%>
 		</div>
 </section>
+
+<%@ include file="form/footer.jsp" %>
 	
 	<script type="text/javascript">
 		function page(){
