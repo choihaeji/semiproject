@@ -124,7 +124,7 @@ public class MemberDao extends JDBCTemplate {
 		Connection con = getConnection();
 		PreparedStatement pstm = null;
 		int res = 0;
-		String sql = " UPDATE MEMBER SET PW=?,EMAIL=?,BANKNAME=?,BANKNO=? WHERE MEMBERNO=? ";
+		String sql = " UPDATE MEMBER SET PW=?,EAMIL=?,BANK=?,BANKNO=? WHERE MEMBERNO=? ";
 
 		try {
 			pstm = con.prepareStatement(sql);
@@ -294,4 +294,32 @@ public class MemberDao extends JDBCTemplate {
 		
 		return dto;
 	}
+	
+	public int chargeAccount(int num,String id) {
+	      Connection con = getConnection();
+	      PreparedStatement pstm = null;
+	      int res=0;
+	      String sql = "UPDATE MEMBER SET ACCOUNT=? WHERE ID=?";
+	      
+	      try {
+	         pstm = con.prepareStatement(sql);
+	         pstm.setInt(1, num);
+	         pstm.setString(2, id);
+	         System.out.println("03. query 준비: "+sql);
+	         
+	         res = pstm.executeUpdate();
+	         System.out.println("04. query 실행 및 리턴");
+	         
+	         if(res>0) commit(con);
+	      } catch (SQLException e) {
+	         System.out.println("3/4단계 에러");
+	         e.printStackTrace();
+	      } finally {
+	         close(pstm);
+	         close(con);
+	         System.out.println("05. 종료");
+	      }
+	      
+	      return res;
+	   }
 }

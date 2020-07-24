@@ -57,7 +57,7 @@
 							<li class="nav-item"><a class="nav-link"
 								href="trade.do?command=trading">모의거래</a></li>
 							<li class="nav-item submenu dropdown"><a
-								href="member.do?command=mypage&id=<%=dto.getId()%>"
+								href="mypage.jsp"
 								class="nav-link dropdown-toggle" data-toggle="dropdown"
 								role="button" aria-haspopup="true" aria-expanded="false">마이페이지</a>
 								<ul class="dropdown-menu">

@@ -100,7 +100,7 @@ public class MemberController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.invalidate(); // 세션 정보 삭제
 			String url = request.getHeader("referer");
-			jsResponse("로그아웃 성공", url, response);
+			jsResponse("로그아웃 성공", "index.jsp", response);
 		} else if (command.equals("update")) {
 			response.sendRedirect("updateform.jsp");
 		} else if (command.equals("updatemember")) {
@@ -177,6 +177,28 @@ public class MemberController extends HttpServlet {
 				jsResponse("실패", "login.jsp", response);
 			}
 		}
+		else if(command.equals("charge_account")) {
+            String id = request.getParameter("id");
+            int num = Integer.parseInt(request.getParameter("chargenum"))+Integer.parseInt(request.getParameter("account"));
+             
+            int res = dao.chargeAccount(num, id);
+            
+            if(res>0) {
+               String pw = request.getParameter("pw");
+               System.out.println(id+" / "+pw);
+               MemberDto dto = dao.login(id, pw);
+               
+               HttpSession session = request.getSession();
+               session.setAttribute("dto", dto);
+               session.setMaxInactiveInterval(60*60);
+
+               jsResponse("충전 성공","mypage.jsp",response);
+            }
+            
+            else {
+               jsResponse("충전 실패","mypage.jsp",response);
+            }
+         }
 
 	}
 
