@@ -49,6 +49,10 @@
 #kosp dl .blind, #kosd dl .blind{
 	display: block;
 }
+
+#kosp dl, #kosd dl {
+	background-color: azure;
+}
 .lst_kos_info dt{
 	width: 69px;
 	float: left;

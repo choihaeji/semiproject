@@ -27,10 +27,10 @@
 	<link rel="stylesheet" href="css/stock_rank.css" />
 	<script type="text/javascript">
 		function mouseOver(obj){
-			obj.style.backgroundColor="#f6f4e5";
+			obj.style.backgroundColor="lavender";
 		}
 		function mouseOut(obj){
-  			obj.style.backgroundColor="#ffffff";
+  			obj.style.backgroundColor="whitesmoke";
 		}
 	</script>
 	
