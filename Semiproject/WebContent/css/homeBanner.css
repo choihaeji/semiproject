@@ -40,7 +40,7 @@
 
 .lst_kos_info {
     overflow: hidden;
-    width: 540px;
+    width: 550px;
     height: 56px;
     margin-top: 23px;
     text-align: center;
@@ -50,11 +50,11 @@
 	display: block;
 }
 .lst_kos_info dt{
-	width: 59px;
+	width: 69px;
 	float: left;
 }
 .lst_kos_info dt.last{
-	width: 63px;
+	width: 64px;
 }
 .lst_kos_info dd{
 	width: 69px;
