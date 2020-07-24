@@ -53,21 +53,11 @@
 										href="StockController?command=stock_rank">전종목 시세</a></li>
 								</ul></li>
 							<li class="nav-item"><a class="nav-link"
-								href="board.do?command=boardlist">커뮤니티</a></li>
+								href="boardlist.jsp">커뮤니티</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="trade.do?command=trading">모의거래</a></li>
-							<li class="nav-item submenu dropdown"><a
-								href="mypage.jsp"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">마이페이지</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="mypage.jsp">마이페이지
-										</a></li>
-									<li class="nav-item"><a class="nav-link" href="blog.html">거래내역
-											조회</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="member.do?command=updata&mno=<%=dto.getMno()%>">회원정보 수정</a></li>
-								</ul></li>
+							<li class="nav-item"><a class="nav-link"
+								href="mypage.jsp">마이페이지</a></li>
 							<%
 								if (userID == null || userID.length() == 0) {
 							%>

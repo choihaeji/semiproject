@@ -137,7 +137,5 @@ function process(price){
 		</div>
 	</section>
 
-	<%@ include file="form/footer.jsp"%>
-
 </body>
 </html>

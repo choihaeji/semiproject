@@ -12,31 +12,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-		 <!-- BootStrap -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-		
-		<!-- jquery -->
-		<script src="//code.jquery.com/jquery.min.js"></script>
-		
-	
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width" initial-scale="1">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<title>MeetMe Personal</title>
+<!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="vendors/linericon/style.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+<link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
+<link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+<link rel="stylesheet" href="vendors/animate-css/animate.css">
+<link rel="stylesheet" href="vendors/popup/magnific-popup.css">
+<!-- main css -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="form/header.jsp"%>
+
+	<!--================Home Banner Area =================-->
+	<section class="banner_area">
+		<div class="box_1620">
+			<div class="banner_inner d-flex align-items-center">
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>모의거래</h2>
+						<div class="page_link">
+							<a href="trade.do?command=index">Home</a> <a
+								href="trade.do?commnad=trading">모의거래</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Home Banner Area =================-->
+	
 	<%
 		//로긴한 상태라면 userID 변수에 해당 아이디가 담김.아니면 널값
-		String userID = null;
-		MemberDto user = (MemberDto)session.getAttribute("dto");
+// 		String userID = null;
+// 		MemberDto user = (MemberDto)session.getAttribute("dto");
 		
-		if(session.getAttribute("dto") != null){
-			userID = user.getId();
-		}
-		System.out.println("userID:"+userID);
+// 		if(session.getAttribute("dto") != null){
+// 			userID = user.getId();
+// 		}
+// 		System.out.println("userID:"+userID);
 		
 		int pageNumber = 1; //기본페이지 넘버
 		
@@ -46,55 +71,8 @@
 		}
 		
 	%>
-	<!-- 네비 링크부분 -->
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="bs-example-navbar-collapse-1"
-				aria-expaned="false">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.jsp">주식거래</a>
-		</div>
-		<div class="collapse navbar-collapse"
-			id="#bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index.jsp">메인</a></li>
-				<li class="active"><a href="boardlist.jsp">게시판</a></li>
-			</ul>
-
-			<%
-				//로그인안된경우
-				if (userID==null || userID.length()==0 ) {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">접속하기<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="login.jsp">로그인</a></li>
-						<li><a href="registform.jsp">회원가입</a></li>
-					</ul></li>
-			</ul>
-			<%
-				} else {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">회원관리<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="member.do?command=logout">로그아웃</a></li>
-					</ul></li>
-			</ul>
-			<%
-				}
-			%>
-		</div>
-	</nav>
-
 	<!-- 게시판 -->
+	<section class="blog_area single-post-area p_120">
 	<div class="container">
 		<div class = "row">
 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd"> 
@@ -163,11 +141,7 @@
 					}
 				%>
 		</div>
-		
-			<!-- 애니매이션 담당 JQUERY -->
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<!-- 부트스트랩 JS  -->
-	<script src="js/bootstrap.js"></script>
+</section>
 	
 	<script type="text/javascript">
 		function page(){

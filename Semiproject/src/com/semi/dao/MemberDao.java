@@ -157,7 +157,7 @@ public class MemberDao extends JDBCTemplate {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		MemberDto res = null;
-		String sql = " SELECT * FROM MEMBER WHERE NAME=? AND EMAIL=? ";
+		String sql = " SELECT * FROM MEMBER WHERE NAME=? AND EAMIL=? ";
 		try {
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, name);
@@ -200,7 +200,7 @@ public class MemberDao extends JDBCTemplate {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		MemberDto res = null;
-		String sql = " SELECT * FROM MEMBER WHERE ID=? AND NAME=? AND EMAIL=? ";
+		String sql = " SELECT * FROM MEMBER WHERE ID=? AND NAME=? AND EAMIL=? ";
 		try {
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, id);

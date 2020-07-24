@@ -107,7 +107,7 @@
 						</tr>
 					</tbody>
 				</table>	
-				<input type="submit" class="btn btn-primary pull-right" value="글쓰기" />
+				<input type="submit" class="genric-btn info circle arrow" value="글쓰기" />
 			</form>
 
 	<!-- 회원만 넘어가기 -->
