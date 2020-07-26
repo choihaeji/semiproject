@@ -142,6 +142,8 @@ public class MemberController extends HttpServlet {
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			MemberDto dto = dao.searchId(name, email);
+			System.out.println(name);
+			System.out.println(email);
 
 			if (dto.getName() != null && dto.getEmail() != null) {
 				System.out.println("이름과 이메일 일치!");
@@ -153,7 +155,7 @@ public class MemberController extends HttpServlet {
 
 			} else {
 				System.out.println("\n이름과 이메일 불일치!");
-				jsResponse("실패", "searchid1.jsp", response);
+				jsResponse("실패", "searchidpw1.jsp", response);
 			}
 		}
 		// 비밀번호 찾기
@@ -174,7 +176,7 @@ public class MemberController extends HttpServlet {
 
 			} else {
 				System.out.println("\n불일치!");
-				jsResponse("실패", "login.jsp", response);
+				jsResponse("실패", "searchidpw1.jsp", response);
 			}
 		}
 		else if(command.equals("charge_account")) {

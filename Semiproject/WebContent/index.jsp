@@ -15,7 +15,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="icon" href="img/favicon.png" type="image/png">
-<title>MeetMe Personal</title>
+<title>MeetMe</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="vendors/linericon/style.css">
@@ -40,15 +40,23 @@
 	<!--================Header Menu Area =================-->
 
 	<!--================Home Banner Area =================-->
-	<jsp:include page="form/homeBanner.jsp"></jsp:include>
-	<!--================End Home Banner Area =================-->
+	<section class="home_banner_area blog_banner">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background="" style="transform: translateY(1.89632px);"></div>
+				<div class="container">
+					<div class="blog_b_text text-center">
+						
+					</div>
+				</div>
+            </div>
+        </section>
+	<!--================End Home Banner Area ========
 
 	<!--================Welcome Area =================-->
-	<section class="welcome_area p_120">
 		<div class="container">
+		<jsp:include page="form/homeBanner.jsp"></jsp:include>
 			
 		</div>
-	</section>
 	<!--================End Welcome Area =================-->
 	
 	<!--================Footer Area =================-->

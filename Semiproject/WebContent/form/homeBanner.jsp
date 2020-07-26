@@ -19,7 +19,7 @@
 		String kosdaq = Jsoup.connect("https://finance.naver.com/sise/sise_index.nhn?code=KOSDAQ").get().select("#quotient").toString().replace("\n", "");
 		String kosdaq_info = Jsoup.connect("https://finance.naver.com/sise/sise_index.nhn?code=KOSDAQ").get().select("#contentarea_left > div.box_top_sub > div > dl").toString().replace("\n", "");
 	%>
-	<section class="home_banner_area">
+	<section class="welcome_area p_120">
 		<div class="container box_1620">
 			<div class="banner_inner d-flex align-items-center">
 				<div class="contents">
