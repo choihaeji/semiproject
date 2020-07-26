@@ -60,8 +60,28 @@
 
 	<!-- 네비게이션  -->
 	<jsp:include page="form/header.jsp"></jsp:include>
+	
+	<!--================Home Banner Area =================-->
+	<section class="banner_area">
+		<div class="box_1620">
+			<div class="banner_inner d-flex align-items-center">
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>게시판</h2>
+						<div class="page_link">
+							<a href="trade.do?command=index">Home</a> <a
+								href="trade.do?commnad=trading">커뮤니티</a>
+							<a href="trade.do?command=trading">게시글 수정</a>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Home Banner Area =================-->
 
 	<!-- 게시판 --> 
+	<section class="blog_area single-post-area p_120">
 	<div class="container">
 		<div class="row">
 			<form method="post" action="Board.do?command=update&boardNum=<%= boardNum %> ">
@@ -70,24 +90,27 @@
 					<thead>
 						<tr>
 							<th colspan="2"
-								style="background-color: #eeeeee; text-align: center;">글 수정
+								style="background-color: #eeeeee; text-align: center; width: 1200px;">글 수정
 						    </th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input type="text" class="form-control"  required="required" placeholder="글 제목" name="boardTitle" maxlength="50" value="<%= dto.getBoardTitle() %>" ></td>
+						<tr style=width: 1200px;>
+							<td><input type="text" class="form-control"  required=""  placeholder="글 제목" name="boardTitle" maxlength="50" value="<%= dto.getBoardTitle() %>" ></td>
 						</tr>
-						<tr>
-							<td><textarea class="form-control"  required="required" placeholder="글 내용" name="boardContent" maxlength="2048" style="height: 350px;" ><%= dto.getBoardContent() %></textarea></td>
+						<tr style=width: 1200px;>
+							<td><textarea class="form-control"  required=""  placeholder="글 내용" name="boardContent" maxlength="2048" style="height: 350px; resize:none;" ><%= dto.getBoardContent() %></textarea></td>
 						</tr>
 					</tbody>
 				</table>	
-				<button type="submit" class="btn btn-primary pull-right" >글수정</button>
+				<button type="submit" class="btn btn-primary pull-right" >수정</button>
 			</form>
 		</div>
 	</div>
+	</section>
 
+	<%@ include file="form/footer.jsp" %>
+	
 	<!-- 애니매이션 담당 JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<!-- 부트스트랩 JS  -->

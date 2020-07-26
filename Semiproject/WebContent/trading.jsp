@@ -12,8 +12,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Required meta tags -->
-
 <style type="text/css">
 .tradetable {
 	border: none;
@@ -41,6 +39,7 @@
 
 .tradetable input {
 	width: 120px;
+	text-align: center;
 }
 </style>
 <script type="text/javascript"
@@ -52,7 +51,7 @@ function getStockName(){
 }; 
 
 function search(){
-	window.open("trade.do?command=tradebuyform&stockName="+getStockName(), "_blank", "width=full,height=full");
+	window.open("trade.do?command=tradebuyform&stockName="+getStockName(), "_blank", "width=898px, height=540px");
 };
 
 function getParameter(index){
@@ -119,7 +118,6 @@ function process(index){
 						<div class="section-top-border">
 							<table class="list">
 								<h3 class="mb-30 title_color">주식주문</h3>
-
 								<div align="center">
 									<div class="col-lg-5 col-sm-6">
 										<aside class="f_widget news_widget">
@@ -134,7 +132,6 @@ function process(index){
 										</aside>
 									</div>
 								</div>
-
 							</table>
 						</div>
 					</div>
@@ -208,21 +205,11 @@ function process(index){
 							</table>
 						</div>
 					</div>
-
-
 					<!--================매도 끝=================-->
 				</div>
 			</div>
 	</section>
-
-
-
 	<!--================End My Tabs Area =================-->
 	<%@ include file="form/footer.jsp"%>
-
-
-	
-
-
 </body>
 </html>

@@ -83,57 +83,54 @@ function process(price){
 	<section class="mytabs_area p_120">
 		<div class="container">
 			<div class="tabs_inner">
-
 				<!--================매수 =================-->
-				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade active show" id="home" role="tabpanel"
-						aria-labelledby="home-tab">
-						<div class="section-top-border">
-							<table class="tradetable">
-								<form action="trade.do" method="post">
-									<input type="hidden" name="command" value="tradebuy">
-									<h3 class="mb-30 title_color">주식매수</h3>
-									<div class="progress-table-wrap">
-										<thead>
-											<tr>
-												<th colspan="2">이름 : ${member.name }</th>
-												<th colspan="2">계좌번호 : ${member.bankNo }</th>
-												<th colspan="2">계좌평가금액 : ${member.account }원</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>종목명</td>
-												<td>현재가</td>
-												<td>수량</td>
-											</tr>
-											<tr>
-												<td><input type="text" name="stock"
-													value="${stockName }" readonly="readonly"
-													style="border: 0px; outline: none;"></td>
-												<td><input type="text" id="price" name="priceNow"
-													value="${price }" readonly="readonly"
-													style="border: 0px; outline: none;"></td>
-												<td><input name="countbuy" id="count" type="number"
-													min="0" max="15" step="1"></td>
-												<td><input type="button" class="btn sub-btn circle"
-													value="가격확인" onclick="process(${price})"></td>
-											</tr>
-											<tr>
-												<td colspan="2">매수 금액 :</td>
-												<td colspan="2"><input id="result"></td>
-												<td colspan="2"><input type="submit" value="주식주문"
-													class="genric-btn danger circle"></td>
-											</tr>
-										</tbody>
-									</div>
-								</form>
-							</table>
-						</div>
-					</div>
+				<div class="section-top-border">
+					<table class="tradetable">
+						<form action="trade.do" method="post">
+							<input type="hidden" name="command" value="tradebuy">
+							<h3 class="mb-30 title_color">주식매수</h3>
+							<div class="progress-table-wrap">
+								<thead>
+									<tr>
+										<th colspan="2">이름 : ${member.name }</th>
+										<th colspan="3">계좌번호 : ${member.bankNo }</th>
+										<th colspan="3">계좌평가금액 : ${member.account }원</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="2">종목명</td>
+										<td colspan="2">현재가</td>
+										<td colspan="2">수량</td>
+										<td colspan="2"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><input type="text" name="stock"
+											value="${stockName }" readonly="readonly"
+											style="border: 0px; outline: none;"></td>
+										<td colspan="2"><input type="text" id="price"
+											name="priceNow" value="${price }" readonly="readonly"
+											style="border: 0px; outline: none;"></td>
+										<td colspan="2"><input name="countbuy" id="count"
+											type="number" min="0" max="15" step="1"></td>
+										<td colspan="2"><input type="button"
+											class="btn sub-btn circle" value="가격확인"
+											onclick="process(${price})"></td>
+									</tr>
+									<tr>
+										<td colspan="5">매수 금액 :</td>
+										<td><input type="text" id="result" readonly="readonly"></td>
+										<td colspan="2"><input type="submit" value="주식주문"
+											class="genric-btn danger circle"></td>
+									</tr>
+								</tbody>
+							</div>
+						</form>
+					</table>
 				</div>
-				<!--================매수 =================-->
 			</div>
+		</div>
+		<!--================매수 =================-->
 		</div>
 	</section>
 

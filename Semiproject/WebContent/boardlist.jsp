@@ -9,6 +9,9 @@
 <%@ page import="com.semi.dto.BoardDto"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.semi.dto.MemberDto" %>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +33,12 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
 
+<style type="text/css">
+	#bs {
+		background-image: url("banner-2.jsp")
+	}
+</style>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -37,14 +46,17 @@
 
 	<!--================Home Banner Area =================-->
 	<section class="banner_area">
-		<div class="box_1620">
+		<div class="box_1620" >
 			<div class="banner_inner d-flex align-items-center">
+			<div class="overlay bg-parallax" data-stellar-ratio="0.9" 
+			data-stellar-vertical-offset="0" data-background="" 
+			style="transform: translateY(0px);"></div>
 				<div class="container">
 					<div class="banner_content text-center">
-						<h2>모의거래</h2>
+						<h2>게시판</h2>
 						<div class="page_link">
 							<a href="trade.do?command=index">Home</a> <a
-								href="trade.do?commnad=trading">모의거래</a>
+								href="trade.do?commnad=trading">커뮤니티</a>
 						</div>
 					</div>
 				</div>
@@ -73,7 +85,7 @@
 	%>
 	<!-- 게시판 -->
 	<section class="blog_area single-post-area p_120">
-	<div class="container">
+	<div class="container" >
 		<div class = "row">
 			<table class="table table-striped" style="text-align:center; border:1px solid #dddddd"> 
 				<thead>

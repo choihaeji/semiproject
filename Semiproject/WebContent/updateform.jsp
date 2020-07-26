@@ -18,7 +18,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<link rel="icon" href="img/favicon.png" type="image/png">
+<title>MeetMe Personal</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="vendors/linericon/style.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+<link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
+<link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+<link rel="stylesheet" href="vendors/animate-css/animate.css">
+<link rel="stylesheet" href="vendors/popup/magnific-popup.css">
+<!-- main css -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+
+<title>회원정보 수정</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -76,8 +92,31 @@
 </head>
 
 <body>
+<jsp:include page="form/header.jsp"></jsp:include>
+	<!--================Home Banner Area =================-->
+	<section class="banner_area">
+		<div class="box_1620">
+			<div class="banner_inner d-flex align-items-center">
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>회원정보 수정</h2>
+						<div class="page_link">
+							<a href="#">Home</a> <a
+								href="#">MyPage</a>
+								<a href="#">Home</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Home Banner Area =================-->
+<section class="blog_area single-post-area p_120">
+
+  	<div style="text-align:center;">
 	<h1>회원정보 수정</h1>
-	
+	</div>
+	<div style="position : relative ; left:530px;">
 	<form action="member.do" method="post">
 		<input type="hidden" name="command" value="updatemember">
 		<input type="hidden" name="mno" value="<%=dto.getMno() %>">
@@ -151,12 +190,18 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="수정" onclick="return validate();">
-					<input type="reset" value="리셋">
-					<input type="button" value="취소" onclick="location.href='mypage.jsp'">
+					<input type="submit" value="수정" onclick="return validate();" class="genric-btn default radius">&nbsp;
+					<input type="reset" value="리셋" class="genric-btn default radius">&nbsp;
+					<input type="button" value="취소" onclick="location.href='mypage.jsp'" class="genric-btn default radius">&nbsp;
 				</td>
 			</tr>
 		</table>
 		</form>
+		</div>
+		
+	</section>
+	
+<%@ include file="form/footer.jsp" %>	
+	
 </body>
 </html>

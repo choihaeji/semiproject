@@ -152,8 +152,6 @@ MemberDto dto = (MemberDto) session.getAttribute("dto");
 								</table>
 							</div>
 							<hr>
-
-
 							<div style="padding-bottom: 15px;">
 								<h3 style="padding: 10px 0;">계좌 정보</h3>
 								<table>
@@ -211,30 +209,8 @@ MemberDto dto = (MemberDto) session.getAttribute("dto");
 	</section>
 	<!--================End Home Banner Area =================-->
 
-
-
 	<%@ include file="./form/footer.jsp"%>
 
-
-
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/popper.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/lightbox/simpleLightbox.min.js"></script>
-	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-	<script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-	<script src="vendors/isotope/isotope.pkgd.min.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="vendors/popup/jquery.magnific-popup.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendors/counter-up/jquery.counterup.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/theme.js"></script>
 
 </body>
 </html>

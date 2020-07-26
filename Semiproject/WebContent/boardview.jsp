@@ -36,7 +36,6 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/responsive.css">
 	
-		
 		<!-- jquery -->
 		<script src="//code.jquery.com/jquery.min.js"></script>
 	
@@ -67,8 +66,6 @@
 </head>
 <body>
 
-	<!-- 네비게이션  -->
-	<jsp:include page="form/header.jsp"></jsp:include>
 	<%
 		//로긴한사람이라면	 userID라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
 		String userID = null;
@@ -110,6 +107,27 @@
            commentPage = Integer.parseInt(request.getParameter("commentPage"));
         }
 	%>
+	<!-- 네비게이션  -->
+	<jsp:include page="form/header.jsp"></jsp:include>
+	
+	<!--================Home Banner Area =================-->
+	<section class="banner_area">
+		<div class="box_1620">
+			<div class="banner_inner d-flex align-items-center">
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>게시판</h2>
+						<div class="page_link">
+							<a href="trade.do?command=index">Home</a> <a
+								href="trade.do?commnad=trading">커뮤니티</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Home Banner Area =================-->
+<section class="blog_area single-post-area p_120">
 
 	<!-- 게시판 -->
 	<div class="container">
@@ -144,7 +162,7 @@
 					<thead>
 						<tr>
 							<th colspan="3"
-								style="background-color: #eeeeee; text-align: center;">글 보기 </th>
+								style="background-color: #eeeeee; text-align: center;">게시글 상세보기 </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -184,48 +202,55 @@
 				%>
 		</div>
 	</div>
+	
+
+
+	
+	
 <!-- 댓글등록 -->
+<div class="comment-form" style="text-align: center; ">
 					 <%
 					 	if(userID==null || userID.length()==0){
 					 %>
-					 
-					<div class="comment-form" style="text-align: center;">
+					
+					<div class="" style="text-align: center; ">
+                        <form action="comment.do" method="post" style="height: 120px;">
 							<input type="hidden" name="command" value="insert">
             				<input type="hidden" name="boardNum" value="<%=boardNum %>">
-                            <form action="comment.do" method="post">
-                                <div class="form-group form-inline">
+                                <div class="form-group" style="text-align: center; width: 700px; display: inline-block; border:1px solid gray; height: 83px; ">
+                                    <textarea onclick="location.href='login.jsp'" class="form-control mb-10" rows="2" name="message" placeholder="로그인이 필요합니다.(클릭)" onfocus="this.placeholder = ''" 
+                                    		  onblur="this.placeholder = '로그인이 필요합니다.(클릭)'" required="required" style="height: 80px;"></textarea>
                                 </div>
-                                <div class="form-group" style="width: 1000px; display: inline-block;">
-                                    <textarea onclick="location.href='login.jsp'" class="form-control mb-10" rows="5" name="message" placeholder="로그인을 해주세요(클릭)" onfocus="this.placeholder = ''" 
-                                    		  onblur="this.placeholder = '로그인을 해주세요(클릭)'" required=""></textarea>
-                                </div>
-                                <button onclick="conc();" class="genric-btn info circle arrow">등록</button>	
-                            </form>
+                                <div style="position : relative ; right:45px;">
+                                <button onclick="conc();" class="genric-btn info circle arrow" style="text-align: center;">등록</button>	
+                        		</div>
+                        </form>
                      </div>
 					 <%
 					 	}else{
 					 %>
 					
-					 <div class="comment-form" style="text-align: center;">
-                          <form method="post" action="comment.do">
+					 <div class="" style="text-align: center; ">
+                          <form method="post" action="comment.do" style="text-align: center; height: 120px;">
                               <input type="hidden" name="command" value="insert">
            					  <input type="hidden" name="boardNum" value="<%=boardNum %>">
-                                <div class="form-group form-inline">
-                                </div>
-				                <input type="hidden" value="<%=user.getId() %>" name="commentID">
-                                <div class="form-group" style="width: 1000px; display: inline-block;">
-                                    <textarea id="message" class="form-control mb-10" rows="5" name="commentContent" placeholder="코멘트 입력" onfocus="this.placeholder = ''" 
-                                    		  onblur="this.placeholder = '코멘트 입력'" required="required"></textarea>
-                                </div>
+				              <input type="hidden" value="<%=user.getId() %>" name="commentID">
+                                		<div class="form-group" style=" text-align: center; width: 700px; display: inline-block; border:1px solid gray; height: 83px; ">
+                                   		<textarea id="message" class="form-control mb-10" rows="2" name="commentContent" placeholder="댓글을 남겨보세요." onfocus="this.placeholder = ''" 
+                                    		 	 onblur="this.placeholder = '댓글을 남겨보세요.'" required="required" style=" height: 80px;" maxlength="200"></textarea>
+		                                </div>
                             	<!-- <button type="submit" onclick="return printProduct();" class="primary-btn submit_btn">등록</button> -->
-					 			<input type="submit" value="등록"  class="genric-btn info circle arrow">
-                 		    </form>
+					 					<div style="position : relative ; right:45px;">
+					 						<input type="submit" value="등록" class="genric-btn info circle arrow">
+					 					</div>
+                 		 </form>
                      </div>
 					 <%
 					 	}
 					 %>
 <!-- 댓글 뷰 -->
-						
+						<br>
+						<br>
 	  <%
          CommentDao comment_dao = new CommentDao();
 	  		ArrayList<CommentDto> comment_list = comment_dao.getComment(boardNum);
@@ -240,6 +265,7 @@
             for (int i = begin; i <end; i++) {
             System.out.println(comment_list.get(i));
       %>
+      		<div class="" style="text-align: center; ">
 				<div style="text-align: center;">
 					<form action="comment.do" method="post">
 					     <input type="hidden" name="boardNum" value="<%=res.getBoardNum() %>">
@@ -249,31 +275,46 @@
                                 <div class="single-comment justify-content-between d-flex" style="width: 1000px; display: inline-block;">
                                     <div class="user justify-content-between d-flex">
                                         <div class="desc" style="width: 1000px; display: inline-block;">
-                                            <h5><p>작성자: <a href="#"> <%=comment_list.get(i).getComment_Id() %></a></p></h5>
-                                            <p class="date">등록일: <%=comment_list.get(i).getRegdate() %> </p>
-                                            <p class="comment">
-                                               <%=comment_list.get(i).getComment_Content() %>
-                                            </p>
-                                        </div>
-                                    </div>
+                                        <table >
+                                          <tr>
+                                        	<td>
+                                        		<div>
+                                        		<b><%=comment_list.get(i).getComment_Id() %></b><br>
+                                            	<p class="date" style="font-size:10px; color:gray; "><%=comment_list.get(i).getRegdate() %> </p>
+                                            	</div>
+                                            </td>
+                                           	<td width="800px;">
+                                           		<div class="comment" >
+                                           			<%=comment_list.get(i).getComment_Content() %>
+                                           		</div>
+                                           	</td>
+                                           	<td>
+                                           		<div>
                                     <%
                        					 if(userID==null || !userID.equals(comment_list.get(i).getComment_Id())){
                    				     %>
                                          <div class="reply-btn" >
-                                             <input type="button" value="삭제"  class="genric-btn default" onclick="alert('댓글 작성자만 삭제할 수 있습니다.');">
+                                             <input type="hidden" value="삭제"  class="genric-btn primary-border small" onclick="alert('댓글 작성자만 삭제할 수 있습니다.');">
                                         </div>
                                     <%
                        					 } else{
                    					%>
                    						<div class="reply-btn" >
-                     						 <td><input type="submit" value="삭제" class="genric-btn default" ></td>
+                     						 <input type="submit" value="삭제" class="genric-btn primary-border small" >
                     			    	</div>
                     			    <%
                     				     }
                    				     %>
+                                           		</div>
+                                           	</td>
+                                       	  </tr>
+                                       	  <hr>
+                                        </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-				    </form>
+                            <br>
 					      <%
 					         }
 					      %>
@@ -286,9 +327,17 @@
 					         }
 					      %>
                  					 </p>
+                 	
+				    </form>
+				    
 			</div>
+		</div>	
+		
+	</div>	
+</section>	
+	
 
-
+		<%@ include file="form/footer.jsp" %>
       
   <!-- ---------------------------------------------------------------------------------------------------------- -->
 

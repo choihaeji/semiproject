@@ -38,53 +38,28 @@
 		}
 	%>
 
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="bs-example-navbar-collapse-1"
-				aria-expaned="false">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.jsp">주식거래</a>
-		</div>
-		<div class="collapse navbar-collapse"
-			id="#bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index.jsp">메인</a></li>
-				<li class="active"><a href="boardlist.jsp">게시판</a></li>
-			</ul>
-
-			<%
-				//로그인안된경우
-				if (userID==null || userID.length()==0 ) {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">접속하기<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="login.jsp">로그인</a></li>
-						<li><a href="registform.jsp">회원가입</a></li>
-					</ul></li>
-			</ul>
-			<%
-				} else {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">회원관리<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="member.do?command=logout">로그아웃</a></li>
-					</ul></li>
-			</ul>
-			<%
-				}
-			%>
-		</div>
-	</nav>
+	<!-- 네비게이션  -->
+	<jsp:include page="form/header.jsp"></jsp:include>
 	
+	<!--================Home Banner Area =================-->
+	<section class="banner_area">
+		<div class="box_1620">
+			<div class="banner_inner d-flex align-items-center">
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>게시판</h2>
+						<div class="page_link">
+							<a href="trade.do?command=index">Home</a> <a
+								href="trade.do?commnad=trading">커뮤니티</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Home Banner Area =================-->
+	
+	<section class="blog_area single-post-area p_120">
 	<!-- 게시판 -->
 	<div class="container">
 		<div class="row">
@@ -110,11 +85,10 @@
 				<input type="submit" class="genric-btn info circle arrow" value="글쓰기" />
 			</form>
 
-	<!-- 회원만 넘어가기 -->
-	
 		</div>
 	</div>
-		
+	</section>	
+	<%@ include file="form/footer.jsp" %>
 
 	<!-- 애니매이션 담당 JQUERY -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
