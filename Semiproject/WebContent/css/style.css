@@ -1640,6 +1640,11 @@ h6 {
   padding: 30px 50px 30px 30px;
   background: #fff;
   border-left: 2px solid #f8b600; }
+.generic-blockquote-vl{
+  padding: 5px 5px 5px 5px;
+  background: #fff;
+  border-left: 1px solid gray; }
+}
 
 @media (max-width: 991px) {
   .progress-table-wrap {

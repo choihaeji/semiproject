@@ -69,7 +69,7 @@ function process(price){
 			url:"trade.do?command=ajax&count="+count+"&price="+price,	
 			dataType: "json",						
 			success:function(msg){
-				$("#result").html(msg.allPrice+" 원")
+				$("#result").val(msg.allPrice+" 원")
 			},
 			error:function(){
 				alert("실패");
@@ -119,7 +119,7 @@ function process(price){
 									</tr>
 									<tr>
 										<td colspan="5">매수 금액 :</td>
-										<td><input type="text" id="result" readonly="readonly"></td>
+										<td><input type="text" id="result" readonly="readonly" style="border:0px; outline:none;"></td>
 										<td colspan="2"><input type="submit" value="주식주문"
 											class="genric-btn danger circle"></td>
 									</tr>
