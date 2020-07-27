@@ -114,4 +114,43 @@ public class CommentDao extends JDBCTemplate{
 	      return res;
 	   }
    
+   public ArrayList<CommentDto> getCommentbyId(String id){
+       Connection con = getConnection();
+       PreparedStatement pstm = null;
+       ResultSet rs = null;
+       
+       String sql = " SELECT * FROM BOARD_COMMENT WHERE COMMENT_ID=? ORDER BY REGDATE DESC ";
+       ArrayList<CommentDto> list = new ArrayList<CommentDto>();
+       
+       try {
+          pstm = con.prepareStatement(sql);
+          pstm.setString(1, id);
+          System.out.println("03. query 준비 : "+sql);
+          
+          rs = pstm.executeQuery();
+          System.out.println("04. query 실행 및 리턴");
+          
+          while (rs.next()) {
+             CommentDto dto = new CommentDto();
+             dto.setBoardNo(rs.getInt(1));
+             dto.setComment_No(rs.getInt(2));
+             dto.setComment_Content(rs.getString(3));
+             dto.setComment_Id(rs.getString(4));
+             dto.setRegdate(rs.getString(5));
+             
+             list.add(dto);
+          }
+          
+       } catch (SQLException e) {
+          System.out.println("3/4단계 에러");
+          e.printStackTrace();
+       }finally {
+          close(rs);
+          close(pstm);
+          close(con);
+          System.out.println("05. 종료");
+       }
+       return list;
+    }
+   
 }
