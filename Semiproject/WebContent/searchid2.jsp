@@ -34,40 +34,34 @@
 	if(dto==null){
 		pageContext.forward("index.jsp");
 	}
+	String chk = request.getParameter("chk");
 %>
 </head>
 <body>
-
-<jsp:include page="form/header.jsp"></jsp:include>	
-	<!--================Home Banner Area =================-->
-	<section class="banner_area">
-		<div class="box_1620">
-			<div class="banner_inner d-flex align-items-center">
-				<div class="container">
-					<div class="banner_content text-center">
-						<h2>회원정보 찾기</h2>
-						<div class="page_link">
-							<a href="trade.do?command=index">Home</a> <a
-								href="trade.do?commnad=trading">login</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--================End Home Banner Area =================-->
-<section class="blog_area single-post-area p_120">
-		
+		<%if(chk.equals("y")){ %>
 		<div class="wrap" style="text-align:center;">
-		<div id="userName">[<%=dto.getName()%>]님의 아이디는</div><br>
+		<br>
+		<div id="userName">[<%=dto.getName()%>]님의 아이디는</div>
 		<div id="userId">[<b><%=dto.getId() %></b>] 입니다.</div><br>
-		<button id="button" class="btn btn-outline-info " onclick="location.href='login.jsp'">로그인 하러가기</button>
+		<button id="button" class="btn btn-outline-info " onclick="move();">로그인 하러가기</button>
 		</div>
-
-</section>
-
-<%@ include file="form/footer.jsp" %>
-
+		<%}else if(chk.equals("n")){ %>
+		<div class="wrap" style="text-align:center;">
+		<br>
+		<div>회원정보가 존재하지 않거나,</div>
+		<div> 회원정보가 일치하지 않습니다.</div><br>
+		<button id="button" class="btn btn-outline-info " onclick="cls();">닫기</button>
+		</div>
+		<%} %>
+<script type="text/javascript">
+function move(){
+	opener.document.location.href="login.jsp";
+	self.close();
+}
+function cls(){
+	self.close();
+}
+</script>
 	</body>
 	
 </html>

@@ -26,6 +26,9 @@
 			return false;
 
 		}
+		var target="member.do?command=searchid&name="+name.value.trim()+"&email="+email.value.trim();
+		open(target,"","width=350,height=180");
+		
 	}
 	function pwChk() {
 		var id = document.getElementsByName("id")[0];
@@ -44,6 +47,9 @@
 			alert("이메일을 입력해 주세요.");
 			return false;
 		}
+		
+		var target="member.do?command=searchpw&name2="+name.value.trim()+"&email2="+email.value.trim()+"&id="+id.value.trim();
+		open(target,"","width=350,height=180");
 	}
 </script>
 </head>
@@ -94,7 +100,7 @@
 					<tr>
 						<td colspan="2">
 							<div align="center">
-								<input type="submit" value="아이디 찾기" onclick="return idChk();"
+								<input type="button" value="아이디 찾기" onclick="return idChk();"
 									class="genric-btn default radius">&nbsp; <input
 									type="button" value="취소" onclick="location.href='login.jsp'"
 									class="genric-btn default radius">&nbsp;
@@ -134,7 +140,7 @@
 					<tr>
 						<td colspan="2">
 							<div align="center">
-								<input type="submit" value="비밀번호 찾기" onclick="return pwChk();"
+								<input type="button" value="비밀번호 찾기" onclick="return pwChk();"
 									class="genric-btn default radius">&nbsp; <input
 									type="button" value="취소" onclick="location.href='login.jsp'"
 									class="genric-btn default radius">&nbsp;
