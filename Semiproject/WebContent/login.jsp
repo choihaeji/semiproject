@@ -100,34 +100,6 @@ button {
  
  
     <!-- ==================로그인 부분======================= -->       
-	<div class="col-lg-8 col-md-8" id="d1">
-		<h3 class="mb-30 title_color">로그인</h3>
-		<form action="member.do" method="post">
-			<%
-					String before = request.getHeader("referer");
-				%>
-			<input type="hidden" name="before" value="<%=before %>"> <input
-				type="hidden" name="command" value="login">
-			<div class="mt-10" border="1">
-				<input type="text" name="id" placeholder="ID"
-					onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID'"
-					required="" class="single-input">
-			</div>
-			<div class="mt-10">
-				<input type="password" name="pw" placeholder="Password"
-					onfocus="this.placeholder = ''"
-					onblur="this.placeholder = 'Password'" required=""
-					class="single-input">
-			</div>
-			<div>
-				<input type="submit" class="genric-btn success circle" value="Login">
-				<input type="button" value="Regist" class="genric-btn success circle" onclick="location.href='member.do?command=registform'"> 
-				<input type="button" onclick="location.href='searchid1.jsp'" value="id 찾기" class="genric-btn success circle"> 
-				<input type="button" onclick="location.href='searchpw1.jsp'" value="pw 찾기" class="genric-btn success circle">
-			</div>
-			<div>
-				<a href="kakaoLogin.jsp"><img src="./img/kakao_login_medium_wide.png"></a>
-
 	<section class="blog_area single-post-area p_120">
 		<div class="container">
 			<div class="size">
@@ -135,7 +107,7 @@ button {
 
 					<%
 							String before = request.getHeader("referer");
-						%>
+					%>
 					<input type="hidden" name="before" value="<%=before%>"> <input
 						type="hidden" name="command" value="login">
 					<div class="form-group">
@@ -152,7 +124,8 @@ button {
 						<button name="button"type="submit">로그인</button>
 					</div>
 					<div>
-						<button class="form-group">카카오 로그인</button>
+						<a href="https://kauth.kakao.com/oauth/authorize?client_id=5d72007ee138ddab5fe6236180b87978&redirect_uri=http://localhost:8787/Semiproject/kakaoLogin.jsp&response_type=code">
+            				<img src="./img/kakao_login_medium_wide.png" width="100%"></a>
 					</div>
 					<br>
 
