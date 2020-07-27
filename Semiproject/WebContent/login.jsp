@@ -95,9 +95,6 @@ button {
 		</div>
 	</section>
 	<!--================Home Banner Area =================-->
-	
-	<section class="contact_area p_120">
- 
  
     <!-- ==================로그인 부분======================= -->       
 	<section class="blog_area single-post-area p_120">

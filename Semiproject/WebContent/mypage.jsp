@@ -17,7 +17,7 @@
 <%@ page import="com.semi.dto.CommentDto"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
-<%@ page import = "java.io.PrintWriter" %>
+<%@ page import="java.io.PrintWriter"%>
 
 <!DOCTYPE html>
 <html>
@@ -43,7 +43,7 @@ th {
 	if(dto == null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인을 하세요.')");
+		script.println("alert('로그인이 필요한 서비스 입니다.')");
 		script.println("location.href='login.jsp'");
 		script.println("</script>");
 	}
@@ -89,12 +89,11 @@ th {
 
 			<!-- 회원정보 구역 -->
 			<h3 class="mb-30 title_color">
-				<%=dto.getName()%>님의 정보 &nbsp;&nbsp;&nbsp;
-				<input type="button"
-				onclick="location.href='member.do?command=update'"
-				class="genric-btn success-border radius small" value="회원정보 수정">
+				<%=dto.getName()%>님의 정보 &nbsp;&nbsp;&nbsp; <input type="button"
+					onclick="location.href='member.do?command=update'"
+					class="genric-btn success-border radius small" value="회원정보 수정">
 			</h3>
-			
+
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="generic-blockquote">
@@ -174,21 +173,20 @@ th {
 								%>
 							</table>
 						</div>
-						
+
 					</div>
 
 
 					<div class="tab-pane fade" id="board" role="tabpanel"
 						aria-labelledby="board-tab">
 						<div class="list">
-							<div style="padding-bottom: 15px;">
-                        <table style="width: 925px">
-                           <tr style="border-bottom: 1px solid gray; text-align: center;">
-                              <th style="border-right: 1px solid gray; width: 120px;">번 호</th>
-                              <th style="border-right: 1px solid gray; width: 615px;">제 목</th>
-                              <th style="width: 185px;">작성일</th>
-                           </tr>
-                           <%
+							<table class="table">
+								<tr>
+									<th>번 호</th>
+									<th>제 목</th>
+									<th>작성일</th>
+								</tr>
+								<%
                               BoardDao bdao = new BoardDao();
                               List<BoardDto> blist = bdao.getListbyId(dto.getId());
                               
@@ -201,43 +199,42 @@ th {
                                 int bnum = blist.size()-b_begin;
                               for(int i=b_begin;i<b_end;i++){
                            %>
-                           <tr>
-                              <td style="border-right: 1px solid gray;"><%=bnum %></td>
-                              <%bnum--; %>
-                              <td style="border-right: 1px solid gray;"><a href="Board.do?command=boardview&boardNum=<%=blist.get(i).getBoardNum()%>"><%=blist.get(i).getBoardTitle() %></a></td>
-                              <td style="text-align: center"><%=blist.get(i).getBoardDate() %></td>
-                           </tr>
-                           <%
+								<tr>
+									<td><%=bnum %></td>
+									<%bnum--; %>
+									<td><a
+										href="Board.do?command=boardview&boardNum=<%=blist.get(i).getBoardNum()%>"><%=blist.get(i).getBoardTitle() %></a></td>
+									<td><%=blist.get(i).getBoardDate() %></td>
+								</tr>
+								<%
                               }
                            %>
-                           <tr>
-                              <td colspan="3">
-                           <%
+								<tr>
+									<td colspan="3">
+										<%
                            for(int i=1;i<=b_max;i++){
-                           %>
-                              <a href="mypage.jsp?boardPage=<%=i %>&commentPage=<%=commentPage%>"><%=i %></a>&nbsp;
-                           <%
+                           %> <a
+										href="mypage.jsp?boardPage=<%=i %>&commentPage=<%=commentPage%>"><%=i %></a>&nbsp;
+										<%
                               }
                            %>
-                              </td>
-                           </tr>
-                        </table>
-                     	</div>
+									</td>
+								</tr>
+							</table>
 						</div>
 					</div>
 
-					<div class="tab-pane fade" id="comment" role="tabpanel"
-						aria-labelledby="comment-tab">
-						<div class="list">
-							 <div style="padding-bottom: 15px;">
-                        <table style="width: 925px">
-                           <tr style="border-bottom: 1px solid gray; text-align: center;">
-                              <th style="border-right: 1px solid gray; width: 120px;">번 호</th>
-                              <th style="border-right: 1px solid gray; width: 180px;">글 제목</th>
-                              <th style="border-right: 1px solid gray; width: 435px;">댓글 내용</th>
-                              <th style="width: 185px;">작성일</th>
-                           </tr>
-                           <%   
+				<div class="tab-pane fade" id="comment" role="tabpanel"
+					aria-labelledby="comment-tab">
+					<div class="list">
+						<table class="table">
+							<tr>
+								<th>번 호</th>
+								<th>글 제목</th>
+								<th>댓글 내용</th>
+								<th>작성일</th>
+							</tr>
+							<%   
                               CommentDao cdao = new CommentDao();
                               List<CommentDto> clist = cdao.getCommentbyId(dto.getId());
                               int c_max = clist.size()/5 + 1;
@@ -249,34 +246,34 @@ th {
                                 int cnum = clist.size()-c_begin;
                               for(int i=c_begin;i<c_end;i++){
                            %>
-                           <tr>
-                              <td><%=cnum %></td>
-                              <%cnum--; %>
-                              <td><%=bdao.getBoardTitle(clist.get(i).getBoardNo()) %></td>
-                              <td><a href="Board.do?command=boardview&boardNum=<%=clist.get(i).getBoardNo()%>"><%=clist.get(i).getComment_Content() %></a></td>
-                              <td style="text-align: center;"><%=clist.get(i).getRegdate() %></td>
-                           </tr>
-                           <%
+							<tr>
+								<td><%=cnum %></td>
+								<%cnum--; %>
+								<td><%=bdao.getBoardTitle(clist.get(i).getBoardNo()) %></td>
+								<td><a
+									href="Board.do?command=boardview&boardNum=<%=clist.get(i).getBoardNo()%>"><%=clist.get(i).getComment_Content() %></a></td>
+								<td><%=clist.get(i).getRegdate() %></td>
+							</tr>
+							<%
                               }
                            %>
-                           <tr>
-                              <td colspan="4">
-                           <%
+							<tr>
+								<td colspan="4">
+									<%
                            for(int i=1;i<=c_max;i++){
-                           %>
-                              <a href="mypage.jsp?boardPage=<%=boardPage %>&commentPage=<%=i %>"><%=i %></a>&nbsp;
-                           <%
+                           %> <a
+									href="mypage.jsp?boardPage=<%=boardPage %>&commentPage=<%=i %>"><%=i %></a>&nbsp;
+									<%
                               }
                            %>
-                              </td>
-                           </tr>
-                        </table>
-                	     </div>
-						</div>
+								</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 			</div>
-			<!-- 탭내용  -->
+		</div>
+		<!-- 탭내용  -->
 		</div>
 	</section>
 
