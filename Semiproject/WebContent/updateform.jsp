@@ -37,6 +37,13 @@ if (dto == null) {
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
 
+<style type="text/css">
+body > section.blog_area.single-post-area.p_120 > div > form > table > tbody > tr:nth-child(8) > td > div{
+display: inline-block;
+float: inherit;
+}
+</style>
+
 <title>회원정보 수정</title>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
