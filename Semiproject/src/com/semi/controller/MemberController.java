@@ -94,7 +94,7 @@ public class MemberController extends HttpServlet {
 				jsResponse(url, response);
 			} else {
 				System.out.println("로그인 실패");
-				jsResponse("로그인 실패", "login.jsp", response);
+				jsResponse("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.", "login.jsp", response);
 			}
 		} else if (command.equals("logout")) {
 			HttpSession session = request.getSession();
@@ -156,7 +156,7 @@ public class MemberController extends HttpServlet {
 
 			} else {
 				System.out.println("\n이름과 이메일 불일치!");
-				jsResponse("실패", "searchidpw1.jsp", response);
+				jsResponse("회원정보가 존재하지 않거나, 회원정보가 일치하지 않습니다.", "searchidpw1.jsp", response);
 			}
 		}
 		// 비밀번호 찾기
@@ -178,7 +178,7 @@ public class MemberController extends HttpServlet {
 
 			} else {
 				System.out.println("\n불일치!");
-				jsResponse("실패", "searchidpw1.jsp", response);
+				jsResponse("회원정보가 존재하지 않거나, 회원정보가 일치하지 않습니다.", "searchidpw1.jsp", response);
 			}
 		}
 		else if(command.equals("charge_account")) {
