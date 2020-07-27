@@ -145,6 +145,7 @@ public class MemberController extends HttpServlet {
 			System.out.println(name);
 			System.out.println(email);
 
+			
 			if (dto != null) {
 				System.out.println("이름과 이메일 일치!");
 				HttpSession session = request.getSession();

@@ -274,10 +274,9 @@ th {
                               </td>
                            </tr>
                         </table>
-                     </div>
+                	     </div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 			<!-- 탭내용  -->
