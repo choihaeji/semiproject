@@ -123,13 +123,13 @@
 					class="single-input">
 			</div>
 			<div>
-			<input type="submit" class="genric-btn success circle" value="Login">
-			<input type="button" value="Regist" class="genric-btn success circle"
-				onclick="location.href='member.do?command=registform'"> <input
-				type="button" onclick="location.href='searchid1.jsp'" value="id 찾기"
-				class="genric-btn success circle"> <input type="button"
-				onclick="location.href='searchpw1.jsp'" value="pw 찾기"
-				class="genric-btn success circle">
+				<input type="submit" class="genric-btn success circle" value="Login">
+				<input type="button" value="Regist" class="genric-btn success circle" onclick="location.href='member.do?command=registform'"> 
+				<input type="button" onclick="location.href='searchid1.jsp'" value="id 찾기" class="genric-btn success circle"> 
+				<input type="button" onclick="location.href='searchpw1.jsp'" value="pw 찾기" class="genric-btn success circle">
+			</div>
+			<div>
+				<a href="kakaoLogin.jsp"><img src="./img/kakao_login_medium_wide.png"></a>
 			</div>
 		</form>
 	</div>
