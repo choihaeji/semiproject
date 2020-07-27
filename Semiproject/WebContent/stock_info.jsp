@@ -73,6 +73,12 @@
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
 		<div class="container box_1620">
+			
+		</div>
+	</section>
+	
+	<div class="blog_area single-post-area p_120">
+		<div class="container box_1620">
 			<div id="m_contents">
 				<div id=s_contents>
 					<input id="stock_s" type="text" onkeypress="if( event.keyCode==13 ){search();}">
@@ -114,7 +120,8 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+	
 	<!--================Footer Area =================-->
 	<footer class="footer_area p_120">
 		<div class="container">

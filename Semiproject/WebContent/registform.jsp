@@ -8,6 +8,14 @@
 <html>
 <head>
 <title>회원가입</title>
+
+<style type="text/css">
+body > section.blog_area.single-post-area.p_120 > div > form > table > tbody > tr:nth-child(7) > td:nth-child(2) > div{
+display: inline-block;
+float: inherit;
+}
+</style>
+
 <script type="text/javascript">
 	function idChk(){
 		var doc = document.getElementsByName("id")[0];

@@ -145,13 +145,13 @@ public class MemberController extends HttpServlet {
 			System.out.println(name);
 			System.out.println(email);
 
-			if (dto.getName() != null && dto.getEmail() != null) {
+			if (dto != null) {
 				System.out.println("이름과 이메일 일치!");
 				HttpSession session = request.getSession();
 				session.setAttribute("dto", dto);
 				session.setMaxInactiveInterval(60 * 60);
 
-				jsResponse("성공", "searchid2.jsp", response);
+				jsResponse("searchid2.jsp", response);
 
 			} else {
 				System.out.println("\n이름과 이메일 불일치!");
@@ -166,7 +166,7 @@ public class MemberController extends HttpServlet {
 			String email = request.getParameter("email");
 			MemberDto dto = dao.searchPw(id, name, email);
 
-			if (dto.getId() != null && dto.getName() != null && dto.getEmail() != null) {
+			if (dto != null) {
 				System.out.println("모두 일치!");
 				HttpSession session = request.getSession();
 				session.setAttribute("dto", dto);
@@ -211,6 +211,14 @@ public class MemberController extends HttpServlet {
 
 	private void jsResponse(String msg, String url, HttpServletResponse response) throws IOException {
 		String s = "<script type='text/javascript'>" + "alert('" + msg + "');" + "location.href='" + url + "';"
+				+ "</script>";
+
+		PrintWriter out = response.getWriter();
+		out.print(s);
+	}
+	
+	private void jsResponse(String url, HttpServletResponse response) throws IOException {
+		String s = "<script type='text/javascript'> location.href='" + url + "';"
 				+ "</script>";
 
 		PrintWriter out = response.getWriter();

@@ -13,6 +13,7 @@
 <%@ page import="com.semi.dto.TradeDto"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
+<%@ page import = "java.io.PrintWriter" %>
 
 <!DOCTYPE html>
 <html>
@@ -35,11 +36,17 @@ th {
 </head>
 <%
 	MemberDto dto = (MemberDto) session.getAttribute("dto");
+	if(dto == null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인을 하세요.')");
+		script.println("location.href='login.jsp'");
+		script.println("</script>");
+	}
+	TradeDao dao = new TradeDao();
+	List<TradeDto> list = dao.viewTrade(dto.getId());
 
-TradeDao dao = new TradeDao();
-List<TradeDto> list = dao.viewTrade(dto.getId());
-
-System.out.println(dto.getName() + ", " + dto.getAccount());
+	System.out.println(dto.getName() + ", " + dto.getAccount());
 %>
 <body>
 	<jsp:include page="form/header.jsp"></jsp:include>
