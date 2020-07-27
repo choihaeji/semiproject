@@ -162,8 +162,8 @@ public class MemberController extends HttpServlet {
 		else if (command.equals("searchpw")) {
 
 			String id = request.getParameter("id");
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
+			String name = request.getParameter("name2");
+			String email = request.getParameter("email2");
 			MemberDto dto = dao.searchPw(id, name, email);
 
 			if (dto != null) {
@@ -172,7 +172,7 @@ public class MemberController extends HttpServlet {
 				session.setAttribute("dto", dto);
 				session.setMaxInactiveInterval(60* 60);
 
-				jsResponse("성공", "searchpw2.jsp", response);
+				jsResponse("searchpw2.jsp", response);
 
 			} else {
 				System.out.println("\n불일치!");

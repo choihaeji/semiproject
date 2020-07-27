@@ -5,7 +5,7 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
 <%@ page import="com.semi.dto.MemberDto" %>
-
+<%@ page import = "java.io.PrintWriter" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -18,12 +18,14 @@
 	if(dto==null){
 		pageContext.forward("index.jsp");
 	}
+	
+	PrintWriter script = response.getWriter();
+	script.println("<script>");
+	script.println("alert('" + dto.getId() + "님의 비밀번호는 " + dto.getPw() + " 입니다')");
+	script.println("location.href='login.jsp'");
+	script.println("</script>");
+	
 %>
 <body>
-		<div class="wrap">
-		<div id="userId">[<%=dto.getId()%>]님의 비밀번호는</div><br>
-		<div id="userPw">[<%=dto.getPw() %>] 입니다.</div>
-		<button id="button" class="btn btn-outline-info " onclick="location.href='login.jsp'">로그인 하러가기</button>
-		</div>
-	</body>
+</body>
 </html>
