@@ -86,12 +86,12 @@ public class MemberController extends HttpServlet {
 				session.setAttribute("dto", dto);
 				session.setMaxInactiveInterval(60 * 60);
 
-//				String before = request.getParameter("before");
-//				System.out.println(before);
-//				String url = before.split("/")[4];
-//				System.out.println(url);
+				String before = request.getParameter("before");
+				System.out.println(before);
+				String url = before.split("/")[4];
+				System.out.println(url);
 
-				jsResponse("index.jsp", response);
+				jsResponse(url, response);
 			} else {
 				System.out.println("로그인 실패");
 				jsResponse("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.", "login.jsp", response);
@@ -113,6 +113,7 @@ public class MemberController extends HttpServlet {
 			System.out.println(bank_name);
 			System.out.println(bank_no);
 
+			
 			MemberDto dto = new MemberDto(mno, pw, email, bank_name, bank_no);
 
 			int res = dao.updateMember(dto);
@@ -193,11 +194,10 @@ public class MemberController extends HttpServlet {
 				session.setAttribute("dto", dto);
 				session.setMaxInactiveInterval(60* 60);
 
-				jsResponse("searchpw2.jsp", response);
-
+				response.sendRedirect("searchpw2.jsp?chk=y");
 			} else {
 				System.out.println("\n불일치!");
-				jsResponse("회원정보가 존재하지 않거나, 회원정보가 일치하지 않습니다.", "searchidpw1.jsp", response);
+				response.sendRedirect("searchpw2.jsp?chk=n");
 			}
 		}
 		else if(command.equals("charge_account")) {
@@ -245,4 +245,5 @@ public class MemberController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.print(s);
 	}
+	
 }

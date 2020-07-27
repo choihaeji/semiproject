@@ -24,7 +24,7 @@ float: inherit;
 		}
 		else{
 			var target="member.do?command=idchk&id="+doc.value.trim();
-			open(target,"","width=200,height=100");
+			open(target,"","width=350,height=150");
 		}
 	}
 	function idChkConfirm(){ 
