@@ -255,7 +255,6 @@ public class TradeDao {
 	public List<TradeDto> viewTrade(String id) {
 		Connection con = getConnection();
 		ResultSet rs = null;
-		TradeDto dto = new TradeDto();
 		List<TradeDto> list = new ArrayList<TradeDto>();
 		String sql = " SELECT LOGSQ, STOCKNAME, PRICE, HOLDING, STATUS FROM TRADE_LOG WHERE ID=? ";
 		
@@ -265,6 +264,7 @@ public class TradeDao {
 			
 			rs = pstm.executeQuery();
 			while (rs.next()) {
+				TradeDto dto = new TradeDto();
 				dto.setTradeNo(rs.getInt(1));
 				dto.setstockName(rs.getString(2));
 				dto.setPrice(rs.getInt(3));

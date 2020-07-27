@@ -137,28 +137,47 @@ public class MemberController extends HttpServlet {
 			}
 		}
 		// 아이디 찾기
-		else if (command.equals("searchid")) {
+	      else if (command.equals("searchid")) {
 
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
-			MemberDto dto = dao.searchId(name, email);
-			System.out.println(name);
-			System.out.println(email);
+	         String name = request.getParameter("name");
+	         String email = request.getParameter("email");
+	         MemberDto dto = dao.searchId(name, email);
+	         
+	         if (dto != null) {
+	            System.out.println("이름과 이메일 일치!");
+	            HttpSession session = request.getSession();
+	            session.setAttribute("dto", dto);
+	            session.setMaxInactiveInterval(60 * 60);
 
-			
-			if (dto != null) {
-				System.out.println("이름과 이메일 일치!");
-				HttpSession session = request.getSession();
-				session.setAttribute("dto", dto);
-				session.setMaxInactiveInterval(60 * 60);
+	            response.sendRedirect("searchid2.jsp");
 
-				jsResponse("searchid2.jsp", response);
+	         } else {
+	            System.out.println("\n이름과 이메일 불일치!");
+	            jsResponse("일치하는 회원이 없습니다.", "searchid1.jsp", response);
+	         }
+	      }
+	      // 비밀번호 찾기
+	      else if (command.equals("searchpw")) {
 
-			} else {
-				System.out.println("\n이름과 이메일 불일치!");
-				jsResponse("회원정보가 존재하지 않거나, 회원정보가 일치하지 않습니다.", "searchidpw1.jsp", response);
-			}
-		}
+	         String id = request.getParameter("id");
+	         String name = request.getParameter("name");
+	         String email = request.getParameter("email");
+	         MemberDto dto = dao.searchPw(id, name, email);
+	         System.out.println(dto);
+	         
+	         if (dto != null) {
+	            System.out.println("모두 일치!");
+	            HttpSession session = request.getSession();
+	            session.setAttribute("dto", dto);
+	            session.setMaxInactiveInterval(60* 60);
+
+	            response.sendRedirect("searchpw2.jsp");
+
+	         } else {
+	            System.out.println("\n불일치!");
+	            jsResponse("일치하는 회원이 없습니다.", "searchpw1.jsp", response);
+	         }
+	      }
 		// 비밀번호 찾기
 		else if (command.equals("searchpw")) {
 

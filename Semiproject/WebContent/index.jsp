@@ -47,7 +47,7 @@
             	</div>
 				<div class="container">
 					<div class="blog_b_text text-center">
-						<h2></h2>
+						<h2>주식! 같이 시작해볼래?</h2>
 						<p>일상을 바꾸는 나의 첫 투자</p>
 					</div>
 				</div>
