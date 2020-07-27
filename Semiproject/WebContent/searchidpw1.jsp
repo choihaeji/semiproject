@@ -65,6 +65,7 @@
 			</div>
 		</div>
 	</section>
+	
 	<!--================End Home Banner Area =================-->
 	<section class="blog_area single-post-area p_120">
 
