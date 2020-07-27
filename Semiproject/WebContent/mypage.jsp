@@ -11,6 +11,10 @@
 <%@ page import="com.semi.dto.MemberDto"%>
 <%@ page import="com.semi.dao.TradeDao"%>
 <%@ page import="com.semi.dto.TradeDto"%>
+<%@ page import="com.semi.dao.BoardDao"%>
+<%@ page import="com.semi.dto.BoardDto"%>
+<%@ page import="com.semi.dao.CommentDao"%>
+<%@ page import="com.semi.dto.CommentDto"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ page import = "java.io.PrintWriter" %>
@@ -47,6 +51,19 @@ th {
 	List<TradeDto> list = dao.viewTrade(dto.getId());
 
 	System.out.println(dto.getName() + ", " + dto.getAccount());
+	
+	int boardPage = 1;
+	
+	if (request.getParameter("boardPage") != null) {
+	       boardPage = Integer.parseInt(request.getParameter("boardPage"));
+	}
+	    
+	   int commentPage = 1;
+	    
+	if (request.getParameter("commentPage") != null) {
+	       commentPage = Integer.parseInt(request.getParameter("commentPage"));
+	}
+	
 %>
 <body>
 	<jsp:include page="form/header.jsp"></jsp:include>
@@ -160,19 +177,106 @@ th {
 								%>
 							</table>
 						</div>
+						
 					</div>
 
 
 					<div class="tab-pane fade" id="board" role="tabpanel"
 						aria-labelledby="board-tab">
-						<div class="list"></div>
+						<div class="list">
+							<div style="padding-bottom: 15px;">
+                        <table style="width: 925px">
+                           <tr style="border-bottom: 1px solid gray; text-align: center;">
+                              <th style="border-right: 1px solid gray; width: 120px;">번 호</th>
+                              <th style="border-right: 1px solid gray; width: 615px;">제 목</th>
+                              <th style="width: 185px;">작성일</th>
+                           </tr>
+                           <%
+                              BoardDao bdao = new BoardDao();
+                              List<BoardDto> blist = bdao.getListbyId(dto.getId());
+                              
+                              int b_max = blist.size()/5 + 1;
+                                int b_begin = (boardPage-1)*5;
+                                int b_end = b_begin + 5;
+                                if(b_end>blist.size()){
+                                   b_end=blist.size();
+                                }
+                                int bnum = blist.size()-b_begin;
+                              for(int i=b_begin;i<b_end;i++){
+                           %>
+                           <tr>
+                              <td style="border-right: 1px solid gray;"><%=bnum %></td>
+                              <%bnum--; %>
+                              <td style="border-right: 1px solid gray;"><a href="Board.do?command=boardview&boardNum=<%=blist.get(i).getBoardNum()%>"><%=blist.get(i).getBoardTitle() %></a></td>
+                              <td style="text-align: center"><%=blist.get(i).getBoardDate() %></td>
+                           </tr>
+                           <%
+                              }
+                           %>
+                           <tr>
+                              <td colspan="3">
+                           <%
+                           for(int i=1;i<=b_max;i++){
+                           %>
+                              <a href="mypage.jsp?boardPage=<%=i %>&commentPage=<%=commentPage%>"><%=i %></a>&nbsp;
+                           <%
+                              }
+                           %>
+                              </td>
+                           </tr>
+                        </table>
+                     	</div>
+						</div>
 					</div>
 
 					<div class="tab-pane fade" id="comment" role="tabpanel"
 						aria-labelledby="comment-tab">
-						<div class="list"></div>
+						<div class="list">
+							 <div style="padding-bottom: 15px;">
+                        <table style="width: 925px">
+                           <tr style="border-bottom: 1px solid gray; text-align: center;">
+                              <th style="border-right: 1px solid gray; width: 120px;">번 호</th>
+                              <th style="border-right: 1px solid gray; width: 180px;">글 제목</th>
+                              <th style="border-right: 1px solid gray; width: 435px;">댓글 내용</th>
+                              <th style="width: 185px;">작성일</th>
+                           </tr>
+                           <%   
+                              CommentDao cdao = new CommentDao();
+                              List<CommentDto> clist = cdao.getCommentbyId(dto.getId());
+                              int c_max = clist.size()/5 + 1;
+                                int c_begin = (commentPage-1)*5;
+                                int c_end = c_begin + 5;
+                                if(c_end>clist.size()){
+                                   c_end=clist.size();
+                                }
+                                int cnum = clist.size()-c_begin;
+                              for(int i=c_begin;i<c_end;i++){
+                           %>
+                           <tr>
+                              <td><%=cnum %></td>
+                              <%cnum--; %>
+                              <td><%=bdao.getBoardTitle(clist.get(i).getBoardNo()) %></td>
+                              <td><a href="Board.do?command=boardview&boardNum=<%=clist.get(i).getBoardNo()%>"><%=clist.get(i).getComment_Content() %></a></td>
+                              <td style="text-align: center;"><%=clist.get(i).getRegdate() %></td>
+                           </tr>
+                           <%
+                              }
+                           %>
+                           <tr>
+                              <td colspan="4">
+                           <%
+                           for(int i=1;i<=c_max;i++){
+                           %>
+                              <a href="mypage.jsp?boardPage=<%=boardPage %>&commentPage=<%=i %>"><%=i %></a>&nbsp;
+                           <%
+                              }
+                           %>
+                              </td>
+                           </tr>
+                        </table>
+                	     </div>
+						</div>
 					</div>
-
 				</div>
 			</div>
 			<!-- 탭내용  -->
