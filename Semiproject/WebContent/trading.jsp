@@ -163,11 +163,15 @@ function process(index){
 										<td></td>
 									</tr>
 									<!--  -->
+									
 									<c:choose>
 										<c:when test="${empty trade }">
-											<div align="center">===============구매한 주가가 존재하지
-												않습니다.===============</div>
+											<tr>
+												<div align="center">===============구매한 주가가 존재하지
+													않습니다.===============</div>
+											</tr>
 										</c:when>
+										
 										<c:otherwise>
 											<c:forEach var="trade" items="${trade }" varStatus="status">
 												<tr>

@@ -94,13 +94,13 @@ public class MemberController extends HttpServlet {
 				jsResponse(url, response);
 			} else {
 				System.out.println("로그인 실패");
-				jsResponse("로그인 실패", "login.jsp", response);
+				jsResponse("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.", "login.jsp", response);
 			}
 		} else if (command.equals("logout")) {
 			HttpSession session = request.getSession();
 			session.invalidate(); // 세션 정보 삭제
 			String url = "index.jsp";
-			jsResponse("로그아웃 성공", url, response);
+			jsResponse(url, response);
 		} else if (command.equals("update")) {
 			response.sendRedirect("updateform.jsp");
 		} else if (command.equals("updatemember")) {
@@ -145,6 +145,7 @@ public class MemberController extends HttpServlet {
 			System.out.println(name);
 			System.out.println(email);
 
+			
 			if (dto != null) {
 				System.out.println("이름과 이메일 일치!");
 				HttpSession session = request.getSession();
@@ -155,28 +156,29 @@ public class MemberController extends HttpServlet {
 
 			} else {
 				System.out.println("\n이름과 이메일 불일치!");
-				jsResponse("실패", "searchidpw1.jsp", response);
+				jsResponse("회원정보가 존재하지 않거나, 회원정보가 일치하지 않습니다.", "searchidpw1.jsp", response);
 			}
 		}
 		// 비밀번호 찾기
 		else if (command.equals("searchpw")) {
 
 			String id = request.getParameter("id");
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
+			String name = request.getParameter("name2");
+			String email = request.getParameter("email2");
 			MemberDto dto = dao.searchPw(id, name, email);
 
+			
 			if (dto != null) {
 				System.out.println("모두 일치!");
 				HttpSession session = request.getSession();
 				session.setAttribute("dto", dto);
 				session.setMaxInactiveInterval(60* 60);
 
-				jsResponse("성공", "searchpw2.jsp", response);
+				jsResponse("searchpw2.jsp", response);
 
 			} else {
 				System.out.println("\n불일치!");
-				jsResponse("실패", "searchidpw1.jsp", response);
+				jsResponse("회원정보가 존재하지 않거나, 회원정보가 일치하지 않습니다.", "searchidpw1.jsp", response);
 			}
 		}
 		else if(command.equals("charge_account")) {

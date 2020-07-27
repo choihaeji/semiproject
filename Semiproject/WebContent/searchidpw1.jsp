@@ -28,9 +28,9 @@
 		}
 	}
 	function pwChk() {
-		var id = document.getElementsByName("id")[1];
-		var name = document.getElementsByName("name")[1];
-		var email = document.getElementsByName("email")[1];
+		var id = document.getElementsByName("id")[0];
+		var name = document.getElementsByName("name2")[0];
+		var email = document.getElementsByName("email2")[0];
 
 		if (id.value.trim() == "" || id.value == null) {
 			alert("아이디를 입력해 주세요.");
@@ -65,6 +65,7 @@
 			</div>
 		</div>
 	</section>
+	
 	<!--================End Home Banner Area =================-->
 	<section class="blog_area single-post-area p_120">
 
@@ -123,12 +124,12 @@
 					</tr>
 					<tr height="38">
 						<th>이&nbsp;&nbsp;름</th>
-						<td><input type="text" name="name"></td>
+						<td><input type="text" name="name2"></td>
 					</tr>
 					<tr height="38">
 						<th style="border-bottom: 1px solid black;">이메일</th>
 						<td style="border-bottom: 1px solid black;"><input
-							type="text" name="email"></td>
+							type="text" name="email2"></td>
 					</tr>
 					<tr>
 						<td colspan="2">
