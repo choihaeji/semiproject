@@ -100,7 +100,7 @@ public class MemberController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.invalidate(); // 세션 정보 삭제
 			String url = "index.jsp";
-			jsResponse("로그아웃 성공", url, response);
+			jsResponse(url, response);
 		} else if (command.equals("update")) {
 			response.sendRedirect("updateform.jsp");
 		} else if (command.equals("updatemember")) {
