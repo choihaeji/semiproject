@@ -133,9 +133,7 @@ button {
 			<div class="size">
 				<form action="member.do" method="post">
 
-					<%
-							String before = request.getHeader("referer");
-						%>
+
 					<input type="hidden" name="before" value="<%=before%>"> <input
 						type="hidden" name="command" value="login">
 					<div class="form-group">

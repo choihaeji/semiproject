@@ -93,9 +93,6 @@ th {
 				<input type="button"
 				onclick="location.href='member.do?command=update'"
 				class="genric-btn success-border radius small" value="회원정보 수정">
-				<input type="button"
-                           onclick="location.href='deletepro.jsp'"
-                           class="genric-btn success-border radius small" value="회원탈퇴">
 			</h3>
 			
 			<div class="row">

@@ -30,52 +30,28 @@
 <body>
 	
 	<!--================Header Menu Area =================-->
-	<header class="header_area">
-			<div class="main_menu">
-				<nav class="navbar navbar-expand-lg navbar-light">
-		<div class="container box_1620">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<a class="navbar-brand logo_h" href="index.jsp"><img src="img/logo.png" alt=""></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-				<ul class="nav navbar-nav menu_nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="index.jsp">Home</a></li> 
-					<li class="nav-item submenu dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">시장정보</a>
-						<ul class="dropdown-menu">
-							<li class="nav-item"><a class="nav-link" href="stock_search.jsp">기업별 조회</a></li>
-							<li class="nav-item"><a class="nav-link" href="StockController?command=stock_rank">전종목 시세</a></li>
-						</ul>
-					</li> 
-					<li class="nav-item"><a class="nav-link" href="about-us.html">커뮤니티</a></li> 
-					<li class="nav-item"><a class="nav-link" href="trading.jsp">모의거래</a></li> 
-					<li class="nav-item submenu dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">마이페이지</a>
-						<ul class="dropdown-menu">
-							<li class="nav-item"><a class="nav-link" href="blog.html">거래내역 조회</a></li>
-							<li class="nav-item"><a class="nav-link" href="single-blog.html">회원정보 수정</a></li>
-						</ul>
-					</li> 
-					<li class="nav-item"><a class="nav-link" href="contact.html">Login/Register</a></li>
-				</ul>
-			</div> 
-		</div>
-				</nav>
-			</div>
-	</header>
+	<%@ include file="form/header.jsp" %>
 	<!--================Header Menu Area =================-->
-	
 	<!--================Home Banner Area =================-->
-	<section class="home_banner_area">
-		<div class="container box_1620">
-			
+	<section class="banner_area">
+		<div class="box_1620">
+			<div class="banner_inner d-flex align-items-center">
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>기업별 주가정보</h2>
+						<div class="page_link">
+							<a href="index.jsp">Home</a> <a href="stock_search.jsp">기업별
+								조회</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
+	
+	
+	<!--================Home Banner Area =================-->
+
 	
 	<div class="blog_area single-post-area p_120">
 		<div class="container box_1620">

@@ -167,8 +167,10 @@ function process(index){
 									<c:choose>
 										<c:when test="${empty trade }">
 											<tr>
+											<td colspan="8">
 												<div align="center">===============구매한 주가가 존재하지
 													않습니다.===============</div>
+											</td>
 											</tr>
 										</c:when>
 										

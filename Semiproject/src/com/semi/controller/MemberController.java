@@ -86,12 +86,12 @@ public class MemberController extends HttpServlet {
 				session.setAttribute("dto", dto);
 				session.setMaxInactiveInterval(60 * 60);
 
-				String before = request.getParameter("before");
-				System.out.println(before);
-				String url = before.split("/")[4];
-				System.out.println(url);
+//				String before = request.getParameter("before");
+//				System.out.println(before);
+//				String url = before.split("/")[4];
+//				System.out.println(url);
 
-				jsResponse(url, response);
+				jsResponse("index.jsp", response);
 			} else {
 				System.out.println("로그인 실패");
 				jsResponse("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.", "login.jsp", response);
