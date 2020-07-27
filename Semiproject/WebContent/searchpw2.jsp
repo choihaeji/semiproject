@@ -32,9 +32,9 @@
 <body>
 <%
 	MemberDto dto = (MemberDto)session.getAttribute("dto");
-	if(dto==null){
+	/* if(dto==null){
 		pageContext.forward("index.jsp");
-	}
+	} */
 	String chk = request.getParameter("chk");
 	if(chk.equals("y")){
 %>

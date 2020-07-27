@@ -150,35 +150,35 @@ public class MemberController extends HttpServlet {
 	            session.setAttribute("dto", dto);
 	            session.setMaxInactiveInterval(60 * 60);
 
-	            response.sendRedirect("searchid2.jsp");
+	            response.sendRedirect("searchid2.jsp?chk=y&name="+name+"&email="+email);
 
 	         } else {
 	            System.out.println("\n이름과 이메일 불일치!");
-	            jsResponse("일치하는 회원이 없습니다.", "searchid1.jsp", response);
+	            response.sendRedirect("searchid2.jsp?chk=n&name="+name+"&email="+email);
 	         }
 	      }
-	      // 비밀번호 찾기
-	      else if (command.equals("searchpw")) {
+	      
+		// 비밀번호 찾기
+		else if (command.equals("searchpw")) {
 
-	         String id = request.getParameter("id");
-	         String name = request.getParameter("name");
-	         String email = request.getParameter("email");
-	         MemberDto dto = dao.searchPw(id, name, email);
-	         System.out.println(dto);
-	         
-	         if (dto != null) {
-	            System.out.println("모두 일치!");
-	            HttpSession session = request.getSession();
-	            session.setAttribute("dto", dto);
-	            session.setMaxInactiveInterval(60* 60);
+			String id = request.getParameter("id");
+			String name = request.getParameter("name2");
+			String email = request.getParameter("email2");
+			MemberDto dto = dao.searchPw(id, name, email);
 
-	            response.sendRedirect("searchpw2.jsp");
+			
+			if (dto != null) {
+				System.out.println("모두 일치!");
+				HttpSession session = request.getSession();
+				session.setAttribute("dto", dto);
+				session.setMaxInactiveInterval(60* 60);
 
-	         } else {
-	            System.out.println("\n불일치!");
-	            jsResponse("일치하는 회원이 없습니다.", "searchpw1.jsp", response);
-	         }
-	      }
+				response.sendRedirect("searchpw2.jsp?chk=y&id="+id+"&name="+name+"&email="+email);
+			} else {
+				System.out.println("\n불일치!");
+				response.sendRedirect("searchpw2.jsp?chk=n&id="+id+"&name="+name+"&email="+email);
+			}
+		}
 		else if(command.equals("charge_account")) {
             String id = request.getParameter("id");
             int num = Integer.parseInt(request.getParameter("chargenum"))+Integer.parseInt(request.getParameter("account"));
