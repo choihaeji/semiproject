@@ -42,10 +42,13 @@
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area blog_banner">
             <div class="banner_inner d-flex align-items-center">
-            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background="" style="transform: translateY(1.89632px);"></div>
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" >
+            		<img src="img/banner/banner-2.PNG" alt="">
+            	</div>
 				<div class="container">
 					<div class="blog_b_text text-center">
-						
+						<h2></h2>
+						<p>일상을 바꾸는 나의 첫 투자</p>
 					</div>
 				</div>
             </div>
