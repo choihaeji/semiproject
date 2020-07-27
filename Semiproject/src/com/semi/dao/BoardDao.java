@@ -302,7 +302,81 @@ public class BoardDao extends JDBCTemplate{
 	}
 
 	
-	
+	public ArrayList<BoardDto> getListbyId(String id){
+	      Connection con = getConnection();
+	      PreparedStatement pstm = null;
+	      ResultSet rs = null;
+	      
+	      String sql = " SELECT * FROM BOARD WHERE BOARDAVAILABLE = 1 AND USERID=? ORDER BY BOARDDATE DESC ";
+	      ArrayList<BoardDto> list = new ArrayList<BoardDto>();
+	      
+	      try {
+	         pstm = con.prepareStatement(sql);
+	         pstm.setString(1,id);
+	         System.out.println("03. query 준비 : "+sql);
+	         
+	         rs = pstm.executeQuery();
+	         System.out.println("04. query 실행 및 리턴");
+	         
+	         while (rs.next()) {
+	            BoardDto dto = new BoardDto();
+	            dto.setBoardNum(rs.getInt(1));
+	            dto.setBoardTitle(rs.getString(2));
+	            dto.setUserID(rs.getString(3));
+	            dto.setBoardDate(rs.getString(4));
+	            dto.setBoardContent(rs.getString(5));
+	            dto.setBoardAvailable(rs.getInt(6));
+	            list.add(dto);
+	         }
+	         
+	      } catch (SQLException e) {
+	         System.out.println("3/4단계 에러");
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstm);
+	         close(con);
+	         System.out.println("05. 종료");
+	      }
+	      return list;
+	   }
+	   
+	   public String getBoardTitle(int num){
+	      Connection con = getConnection();
+	      PreparedStatement pstm = null;
+	      ResultSet rs = null;
+	      BoardDto dto = new BoardDto();
+	      String sql = " SELECT * FROM BOARD WHERE BOARDAVAILABLE = 1 AND BOARDNUM=? ";
+	      
+	      
+	      try {
+	         pstm = con.prepareStatement(sql);
+	         pstm.setInt(1,num);
+	         System.out.println("03. query 준비 : "+sql);
+	         
+	         rs = pstm.executeQuery();
+	         System.out.println("04. query 실행 및 리턴");
+	         
+	         while (rs.next()) {
+	            dto.setBoardNum(rs.getInt(1));
+	            dto.setBoardTitle(rs.getString(2));
+	            dto.setUserID(rs.getString(3));
+	            dto.setBoardDate(rs.getString(4));
+	            dto.setBoardContent(rs.getString(5));
+	            dto.setBoardAvailable(rs.getInt(6));
+	         }
+	         
+	      } catch (SQLException e) {
+	         System.out.println("3/4단계 에러");
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstm);
+	         close(con);
+	         System.out.println("05. 종료");
+	      }
+	      return dto.getBoardTitle();
+	   }
 	
 	
 	
