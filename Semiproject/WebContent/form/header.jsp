@@ -4,8 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="vendors/linericon/style.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+<link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
+<link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+<link rel="stylesheet" href="vendors/animate-css/animate.css">
+<link rel="stylesheet" href="vendors/popup/magnific-popup.css">
+<link rel="stylesheet" href="vendors/flaticon/flaticon.css">
+<!-- main css -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 	<%
@@ -28,7 +43,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container box_1620">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.html"><img
+					<a class="navbar-brand logo_h" href="index.jsp"><img
 						src="img/logo.png" alt=""></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
@@ -53,21 +68,11 @@
 										href="StockController?command=stock_rank">전종목 시세</a></li>
 								</ul></li>
 							<li class="nav-item"><a class="nav-link"
-								href="board.do?command=boardlist">커뮤니티</a></li>
+								href="boardlist.jsp">커뮤니티</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="trade.do?command=trading">모의거래</a></li>
-							<li class="nav-item submenu dropdown"><a
-								href="member.do?command=mypage&id=<%=dto.getId()%>"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">마이페이지</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="mypage.jsp">마이페이지
-										</a></li>
-									<li class="nav-item"><a class="nav-link" href="blog.html">거래내역
-											조회</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="member.do?command=updata&mno=<%=dto.getMno()%>">회원정보 수정</a></li>
-								</ul></li>
+							<li class="nav-item"><a class="nav-link"
+								href="mypage.jsp">마이페이지</a></li>
 							<%
 								if (userID == null || userID.length() == 0) {
 							%>

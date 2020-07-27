@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; charset=UTF-8"); %>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -25,7 +29,37 @@
 <!-- main css -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<style type="text/css">
+.tradetable {
+	border: none;
+	padding: 10px;
+	background-color: white;
+	color: black;
+	width: 900px;
+	text-align: center;
+}
+
+.tradetable thead th {
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+	vertical-align: top;
+	color: #369;
+	border-bottom: 3px solid #036;
+}
+
+.tradetable tbody td {
+	padding: 10px;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+}
+
+.tradetable input {
+	width: 120px;
+}
+</style>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 //ajax
 function process(price){
@@ -35,116 +69,70 @@ function process(price){
 			url:"trade.do?command=ajax&count="+count+"&price="+price,	
 			dataType: "json",						
 			success:function(msg){
-				$("#result").html(msg.allPrice+" 원")
+				$("#result").val(msg.allPrice+" 원")
 			},
 			error:function(){
 				alert("실패");
 			}
 		});
 }
-
-/* $(function(){
-	$("#process").click(function(){
-		$.ajax({
-			url:"trade.do?command=ajax"+getParameter(),	
-			dataType: "json",						
-			success:function(msg){
-				$("#result").html(msg.allPrice+" 원")
-			},
-			error:function(){
-				alert("실패");
-			}
-		});
-	});
-}); */
-
 </script>
-
 </head>
 <body>
 	<!--================매수 팝업창 =================-->
 	<section class="mytabs_area p_120">
 		<div class="container">
 			<div class="tabs_inner">
-
 				<!--================매수 =================-->
-				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade active show" id="home" role="tabpanel"
-						aria-labelledby="home-tab">
-						<div class="section-top-border">
-							<table class="list">
-								 <form action="trade.do" method="post">
-									<input type="hidden" name="command" value="tradebuy"> 
-									<h3 class="mb-30 title_color">주식매도</h3>
-									<div class="progress-table-wrap">
-										<div class="progress-table">
-											<div class="table-head">
-												<div class="serial">이름 :</div>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<div class="country">${member.name }</div>
-												<div class="country">계좌번호 :</div>
-												<div class="country">${member.bankNo }</div>
-												<div class="country">계좌평가금액 :</div>
-												<div class="country">${member.account }원</div>
-											</div>
-											<div class="table-row">
-												<div class="serial"></div>
-												<div class="country">종목명</div>
-												<div class="country">현재가</div>
-												<div class="country">수량</div>
-												<div class="country"></div>
-											</div>
-											<div class="table-row">
-												<div class="serial"></div>
-												<div class="country">
-													<input type="text" name="stock" value="${stockName }" readonly="readonly" style="border:0px; outline:none;">
-												</div>
-												<div class="country">
-													<input type="text" id="price" name="priceNow" value="${price }" readonly="readonly" style="border:0px; outline:none;">
-												</div>
-												<div class="country">
-													<input name="countbuy" id="count" type="number" min="0"
-														max="15" step="1">
-												</div>
-												<div class="country">
-													<input type="button" class="btn sub-btn circle"
-														 value="가격확인" onclick="process(${price})">
-												</div>
-											</div>
-											<br>
-											<div class="table-row">
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="serial"></div>
-												<div class="country">매수 금액 :</div>
-												<div class="percentage" id="result"></div>
-												<div class="country">
-													<input type="submit" value="주식주문"
-														class="genric-btn danger circle" >
-												</div>
-											</div>
-										</div>
-									</div>
-								 </form>
-							</table> 
-						</div>
-					</div>
+				<div class="section-top-border">
+					<table class="tradetable">
+						<form action="trade.do" method="post">
+							<input type="hidden" name="command" value="tradebuy">
+							<h3 class="mb-30 title_color">주식매수</h3>
+							<div class="progress-table-wrap">
+								<thead>
+									<tr>
+										<th colspan="2">이름 : ${member.name }</th>
+										<th colspan="3">계좌번호 : ${member.bankNo }</th>
+										<th colspan="3">계좌평가금액 : ${member.account }원</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="2">종목명</td>
+										<td colspan="2">현재가</td>
+										<td colspan="2">수량</td>
+										<td colspan="2"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><input type="text" name="stock"
+											value="${stockName }" readonly="readonly"
+											style="border: 0px; outline: none;"></td>
+										<td colspan="2"><input type="text" id="price"
+											name="priceNow" value="${price }" readonly="readonly"
+											style="border: 0px; outline: none;"></td>
+										<td colspan="2"><input name="countbuy" id="count"
+											type="number" min="0" max="15" step="1"></td>
+										<td colspan="2"><input type="button"
+											class="btn sub-btn circle" value="가격확인"
+											onclick="process(${price})"></td>
+									</tr>
+									<tr>
+										<td colspan="5">매수 금액 :</td>
+										<td><input type="text" id="result" readonly="readonly" style="border:0px; outline:none;"></td>
+										<td colspan="2"><input type="submit" value="주식주문"
+											class="genric-btn danger circle"></td>
+									</tr>
+								</tbody>
+							</div>
+						</form>
+					</table>
 				</div>
-				<!--================매수 =================-->
 			</div>
+		</div>
+		<!--================매수 =================-->
 		</div>
 	</section>
-
-	<footer class="footer_area p_120">
-		<div class="container">
-			<div class="row footer_inner">
-				<div class="col-lg-5 col-sm-6"></div>
-			</div>
-		</div>
-	</footer>
 
 </body>
 </html>

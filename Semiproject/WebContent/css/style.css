@@ -343,7 +343,7 @@ button:focus {
     min-height: 780px;
     z-index: 1; }
     .blog_banner .banner_inner .overlay {
-      background: url(../img/banner/banner-2.jpg) no-repeat scroll center center;
+      background: url(../img/banner/banner.jpg) no-repeat scroll center center;
       opacity: .5;
       height: 125%;
       position: absolute;
@@ -1640,6 +1640,11 @@ h6 {
   padding: 30px 50px 30px 30px;
   background: #fff;
   border-left: 2px solid #f8b600; }
+.generic-blockquote-vl{
+  padding: 5px 5px 5px 5px;
+  background: #fff;
+  border-left: 1px solid gray; }
+}
 
 @media (max-width: 991px) {
   .progress-table-wrap {
@@ -2583,6 +2588,7 @@ h6 {
   position: relative;
   padding-top: 40px;
   padding-bottom: 60px; }
+
   .tabs_inner .tab-content .tab-pane .list:before {
     content: "";
     height: 100%;

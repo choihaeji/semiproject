@@ -168,59 +168,87 @@ END;
 
 
 ----------------------------------------------------------------------------------------------
-------------------------------------------게시판 table-------------------------------------------
+------------------------------------------게시판  table-------------------------------
 ----------------------------------------------------------------------------------------------
-DROP TABLE BOARD CASCADE CONSTRAINT;
-DROP SEQUENCE BOARDNOSQ;
+DROP SEQUENCE BOARDNUMSQ;
+DROP TABLE BOARD;
 
--- 게시글번호  SEQUENCE
-CREATE SEQUENCE BOARDNOSQ NOCHACHE;
---(글번호, 제목, 내용, 작성자, 작성일, 조회수)
+--글 번호 시퀀스(PRIMARY KEY)
+CREATE SEQUENCE BOARDNUMSQ NOCACHE;
+
+
+--(게시물번호, 제목, 작성자, 날짜, 내용, 글삭제목적 1:삭제되지않은글, 0:삭제된글)
 CREATE TABLE BOARD
 (
-    BOARDNO    NUMBER              NOT NULL, 
-    TITLE      VARCHAR2(400)     NOT NULL, 
-    CONTENT    VARCHAR2(4000)    NOT NULL, 
-    ID         VARCHAR2(100)     NOT NULL, 
-    REGDATE    DATE              NOT NULL, 
-    CHECKNO    NUMBER               NOT NULL, 
-    CONSTRAINT BOARD_PK PRIMARY KEY (BOARDNO)
+    BOARDNUM NUMBER PRIMARY KEY,
+    BOARDTITLE VARCHAR2(1000) NOT NULL,
+    USERID VARCHAR2(1000) NOT NULL ,
+    BOARDDATE DATE NOT NULL,
+    BOARDCONTENT VARCHAR2(2000),
+    BOARDAVAILABLE INT NOT NULL
 );
 
-COMMENT ON COLUMN BOARD.BOARDNO IS '글번호';
+INSERT INTO BOARD VALUES(BOARDNUMSQ.NEXTVAL, 'a', 'a', SYSDATE, 'a', 1);
+SELECT * FROM BOARD;
 
-COMMENT ON COLUMN BOARD.TITLE IS '글제목';
+DELETE FROM BOARD WHERE BOARDNUM=9;
 
-COMMENT ON COLUMN BOARD.CONTENT IS '글내용';
+SELECT * FROM BOARD WHERE BOARDAVAILABLE = 1 ORDER BY BOARDNUM DESC ;
+SELECT * FROM (SELECT * FROM BOARD WHERE BOARDAVAILABLE = 1 ORDER BY BOARDNUM DESC) WHERE BOARDNUM > 0 AND BOARDNUM < 10;
 
-COMMENT ON COLUMN BOARD.ID IS '작성자';
+--DROP TABLE BOARD;
+--DROP SEQUENCE BOARDNOSQ;
+--
+---- 게시글번호  SEQUENCE
+--CREATE SEQUENCE BOARDNOSQ NOCACHE;
 
-COMMENT ON COLUMN BOARD.REGDATE IS '등록일';
+----(글번호, 제목, 내용, 작성자, 작성일, 조회수)
+--CREATE TABLE BOARD
+--(
+--    BOARDNO    NUMBER              NOT NULL, 
+--    TITLE      VARCHAR2(400)     NOT NULL, 
+--    CONTENT    VARCHAR2(4000)    NOT NULL, 
+--    ID         VARCHAR2(100)     NOT NULL, 
+--    REGDATE    DATE              NOT NULL, 
+--    CHECKNO    NUMBER               NOT NULL, 
+--    CONSTRAINT BOARD_PK PRIMARY KEY (BOARDNO)
+--);
+--
+--COMMENT ON COLUMN BOARD.BOARDNO IS '글번호';
+--
+--COMMENT ON COLUMN BOARD.TITLE IS '글제목';
+--
+--COMMENT ON COLUMN BOARD.CONTENT IS '글내용';
+--
+--COMMENT ON COLUMN BOARD.ID IS '작성자';
+--
+--COMMENT ON COLUMN BOARD.REGDATE IS '등록일';
+--
+--COMMENT ON COLUMN BOARD.CHECKNO IS '조회수';
 
-COMMENT ON COLUMN BOARD.CHECKNO IS '조회수';
+
 
 ----------------------------------------------------------------------------------------------
 ------------------------------------------댓글 table--------------------------------------------
 ----------------------------------------------------------------------------------------------
-DROP TABLE  BOARD_COMMENT;
+DROP TABLE BOARD_COMMENT;
 DROP SEQUENCE COMMENTSQ;
 
+
 -- 댓글번호 SEQUENCE
-CREATE SEQUENCE COMMENTSQ NOCHACHE;
+CREATE SEQUENCE COMMENTSQ NOCACHE;
 
 -- (글번호,댓글번호,댓글내용,댓글작성자,작성일,부모댓글)
 CREATE TABLE BOARD_COMMENT(
     BOARDNO            NUMBER            NOT NULL, 
-    COMMENT_NO         NUMBER, 
+    COMMENT_NO         NUMBER            NOT NULL, 
     COMMENT_CONTENT    VARCHAR2(1000)    NOT NULL, 
     COMMENT_ID         VARCHAR2(100)     NOT NULL, 
     REGDATE            DATE              NOT NULL, 
-    COMMENT_PARENT     NUMBER,          
-    CONSTRAINT COMMENT_PK PRIMARY KEY (COMMENT_NO),
-    CONSTRAINT FK_COMMENT_BOARDNO FOREIGN KEY (BOARDNO)
-        REFERENCES BOARD (BOARDNO)
+    CONSTRAINT COMMENT_PK PRIMARY KEY (COMMENT_NO)
 );
 
+SELECT * FROM BOARD_COMMENT;
 
 COMMENT ON COLUMN BOARD_COMMENT.BOARDNO IS '글번호';
 
@@ -233,6 +261,7 @@ COMMENT ON COLUMN BOARD_COMMENT.COMMENT_ID IS '댓글작성자';
 COMMENT ON COLUMN BOARD_COMMENT.REGDATE IS '댓글작성일';
 
 COMMENT ON COLUMN BOARD_COMMENT.COMMENT_PARENT IS '부모댓글';
+
 
 ------------------------------ 거래 로그 table
 DROP TABLE TRADE_LOG;

@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<% request.setCharacterEncoding("UTF-8"); %>    
+<% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>아이디 중복체크</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
 <script type="text/javascript">
 	onload=function(){
 		var id = opener.document.getElementsByName("id")[0].value;
@@ -34,18 +35,13 @@
 	String idnotused = request.getParameter("idnotused");
 %>
 <body>
-	<table border="1">
-		<tr>
-			<td><input type="text" name="chkid" readonly="readonly"></td>
-		</tr>
-		<tr>
-			<td><%=idnotused.equals("true")? "아이디 생성 가능":"중복 아이디 존재" %>
-		</tr>
-		<tr>
-			<td>
-				<input type="button" value="확인" onclick="confirm('<%=idnotused%>');">
-			</td>
-		</tr>
-	</table>
+	<div class="container">
+		<br>
+		<div align="center"><%=idnotused.equals("true")? "사용가능한 ID 입니다":"ID가 존재합니다." %></div>
+		<br>
+		<div align="center">
+			<input class="genric-btn default circle small" type="button" value="확인" onclick="confirm('<%=idnotused%>');">
+		</div>
+	</div>
 </body>
 </html>

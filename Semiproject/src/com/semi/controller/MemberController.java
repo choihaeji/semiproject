@@ -91,7 +91,7 @@ public class MemberController extends HttpServlet {
 				String url = before.split("/")[4];
 				System.out.println(url);
 
-				jsResponse("로그인 성공", url, response);
+				jsResponse(url, response);
 			} else {
 				System.out.println("로그인 실패");
 				jsResponse("로그인 실패", "login.jsp", response);
@@ -142,18 +142,20 @@ public class MemberController extends HttpServlet {
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			MemberDto dto = dao.searchId(name, email);
+			System.out.println(name);
+			System.out.println(email);
 
-			if (dto.getName() != null && dto.getEmail() != null) {
+			if (dto != null) {
 				System.out.println("이름과 이메일 일치!");
 				HttpSession session = request.getSession();
 				session.setAttribute("dto", dto);
 				session.setMaxInactiveInterval(60 * 60);
 
-				jsResponse("성공", "searchid2.jsp", response);
+				jsResponse("searchid2.jsp", response);
 
 			} else {
 				System.out.println("\n이름과 이메일 불일치!");
-				jsResponse("실패", "searchid1.jsp", response);
+				jsResponse("실패", "searchidpw1.jsp", response);
 			}
 		}
 		// 비밀번호 찾기
@@ -164,7 +166,7 @@ public class MemberController extends HttpServlet {
 			String email = request.getParameter("email");
 			MemberDto dto = dao.searchPw(id, name, email);
 
-			if (dto.getId() != null && dto.getName() != null && dto.getEmail() != null) {
+			if (dto != null) {
 				System.out.println("모두 일치!");
 				HttpSession session = request.getSession();
 				session.setAttribute("dto", dto);
@@ -174,9 +176,31 @@ public class MemberController extends HttpServlet {
 
 			} else {
 				System.out.println("\n불일치!");
-				jsResponse("실패", "login.jsp", response);
+				jsResponse("실패", "searchidpw1.jsp", response);
 			}
 		}
+		else if(command.equals("charge_account")) {
+            String id = request.getParameter("id");
+            int num = Integer.parseInt(request.getParameter("chargenum"))+Integer.parseInt(request.getParameter("account"));
+             
+            int res = dao.chargeAccount(num, id);
+            
+            if(res>0) {
+               String pw = request.getParameter("pw");
+               System.out.println(id+" / "+pw);
+               MemberDto dto = dao.login(id, pw);
+               
+               HttpSession session = request.getSession();
+               session.setAttribute("dto", dto);
+               session.setMaxInactiveInterval(60*60);
+
+               jsResponse("충전 성공","mypage.jsp",response);
+            }
+            
+            else {
+               jsResponse("충전 실패","mypage.jsp",response);
+            }
+         }
 
 	}
 
@@ -187,6 +211,14 @@ public class MemberController extends HttpServlet {
 
 	private void jsResponse(String msg, String url, HttpServletResponse response) throws IOException {
 		String s = "<script type='text/javascript'>" + "alert('" + msg + "');" + "location.href='" + url + "';"
+				+ "</script>";
+
+		PrintWriter out = response.getWriter();
+		out.print(s);
+	}
+	
+	private void jsResponse(String url, HttpServletResponse response) throws IOException {
+		String s = "<script type='text/javascript'> location.href='" + url + "';"
 				+ "</script>";
 
 		PrintWriter out = response.getWriter();

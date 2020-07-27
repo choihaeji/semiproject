@@ -8,7 +8,7 @@ public class BoardDto {
 	private String boardDate;
 	private String boardContent;
 	private int boardAvailable;
-
+	
 	public BoardDto() {
 		super();
 	}
@@ -77,5 +77,8 @@ public class BoardDto {
 		return "BoardDto [boardNum=" + boardNum + ", boardTitle=" + boardTitle + ", userID=" + userID + ", boardDate="
 				+ boardDate + "]";
 	}
+	
+	
+	
+	}
 
-}

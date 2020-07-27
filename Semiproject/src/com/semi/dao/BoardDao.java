@@ -10,8 +10,9 @@ import com.semi.dto.BoardDto;
 
 import common.JDBCTemplate;
 
-public class BoardDao extends JDBCTemplate {
+public class BoardDao extends JDBCTemplate{
 
+	
 //	//현재시간 가져오기
 //	public String getDate() {
 //		Connection con = getConnection();
@@ -35,40 +36,40 @@ public class BoardDao extends JDBCTemplate {
 //		
 //		return "";
 //	}
-
-	// boadrNum 게시글 번호 가져오기
+	
+	//boadrNum 게시글 번호 가져오기
 	public int getNext() {
 		Connection con = getConnection();
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		String sql = " SELECT BOARDNUM FROM BOARD ORDER BY BOARDNUM DESC ";
-
+		
 		try {
 			pstm = con.prepareStatement(sql);
-
+			
 			rs = pstm.executeQuery();
-			if (rs.next()) {
+			if(rs.next()) {
 				return rs.getInt(1) + 1;
 			}
-			// 첫번째 게시물일 경우
+			//첫번째 게시물일 경우
 			return 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}finally {
 			close(pstm);
 			close(con);
 		}
-
+		
 		return -1;
 	}
-
-	// 글 작성하기
+	
+	//글 작성하기
 	public int boardWrite(String boardTitle, String userID, String boardContent) {
 		Connection con = getConnection();
 		PreparedStatement pstm = null;
 		int res = 0;
 		String sql = " INSERT INTO BOARD VALUES(BOARDNUMSQ.NEXTVAL, ?, ?, SYSDATE, ?, ?) ";
-
+		
 		try {
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, boardTitle);
@@ -79,18 +80,18 @@ public class BoardDao extends JDBCTemplate {
 			System.out.println(userID);
 			System.out.println(boardContent);
 			res = pstm.executeUpdate();
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-
-		} finally {
+			
+		}finally {
 			close(pstm);
 			close(con);
 		}
-
+		
 		return res;
 	}
-
+	
 //	//글 작성하기
 //	public int boardWrite(BoardDto dto) {
 //		Connection con = getConnection();
@@ -122,27 +123,27 @@ public class BoardDao extends JDBCTemplate {
 //		
 //		return res;
 //	}
-
-	// 글목록 가져오기
-	public ArrayList<BoardDto> getList(int pageNumber) {
+	
+	//글목록 가져오기
+	public ArrayList<BoardDto> getList(int pageNumber){
 		Connection con = getConnection();
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		int pageNum = pageNumber * 10;
-
+		
 //		String sql = " SELECT * FROM (SELECT * FROM BOARD WHERE BOARDAVAILABLE = 1 ORDER BY BOARDNUM DESC) WHERE BOARDNUM > ? AND BOARDNUM < ? ";
 		String sql = " SELECT * FROM BOARD WHERE BOARDAVAILABLE = 1 ORDER BY BOARDNUM DESC ";
 		ArrayList<BoardDto> list = new ArrayList<BoardDto>();
-
+		
 		try {
 			pstm = con.prepareStatement(sql);
 //			pstm.setInt(1, pageNumber - 1);
 //			pstm.setInt(2, pageNum+1);
-			System.out.println("03. query 준비 : " + sql);
-
+			System.out.println("03. query 준비 : "+sql);
+			
 			rs = pstm.executeQuery();
 			System.out.println("04. query 실행 및 리턴");
-
+			
 			while (rs.next()) {
 				BoardDto dto = new BoardDto();
 				dto.setBoardNum(rs.getInt(1));
@@ -153,11 +154,11 @@ public class BoardDao extends JDBCTemplate {
 				dto.setBoardAvailable(rs.getInt(6));
 				list.add(dto);
 			}
-
+			
 		} catch (SQLException e) {
 			System.out.println("3/4단계 에러");
 			e.printStackTrace();
-		} finally {
+		}finally {
 			close(rs);
 			close(pstm);
 			close(con);
@@ -165,7 +166,7 @@ public class BoardDao extends JDBCTemplate {
 		}
 		return list;
 	}
-	// 10단위로 페이징 처리를 하기 위한 함수
+	//10단위로 페이징 처리를 하기 위한 함수
 //	public boolean nextPage(int pageNumber) {
 //		Connection con = getConnection();
 //		PreparedStatement pstm = null;
@@ -202,22 +203,22 @@ public class BoardDao extends JDBCTemplate {
 //		}
 //		return false;
 //	}
-
-	// 뷰 화면. 글 내용 불러오는 함수
+	
+	//뷰 화면. 글 내용 불러오는 함수
 	public BoardDto getBoardview(int boardNum) {
 		Connection con = getConnection();
 		PreparedStatement pstm = null;
-		ResultSet rs = null;
+		ResultSet rs = null;		
 		BoardDto dto = new BoardDto();
 		String sql = " SELECT * FROM BOARD WHERE BOARDNUM=? ";
 		try {
 			pstm = con.prepareStatement(sql);
 			pstm.setInt(1, boardNum);
-			System.out.println("03. query 준비 : " + sql);
-
+			System.out.println("03. query 준비 : "+sql);
+			
 			rs = pstm.executeQuery();
 			System.out.println("04. query 실행 및 리턴");
-
+			
 			if (rs.next()) {
 				dto.setBoardNum(rs.getInt(1));
 				dto.setBoardTitle(rs.getString(2));
@@ -229,74 +230,87 @@ public class BoardDao extends JDBCTemplate {
 		} catch (Exception e) {
 			System.out.println("3/4단계 에러");
 			e.printStackTrace();
-		} finally {
+		}finally {
 			close(rs);
 			close(pstm);
 			close(con);
 			System.out.println("05. 종료");
 		}
-
+		
 		return dto;
 	}
-
-	// 글 수정하기
+	
+	//글 수정하기
 	public int update(int boardNum, String boardTitle, String boardContent) {
 		Connection con = getConnection();
 		PreparedStatement pstm = null;
-		int res = 0;
+		int res=0;
 		String sql = " UPDATE BOARD SET BOARDTITLE=?, BOARDCONTENT=? WHERE BOARDNUM=? ";
 		try {
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, boardTitle);
 			pstm.setString(2, boardContent);
 			pstm.setInt(3, boardNum);
-			System.out.println("03.query 준비 : " + sql);
-
+			System.out.println("03.query 준비 : "+sql);
+			
 			res = pstm.executeUpdate();
 			System.out.println("04.query 실행 및 리턴");
-
-			if (res > 0) {
+			
+			if(res>0) {
 				commit(con);
 			}
 		} catch (Exception e) {
 			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
+					e.printStackTrace();
+		}finally {
 			close(pstm);
 			close(con);
 			System.out.println("05. 종료");
 		}
-
+		
 		return res; // 데이터베이스 오류
 	}
-
-	// 삭제하기
+	
+	//삭제하기
 	public int delete(int boardNum) {
 		Connection con = getConnection();
 		PreparedStatement pstm = null;
-		int res = 0;
+		int res=0;
 		String sql = " UPDATE BOARD SET BOARDAVAILABLE = 0 WHERE BOARDNUM = ? ";
 		try {
-			pstm = con.prepareStatement(sql);
+			pstm = con.prepareStatement(sql);   
 			pstm.setInt(1, boardNum);
-			System.out.println("03. query 준비 : " + sql);
+			System.out.println("03. query 준비 : "+sql);
 
-			res = pstm.executeUpdate();
+			res=pstm.executeUpdate();
 			System.out.println("04. query 실행 및 리턴");
-
-			if (res > 0) {
+			
+			if(res>0) {
 				commit(con);
 			}
 		} catch (Exception e) {
 			System.out.println("3/4단계 에러");
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			close(pstm);
 			close(con);
 			System.out.println("05. 종료");
 		}
-
+		
 		return res; // 데이터베이스 오류
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

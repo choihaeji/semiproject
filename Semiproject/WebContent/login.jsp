@@ -1,86 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; charset=UTF-8"); %>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="img/favicon.png" type="image/png">
-<title>MeetMe Personal</title>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="vendors/linericon/style.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
-<link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
-<link rel="stylesheet" href="vendors/animate-css/animate.css">
-<link rel="stylesheet" href="vendors/popup/magnific-popup.css">
-<!-- main css -->
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/responsive.css">
- 
+<title>Login</title>
 <style type="text/css">
-.col-lg-8 col-md-8 {
-	margin-top: 100px;
-}
-
-.col-lg-8 col-md-8 p {
-	width: 380px;
-	margin: 0 auto;
-	padding: 50px 20px;
-	text-align: center;
-}
-
-#d1 {
-	width: 500px;
-	height: 1000px;
-	margin: 0 auto;
-}
-
-.div_box {
+.form {
 	position: absolute;
-	width: 100px;
-	height: 100px;
+	top: 50%;
+	left: 50%;
+	background: #fff;
+	width: 285px;
+	margin: -140px 0 0 -182px;
+	padding: 40px;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+input {
+	outline: none;
+	display: block;
+	width: 100%;
+	margin: 0 0 20px;
+	padding: 10px 15px;
+	border: 1px solid #ccc;
+	color: #ccc;
+	font-family: "Roboto";
+	box-sizing: border-box;
+	font-size: 14px;
+	font-wieght: 400;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transition: 0.2s linear; &
+	input: focus{
+      color: #333;
+	border: 1px solid #44c4e7;
+}
+
+}
+button {
+	cursor: pointer;
+	background: #44c4e7;
+	width: 100%;
+	padding: 10px 15px;
+	border: 0;
+	color: #fff;
+	font-family: "Roboto";
+	font-size: 14px;
+	font-weight: 400;
+	&:
+	hover
+	{
+	background
+	:
+	#369cb8;
+}
+
+}
+.size {
+	position: relative;
+	left: 55%;
+	margin-left: -250px;
+	padding-top: 50px;
+	text-align: center;
+	width: 350px;
+	height: 250px;
+}
 }
 </style>
-
-<meta charset="UTF-8">
-<title>로그인</title>
 </head>
 <body>
-	<!--  <h1>로그인</h1>
-	<form action="member.do" method="post">
-		<input type="hidden" name="command" value="login" >
-		<table border="1">
-			<col width="100"><col width="100" >
-			<tr>
-				<th>I D : </th>
-				<td><input type="text" name="id" ></td>
-			</tr>
-			<tr>
-				<th>P W : </th>
-				<td><input type="password" name="pw" ></td>
-			</tr>
-			<tr>
-				<td colspan="2" >
-					<input type="submit" value="login" >
-					<input type="button" value="regist"
-								onclick="location.href='member.do?command=registform'" >
-					<input type="button" onclick="location.href='searchid1.jsp'" value="id 찾기">
-					<input type="button" onclick="location.href='searchpw1.jsp'" value="pw 찾기">
-				</td>
-			</tr>
-		</table>
-	</form>
-	
-	----------------------------------------------------------------------------------------------- -->
 	<!--================Header Menu Area =================-->
 	<%@ include file="form/header.jsp"%>
 	<!--================Header Menu Area =================-->
@@ -90,8 +87,8 @@
 			<div class="banner_inner d-flex align-items-center">
 				<div class="container">
 					<div class="banner_content text-center">
-						<h2>로그인</h2>
-						
+						<h2>Login</h2>
+
 					</div>
 				</div>
 			</div>
@@ -130,16 +127,49 @@
 			</div>
 			<div>
 				<a href="kakaoLogin.jsp"><img src="./img/kakao_login_medium_wide.png"></a>
+
+	<section class="blog_area single-post-area p_120">
+		<div class="container">
+			<div class="size">
+				<form action="member.do" method="post">
+
+					<%
+							String before = request.getHeader("referer");
+						%>
+					<input type="hidden" name="before" value="<%=before%>"> <input
+						type="hidden" name="command" value="login">
+					<div class="form-group">
+						<input type="text" name="id" placeholder="ID"
+							onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID'"
+							class="form-control">
+					</div>
+					<div class="form-group">
+						<input type="password" name="pw" placeholder="Password"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = 'Password'" class="form-control">
+					</div>
+					<div class="form-group">
+						<button name="button"type="submit">로그인</button>
+					</div>
+					<div>
+						<button class="form-group">카카오 로그인</button>
+					</div>
+					<br>
+
+					<div align="center">
+						<a href="searchidpw1.jsp">ID/PW찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp; <a
+							href="member.do?command=registform">회원가입</a>
+					</div>
+				</form>
+				<!-- ==================로그인 부분======================= -->
 			</div>
-		</form>
-	</div>
-    <!-- ==================로그인 부분======================= -->       
-        </section>
-	
-	
-	
-	
-	
+		</div>
+	</section>
+
+
+
+
+
 	<%@ include file="form/footer.jsp"%>
 </body>
 </html>
