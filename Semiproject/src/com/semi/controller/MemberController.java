@@ -166,6 +166,7 @@ public class MemberController extends HttpServlet {
 			String email = request.getParameter("email2");
 			MemberDto dto = dao.searchPw(id, name, email);
 
+			
 			if (dto != null) {
 				System.out.println("모두 일치!");
 				HttpSession session = request.getSession();
