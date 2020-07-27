@@ -14,7 +14,6 @@
 	String accessToken = api.getAccessToken(code);
 	
 	String email = api.getUserInfo(accessToken).getEmail();
-	int atIndex = email.indexOf("@");
 %>
 <body>
 	<h1>추가 정보 입력</h1>
@@ -24,7 +23,7 @@
 			<tr>
 				<th rowspan="2">아이디</th>			
 				<td>
-					<input type="text" name="id" title="n" required="required" value="<%=email.substring(0, atIndex) %>">
+					<input type="text" name="id" title="n" required="required" value="<%=email.substring(0, email.indexOf("@")) %>">
 					<input type="button" value="중복체크" onclick="idChk();" >
 				</td>
 			</tr>
@@ -76,7 +75,7 @@
 				<th>이메일</th>
 				<td>
 					<input type="text" name="email_id" required="required"
-						value="<%=email.substring(0, atIndex) %>">&nbsp;&nbsp;@&nbsp;
+						value="<%=email.substring(0, email.indexOf("@")) %>">&nbsp;&nbsp;@&nbsp;
 					<select name="email_url">
 						<option value="@kakao.com">kakao.com</option>
 						<option value="@naver.com">naver.com</option>
