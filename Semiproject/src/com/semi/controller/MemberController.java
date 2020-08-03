@@ -200,7 +200,10 @@ public class MemberController extends HttpServlet {
             else {
                jsResponse("충전 실패","mypage.jsp",response);
             }
-         }
+         }else if(command==null || command.length()==0) {
+             System.out.println("커맨드 에러");
+             response.sendRedirect("index.jsp");
+          }
 
 	}
 

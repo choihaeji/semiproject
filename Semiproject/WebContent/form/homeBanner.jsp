@@ -10,7 +10,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/homeBanner.css">
-
+<style type="text/css">
+.col{
+	column-count:2;
+	width:full;
+}
+</style>
 </head>
 <body>
 	<%
@@ -24,11 +29,13 @@
 			<div class="banner_inner d-flex align-items-center">
 				<div class="contents">
 					<div class="m_contents">
+					<div class="col">
 						<div id="kosp">
 							
 						</div>
 						<div id="kosd">
 							
+						</div>
 						</div>
 					</div>
 					<div class="media-body">
